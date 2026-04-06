@@ -1113,7 +1113,7 @@ textarea::placeholder{color:var(--text-s)}
     <p class="hero-accroche">S'orienter · S'informer · Se reconstruire</p>
     <p class="hero-p">Vous êtes une femme entière. SEREINIA est là pour vous accompagner — avant, pendant, et longtemps après les traitements.</p>
     <div class="hero-btns">
-      <button class="btn-p" onclick="openChatWithTrace('general')">Parler maintenant — c'est gratuit</button>
+      <button class="btn-p" onclick="openChatDirect()">Parler maintenant — c'est gratuit</button>
       <button class="btn-g" onclick="document.getElementById('situations').scrollIntoView({behavior:'smooth'})">Trouver ma situation →</button>
     </div>
   </div>
@@ -1457,7 +1457,7 @@ textarea::placeholder{color:var(--text-s)}
   <div class="kcta-icon">🤝</div>
   <h2>Disponible <em>maintenant</em>,<br>même à 23h.</h2>
   <p>KAP IA ne remplace pas votre kiné. Il fait en sorte que quand vous arrivez en séance, vous êtes déjà informée, rassurée, moins seule. Le soin commence avant la séance.</p>
-  <button class="btn-white" onclick="openChatWithTrace('general')">Parler à SEREINIA — c'est gratuit</button>
+  <button class="btn-white" onclick="openChatDirect()">Parler à SEREINIA — c'est gratuit</button>
 </section>
 
 <!-- FOOTER -->
@@ -1508,9 +1508,9 @@ textarea::placeholder{color:var(--text-s)}
       <button class="p-close" onclick="closeChat()">✕</button>
     </div>
 
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px 0;gap:10px">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px 4px;border-bottom:1px solid rgba(168,84,112,0.1)">
       <span style="font-family:'Jost',sans-serif;font-size:11px;color:#A08080;font-style:italic">Pour un bilan complet et personnalisé</span>
-      <button onclick="openTrace()" style="flex-shrink:0;padding:7px 18px;border-radius:20px;background:transparent;border:1.5px solid rgba(168,84,112,0.35);color:#A85470;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap" onmouseover="this.style.background='rgba(168,84,112,0.08)'" onmouseout="this.style.background='transparent'">✦ Voir mon bilan →</button>
+      <button onclick="openTrace()" style="padding:6px 16px;border-radius:20px;background:transparent;border:1.5px solid rgba(168,84,112,0.35);color:#A85470;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;cursor:pointer;white-space:nowrap">✦ Voir mon bilan →</button>
     </div>
 
     <div class="sit-bar">
@@ -1918,16 +1918,6 @@ function closeChat(){
 }
 
 function bgClose(e){if(e.target===document.getElementById('overlay'))closeChat();}
-
-function parseRefs(txt){
-  var re=/\[REF:\s*([^|\]]+?)\s*(?:\|\s*([^\]]+?))?\s*\]/g;
-  var refs=[];
-  var clean=txt.replace(re,function(_,label,url){
-    refs.push({label:label.trim(),url:url?url.trim():null});
-    return "";
-  });
-  return{clean:clean.trim(),refs:refs};
-}
 
 function addKap(txt){
   const{clean,res}=parse(txt);
