@@ -1,0 +1,2084 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAP Gynéco — Ménopause · Endométriose · Périnée</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FAF8F5;--bg-w:#F3EBE8;--white:#FDFCFA;
+  --rose:#6B4E8B;--rose-l:#8B6AAB;--rose-p:#C4A8D8;
+  --rose-bg:rgba(107,78,139,0.07);--rose-line:rgba(107,78,139,0.18);
+  --ink:#150F1A;--ink-m:#251A30;--ink-s:#504560;--ink-xs:#9A8AAA;
+  --accent:#6B4E8B;--accent-l:#8B6AAB;--accent-bg:rgba(107,78,139,0.07);
+  --line:rgba(26,16,21,0.08);--line-m:rgba(26,16,21,0.14);
+  --sh:0 2px 24px rgba(26,16,21,0.06);--sh-m:0 12px 48px rgba(26,16,21,0.10);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Jost',sans-serif;font-weight:300;line-height:1.72;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 800px 600px at -5% 0%,rgba(139,74,110,0.05) 0%,transparent 60%),radial-gradient(ellipse 600px 700px at 105% 90%,rgba(196,135,106,0.04) 0%,transparent 60%);pointer-events:none;z-index:0}
+
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:200;background:rgba(252,249,246,0.96);backdrop-filter:blur(24px);border-bottom:1px solid var(--line);padding:16px 52px;display:flex;align-items:center;justify-content:space-between}
+.h-logo{display:flex;align-items:center;gap:14px;text-decoration:none}
+.h-kap{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:400;letter-spacing:6px;color:var(--ink-xs)}
+.h-arrow{color:var(--rose);opacity:.6;font-size:14px}
+.h-spec{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;letter-spacing:3px;background:linear-gradient(135deg,var(--rose) 0%,var(--rose-l) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.h-sub{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--ink-xs);margin-top:2px}
+nav a{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-s);text-decoration:none;transition:color .2s;margin-left:32px}
+nav a:hover{color:var(--rose)}
+.h-cta{padding:9px 24px;border:1px solid var(--rose-line);background:var(--rose);color:var(--white);font-size:11px;font-family:'Jost',sans-serif;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .22s;margin-left:32px;border-radius:3px}
+.h-cta:hover{background:var(--ink);border-color:var(--ink)}
+
+/* ── HERO ── */
+.hero{position:relative;z-index:1;min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 80px;overflow:hidden}
+.hero-watermark{position:absolute;font-family:'Cormorant Garamond',serif;font-size:200px;font-weight:300;color:rgba(139,74,110,0.04);line-height:1;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;user-select:none;white-space:nowrap}
+.hero-badge{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--rose);margin-bottom:48px;display:flex;align-items:center;gap:20px;position:relative;z-index:2}
+.hero-badge::before,.hero-badge::after{content:'';width:48px;height:1px;background:var(--rose-line)}
+.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,6.5vw,76px);font-weight:300;line-height:1.12;color:var(--ink);max-width:860px;margin-bottom:28px;position:relative;z-index:2}
+.hero-h1 em{font-style:italic;color:var(--rose)}
+.hero-sep{width:160px;height:1px;border:none;background:linear-gradient(to right,transparent,var(--rose-p),transparent);margin:0 auto 32px;position:relative;z-index:2}
+.hero-p{font-size:15px;color:var(--ink-s);max-width:520px;line-height:1.85;position:relative;z-index:2;margin-bottom:52px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;position:relative;z-index:2}
+.btn-p{padding:14px 36px;background:var(--rose);border:none;color:var(--white);font-size:13px;font-family:'Jost',sans-serif;letter-spacing:1px;cursor:pointer;transition:all .22s;box-shadow:0 6px 24px rgba(139,74,110,0.28);border-radius:3px}
+.btn-p:hover{background:var(--ink);box-shadow:0 8px 30px rgba(26,16,21,0.22);transform:translateY(-2px)}
+.btn-g{padding:14px 36px;background:transparent;border:1px solid var(--line-m);color:var(--ink-m);font-size:13px;font-family:'Jost',sans-serif;cursor:pointer;transition:all .22s;letter-spacing:.5px;border-radius:3px}
+.btn-g:hover{border-color:var(--rose);color:var(--rose)}
+
+/* ── VÉRITÉS ── */
+.truths{position:relative;z-index:1;padding:80px 52px;background:var(--bg-w);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.truths-inner{max-width:1100px;margin:0 auto}
+.truths-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0}
+.truth{padding:36px 40px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.truth:nth-child(3n){border-right:none}
+.truth-n{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:rgba(139,74,110,0.15);line-height:1;margin-bottom:20px}
+.truth-txt{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;font-weight:400;color:var(--ink);line-height:1.58;margin-bottom:12px}
+.truth-src{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-xs)}
+.truth-tag{display:inline-block;padding:3px 10px;background:var(--rose-bg);color:var(--rose);font-size:10px;letter-spacing:1px;margin-top:8px}
+
+/* ── CHAT OVERLAY ── */
+#overlay{display:none;position:fixed;inset:0;background:rgba(15,26,25,0.6);backdrop-filter:blur(12px);z-index:90100;align-items:center;justify-content:center;padding:20px}
+#overlay.open{display:flex}
+#chat-panel{background:var(--white);width:100%;max-width:680px;height:82vh;max-height:760px;border-radius:20px;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(15,26,25,0.28);animation:chatSlideIn .35s cubic-bezier(.4,0,.2,1)}
+.cp-header{padding:20px 24px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.cp-brand{display:flex;align-items:center;gap:12px}
+.cp-av{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#6B4E8B,#C4876A);display:flex;align-items:center;justify-content:center;font-size:16px;color:white}
+.cp-name{font-size:14px;font-weight:500;color:var(--ink)}
+.cp-sub{font-size:11px;color:var(--ink-xs)}
+.cp-close{width:30px;height:30px;border:none;background:var(--bg);border-radius:8px;cursor:pointer;font-size:16px;color:var(--ink-s)}
+.msgs{flex:1;overflow-y:auto;padding:20px 20px;display:flex;flex-direction:column;gap:14px}
+.msg{max-width:82%;padding:12px 16px;font-size:13.5px;line-height:1.72;border-radius:14px}
+.msg-kap{background:var(--bg-w);color:var(--ink);border-radius:4px 14px 14px 14px;align-self:flex-start}
+.msg-user{background:var(--rose);color:white;border-radius:14px 4px 14px 14px;align-self:flex-end}
+.disc{display:flex;align-items:center;gap:6px;padding:10px 14px;background:var(--bg-w);border-radius:14px;align-self:flex-start}
+.disc .d{width:7px;height:7px;border-radius:50%;background:var(--rose);animation:bounce .9s infinite ease-in-out}
+.disc .d:nth-child(2){animation-delay:.15s}.disc .d:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,80%,100%{transform:scale(0.7);opacity:.4}40%{transform:scale(1);opacity:1}}
+.inp-area{padding:14px 16px;border-top:1px solid var(--line);display:flex;gap:10px;align-items:flex-end;flex-shrink:0}
+.inp-area textarea{flex:1;border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-family:'Jost',sans-serif;font-size:13.5px;resize:none;outline:none;line-height:1.6;max-height:130px;overflow-y:auto;background:var(--bg);color:var(--ink)}
+.inp-area textarea:focus{border-color:var(--rose)}
+.inp-send{width:40px;height:40px;border-radius:12px;background:var(--rose);border:none;cursor:pointer;color:white;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.inp-send:hover{background:var(--ink)}
+
+/* ── TRACE OVERLAY ── */
+#trace-overlay{display:none;position:fixed;inset:0;background:rgba(15,26,25,0.62);backdrop-filter:blur(12px);z-index:90050;align-items:center;justify-content:center;padding:20px}
+#trace-overlay.open{display:flex}
+#trace-panel{background:var(--white);width:100%;max-width:640px;max-height:90vh;border-radius:20px;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(15,26,25,0.28);overflow:hidden;animation:chatSlideIn .38s cubic-bezier(.4,0,.2,1)}
+@keyframes chatSlideIn{from{transform:translateY(20px) scale(.97);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+/* ── Flex layout overlay ── */
+#trace-flex{display:flex;flex-direction:column;align-items:center;gap:14px;max-height:94vh;}
+#step-bubble-gyn{width:100%;max-width:560px;flex-shrink:0;background:#FDFCFA;border-radius:16px;border:1px solid rgba(107,78,139,0.15);padding:14px 18px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 4px 20px rgba(107,78,139,0.08);display:none}
+#step-bubble-gyn.visible{display:flex}
+#step-bubble-gyn .bub-icon{font-size:20px;flex-shrink:0;margin-top:1px;color:var(--bc,var(--rose))}
+#step-bubble-gyn .bub-tag{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--bc,var(--rose));margin-bottom:3px;opacity:.8}
+#step-bubble-gyn .bub-title{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:600;color:#2E1E2E;margin-bottom:3px;line-height:1.35}
+#step-bubble-gyn .bub-text{font-size:11.5px;color:#7A6A7A;line-height:1.6}
+#step-bubble-gyn .bub-src{font-size:10px;color:#B0A0B0;margin-top:4px;font-style:italic}
+/* Bouton kiné */
+.btn-kine-pro{padding:10px 16px;border-radius:22px;border:1px solid var(--bc-line,var(--line));background:transparent;color:var(--bc,var(--rose));font-family:'Jost',sans-serif;font-size:11.5px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:5px;font-weight:400}
+.btn-kine-pro:hover{background:var(--bc-bg,rgba(107,78,139,0.07));border-color:var(--bc,var(--rose))}
+/* Modal kiné */
+#kine-modal{display:none;position:fixed;inset:0;background:rgba(21,15,26,0.6);z-index:9000;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+#kine-modal.open{display:flex}
+#kine-panel{background:#FDFCFA;border-radius:24px;width:min(680px,94vw);max-height:88vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(21,15,26,0.2)}
+#kine-panel-header{padding:18px 24px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+#kine-panel-body{overflow-y:auto;padding:22px 24px;flex:1}
+.kine-section{margin-bottom:18px}
+.kine-section-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--rose);margin-bottom:10px}
+.kine-row{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:12px}
+.kine-row-label{color:var(--ink-s);min-width:160px;flex-shrink:0}
+.kine-row-value{color:var(--ink);font-weight:400}
+@keyframes traceSlideUp{from{transform:translateY(32px);opacity:0}to{transform:translateY(0);opacity:1}}
+.tp-header{padding:18px 22px 14px;border-bottom:1px solid var(--bc-line,var(--line));display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.tp-brand{display:flex;align-items:center;gap:12px}
+.tp-icon{width:36px;height:36px;border-radius:10px;background:var(--bc,var(--rose));display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;transition:background .3s}
+.tp-title{font-size:14px;font-weight:500;color:var(--ink);line-height:1.3}
+.tp-sub{font-size:11px;color:var(--ink-xs)}
+.tp-close{width:30px;height:30px;border:none;background:var(--bg);border-radius:8px;cursor:pointer;font-size:14px;color:var(--ink-s)}
+.tp-progress{padding:14px 22px 8px;flex-shrink:0}
+.tp-steps{display:flex;align-items:center;margin-bottom:6px}
+.tp-step{display:flex;align-items:center}
+.tp-step-dot{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line-m);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--ink-xs);flex-shrink:0;transition:all .25s;background:var(--white)}
+.tp-step-dot.active{background:var(--bc,var(--rose));border-color:var(--bc,var(--rose));color:white}
+.tp-step-dot.done{background:var(--bc-l,var(--rose-l));border-color:var(--bc-l,var(--rose-l));color:white;font-size:12px}
+.tp-step-line{flex:1;height:1.5px;background:var(--line-m);transition:background .25s;min-width:6px}
+.tp-step-line.done{background:var(--bc-l,var(--rose-l))}
+.tp-progress-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-xs)}
+.tp-body{flex:1;overflow-y:auto;padding:18px 22px}
+.tp-step-num{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--bc,var(--rose));margin-bottom:8px}
+.tp-step-q{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ink);line-height:1.35;margin-bottom:16px}
+.tp-step-q em{font-style:italic;color:var(--bc,var(--rose));font-style:normal;font-weight:300}
+.tp-textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-family:'Jost',sans-serif;font-size:13px;color:var(--ink);background:var(--bg);resize:none;outline:none;line-height:1.72;min-height:100px}
+.tp-textarea:focus{border-color:var(--bc,var(--rose))}
+.tp-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+.tp-chip{padding:8px 14px;border:1.5px solid var(--line-m);border-radius:30px;font-size:12.5px;color:var(--ink-s);cursor:pointer;transition:all .18s;user-select:none}
+.tp-chip.selected{border-color:var(--bc,var(--rose));background:var(--bc-bg,var(--rose-bg));color:var(--bc,var(--rose));font-weight:500}
+.tp-chip:hover{border-color:var(--bc-l,var(--rose-l));color:var(--bc,var(--rose));background:var(--bc-bg,var(--rose-bg))}
+.tp-progress-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.tp-progress-opt{background:var(--white);border:1.5px solid var(--line-m);border-radius:14px;padding:14px 10px;cursor:pointer;text-align:center;transition:all .2s}
+.tp-progress-opt.selected{border-color:var(--bc,var(--rose));background:var(--bc-bg,var(--rose-bg))}
+.tp-progress-opt-icon{font-size:22px;display:block;margin-bottom:6px}
+.tp-progress-opt-label{font-size:12px;color:var(--ink-s)}
+.tp-footer{padding:14px 22px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.tp-btn-back{padding:10px 18px;border-radius:22px;border:1px solid var(--line-m);background:transparent;color:var(--ink-s);font-family:'Jost',sans-serif;font-size:12px;cursor:pointer;transition:all .2s}
+.tp-btn-back:hover{border-color:var(--bc,var(--rose));color:var(--bc,var(--rose))}
+.tp-btn-next{background:var(--bc,var(--rose));border:none;color:white;padding:12px 28px;border-radius:24px;font-family:'Jost',sans-serif;font-size:13px;cursor:pointer;transition:all .22s;box-shadow:0 4px 16px rgba(0,0,0,0.12)}
+.tp-btn-next:hover{opacity:.88;transform:translateY(-1px)}
+
+/* ── BILAN COLOR VARIABLES ── */
+#trace-panel[data-bilan="menopause"]{--bc:#C4876A;--bc-l:#DBA882;--bc-bg:rgba(196,135,106,0.08);--bc-line:rgba(196,135,106,0.22)}
+#trace-panel[data-bilan="endometriose"]{--bc:#7B5FAA;--bc-l:#9E84C8;--bc-bg:rgba(123,95,170,0.08);--bc-line:rgba(123,95,170,0.22)}
+#trace-panel[data-bilan="perinee"]{--bc:#C06080;--bc-l:#DA8FA8;--bc-bg:rgba(192,96,128,0.08);--bc-line:rgba(192,96,128,0.22)}
+
+/* ── SCALE ITEMS ── */
+.msk-scale-item{margin-bottom:14px;padding:13px;background:var(--bg);border-radius:10px;border:1px solid var(--line)}
+.msk-scale-label{font-size:13px;color:var(--ink-m);margin-bottom:10px;line-height:1.5}
+.msk-scale-opts{display:flex;gap:4px;flex-wrap:wrap}
+.msk-scale-opt{flex:1;min-width:42px;padding:7px 4px;text-align:center;border:1px solid var(--line);border-radius:8px;cursor:pointer;font-size:10px;color:var(--ink-s);transition:all .18s;line-height:1.3}
+.msk-scale-opt:hover{border-color:var(--bc,var(--rose));color:var(--bc,var(--rose))}
+.msk-scale-opt.sel{background:var(--bc,var(--rose));border-color:var(--bc,var(--rose));color:white;font-weight:500}
+.msk-scale-opt-num{display:block;font-size:14px;font-weight:500;margin-bottom:1px}
+
+/* ── PSFS ── */
+.psfs-item{margin-bottom:14px;background:var(--bg);border-radius:10px;padding:13px;border:1px solid var(--line)}
+.psfs-label-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.psfs-num{width:22px;height:22px;border-radius:50%;background:var(--bc,var(--rose));color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0}
+.psfs-input{flex:1;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-family:'Jost',sans-serif;font-size:12.5px;background:var(--white);outline:none;color:var(--ink)}
+.psfs-input:focus{border-color:var(--bc,var(--rose))}
+.psfs-score-row{display:flex;align-items:center;gap:10px}
+.psfs-score-label{font-size:11px;color:var(--ink-xs);white-space:nowrap}
+.psfs-slider{flex:1;accent-color:var(--bc,var(--rose))}
+.psfs-score-val{font-size:16px;font-weight:600;color:var(--bc,var(--rose));min-width:20px;text-align:center}
+
+/* ── EVA ── */
+.eva-wrap{padding:8px 0}
+.eva-value{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;color:var(--bc,var(--rose));line-height:1;text-align:center;margin-bottom:10px}
+.eva-slider{width:100%;accent-color:var(--bc,var(--rose));margin-bottom:6px}
+.eva-labels{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink-xs);margin-bottom:6px}
+.eva-desc{font-size:12px;color:var(--bc,var(--rose));text-align:center;font-style:italic}
+.dual-eva-item{margin-bottom:18px;padding:14px;background:var(--bg);border-radius:10px;border:1px solid var(--line)}
+.dual-eva-label{font-size:12px;color:var(--ink-s);margin-bottom:8px}
+.dual-eva-val{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--bc,var(--rose));line-height:1;margin-bottom:6px}
+
+/* ── RESULT ── */
+#trace-panel.result-mode{max-width:960px;border-radius:20px;max-height:90vh}
+.kap-res-top{padding:13px 22px;border-bottom:1px solid var(--bc-line,var(--line));display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.kap-res-top-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--bc,var(--rose))}
+.kap-res-close{width:30px;height:30px;border-radius:8px;background:var(--bc-bg);border:none;cursor:pointer;font-size:14px;color:var(--bc,var(--rose));display:flex;align-items:center;justify-content:center}
+.kap-res-body{display:flex;flex:1;overflow:hidden;min-height:0}
+.kap-res-left{flex:0 0 350px;overflow-y:auto;padding:22px;border-right:1px solid var(--bc-line,var(--line));background:#FDFCFA}
+.kap-res-right{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.kap-res-msg-zone{flex:1;overflow-y:auto;padding:26px 28px}
+.kap-res-footer{flex-shrink:0;padding:13px 22px;border-top:1px solid var(--bc-line,var(--line));display:flex;gap:10px}
+.kap-res-btn-redo{padding:11px 18px;border-radius:22px;border:1px solid var(--line-m);background:transparent;color:var(--ink-s);font-family:'Jost',sans-serif;font-size:12px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px}
+.kap-res-btn-chat{flex:1;padding:12px 20px;border-radius:22px;background:var(--bc,var(--rose));border:none;color:white;font-family:'Jost',sans-serif;font-size:13px;cursor:pointer}
+.kap-score-wrap{background:var(--white);border:2px solid var(--bc-line,var(--line));border-radius:16px;padding:18px;margin-bottom:14px}
+.kap-score-num{font-family:'Cormorant Garamond',serif;font-size:68px;font-weight:300;line-height:1;color:var(--bc,var(--rose))}
+.kap-score-bar-track{background:var(--bc-bg);border-radius:6px;height:9px;overflow:hidden;margin-top:8px}
+.kap-score-bar-fill{height:100%;border-radius:6px;transition:width 1.4s cubic-bezier(.4,0,.2,1);background:var(--bc,var(--rose))}
+.kap-dim{margin-bottom:11px}
+.kap-dim-row{display:flex;justify-content:space-between;margin-bottom:4px}
+.kap-dim-name{font-size:12px;color:var(--ink-m)}
+.kap-dim-val{font-size:12px;font-weight:600;color:var(--bc,var(--rose))}
+.kap-dim-track{background:var(--bc-bg);border-radius:5px;height:6px;overflow:hidden}
+.kap-dim-fill{height:100%;border-radius:5px;background:var(--bc,var(--rose));transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.kap-dim-lbl{font-size:10px;color:var(--bc,var(--rose));margin-top:2px}
+.kap-res-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,26px);font-weight:400;color:var(--ink);line-height:1.35;margin-bottom:14px}
+.kap-res-headline em{font-style:italic;color:var(--bc,var(--rose))}
+.kap-res-text{font-size:13.5px;color:var(--ink-s);line-height:1.88;margin-bottom:18px}
+.kap-immat-wrap{background:var(--bc-bg);border:1px solid var(--bc-line,var(--line));border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px;margin-top:14px}
+.kap-immat-num{font-family:monospace;font-size:17px;font-weight:700;color:var(--bc,var(--rose));letter-spacing:2px}
+
+@media(max-width:700px){
+  header{padding:14px 20px}.hero,.truths,.bilans-section,.situations{padding-left:20px;padding-right:20px}
+  #trace-panel.result-mode .kap-res-body{flex-direction:column;overflow-y:auto}
+  #trace-panel.result-mode .kap-res-left{flex:none;border-right:none;border-bottom:1px solid var(--bc-line,var(--line))}
+  .tp-step-dot{width:18px;height:18px;font-size:8px}
+}
+@media(max-width:500px){#trace-overlay{align-items:flex-end;padding:0}#trace-panel{border-radius:20px 20px 0 0;max-height:96vh}#trace-panel.result-mode{border-radius:16px 16px 0 0}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-logo">
+    <div>
+      <div class="h-kap">KAP <span class="h-arrow">›</span> <span class="h-spec">GYNÉCO</span></div>
+      <div class="h-sub">Ménopause · Endométriose · Périnée</div>
+    </div>
+  </div>
+  <nav>
+    <a href="#bilans-section">Bilans</a>
+    <a href="#situations">Situations</a>
+    <button class="h-cta" onclick="openChatDirect()">Parler à KAP IA</button>
+  </nav>
+</header>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-watermark">KAP</div>
+  <div class="hero-badge">Kinésithérapie · Science · Prévention</div>
+  <h1 class="hero-h1">Ce que vous vivez<br>a un <em>nom précis</em><br>et une réponse.</h1>
+  <hr class="hero-sep">
+  <p class="hero-p">Ménopause, endométriose, plancher pelvien. Des bilans cliniques validés conçus par des kinésithérapeutes spécialisés — pour vous aider à comprendre, quantifier et agir.</p>
+  <div class="hero-btns">
+    <button class="btn-p" onclick="openChatDirect()">Parler à KAP IA — c'est gratuit</button>
+    <button class="btn-g" onclick="document.getElementById('bilans-section').scrollIntoView({behavior:'smooth'})">Faire mon bilan →</button>
+  </div>
+</section>
+
+<!-- ══ VÉRITÉS ══ -->
+<section class="truths">
+  <div class="truths-inner">
+    <div style="text-align:center;margin-bottom:48px">
+      <div style="font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--ink-xs)">Ce que la science dit</div>
+    </div>
+    <div class="truths-grid">
+      <div class="truth">
+        <div class="truth-n">7</div>
+        <div class="truth-txt">En moyenne, 7 ans séparent les premiers symptômes du diagnostic d'endométriose. Ce n'est pas dans la tête.</div>
+        <div class="truth-src">Bulletins Épidémiologiques Hebdomadaires · INSERM 2022</div>
+        <span class="truth-tag">Endométriose</span>
+      </div>
+      <div class="truth">
+        <div class="truth-n">40%</div>
+        <div class="truth-txt">40% des femmes souffrent d'incontinence urinaire d'effort après l'accouchement. 70% ne font jamais de rééducation périnéale.</div>
+        <div class="truth-src">Haute Autorité de Santé · 2021</div>
+        <span class="truth-tag">Périnée</span>
+      </div>
+      <div class="truth">
+        <div class="truth-n">80%</div>
+        <div class="truth-txt">80% des femmes ménopausées rapportent des symptômes impactant leur qualité de vie. Seules 16% bénéficient d'une prise en charge structurée.</div>
+        <div class="truth-src">Enquête MATURITAS · Heinemann 2004</div>
+        <span class="truth-tag">Ménopause</span>
+      </div>
+      <div class="truth">
+        <div class="truth-n">3</div>
+        <div class="truth-txt">La rééducation périnéale réduit l'incontinence urinaire d'effort de 3 fois plus efficacement qu'un traitement médicamenteux seul.</div>
+        <div class="truth-src">Cochrane Database · Dumoulin 2018</div>
+        <span class="truth-tag">Périnée</span>
+      </div>
+      <div class="truth">
+        <div class="truth-n">86%</div>
+        <div class="truth-txt">86% des femmes avec endométriose présentent des symptômes anxieux ou dépressifs significatifs. La douleur chronique n'est pas que physique.</div>
+        <div class="truth-src">Nnoaham et al. · Human Reproduction 2011</div>
+        <span class="truth-tag">Endométriose</span>
+      </div>
+      <div class="truth">
+        <div class="truth-n">PSFS</div>
+        <div class="truth-txt">Le Patient-Specific Functional Scale permet de mesurer des objectifs fonctionnels individuels — la seule façon de savoir si votre prise en charge avance vraiment.</div>
+        <div class="truth-src">Stratford et al. · 1995</div>
+        <span class="truth-tag">Approche KAP</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BILANS SPÉCIALISÉS ══ -->
+<section id="bilans-section" style="position:relative;z-index:1;padding:80px 52px;background:var(--bg)">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:48px">
+      <p style="font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--ink-xs);margin-bottom:14px">Bilans cliniques spécialisés</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);font-weight:300;color:var(--ink);line-height:1.2;margin-bottom:14px">3 bilans. <em style="color:var(--rose)">Les outils qui comptent.</em></h2>
+      <p style="font-size:14px;color:var(--ink-s);max-width:520px;margin:0 auto;line-height:1.82">Chaque bilan utilise les échelles cliniques validées de votre spécialité. 15 à 20 questions. Un score structuré. Un PDF à apporter à votre séance.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+
+      <!-- MÉNOPAUSE -->
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:16px;padding:26px;position:relative;overflow:hidden;transition:all .24s" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 40px rgba(26,16,21,0.10)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#C4876A"></div>
+        <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#C4876A;margin-bottom:8px;margin-top:8px">Gynécologie · Hormonologie</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ink);margin-bottom:8px">🌿 Ménopause</div>
+        <div style="font-size:12px;color:var(--ink-s);line-height:1.7;margin-bottom:14px">Bouffées de chaleur, troubles du sommeil, sécheresse, humeur. Péri-ménopause ou ménopause installée.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:18px">
+          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(196,135,106,0.08);color:#C4876A">MRS</span>
+          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(196,135,106,0.08);color:#C4876A">GSM</span>
+          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(196,135,106,0.08);color:#C4876A">PHQ-2</span>
+          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(196,135,106,0.08);color:#C4876A">PSFS</span>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button onclick="openBilanGyneco('menopause','naturelle')" style="flex:1;padding:10px;border-radius:10px;border:1.5px solid #C4876A;background:transparent;color:#C4876A;font-family:'Jost',sans-serif;font-size:11px;cursor:pointer;transition:all .2s" onmouseover="this.style.background='rgba(196,135,106,0.08)'" onmouseout="this.style.background='transparent'">Sans THS</button>
+          <button onclick="openBilanGyneco('menopause','ths')" style="flex:1;padding:10px;border-radius:10px;border:1.5px solid #C4876A;background:#C4876A;color:white;font-family:'Jost',sans-serif;font-size:11px;cursor:pointer">Sous THS</button>
+        </div>
+      </div>
+
+      <!-- ENDOMÉTRIOSE -->
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:16px;padding:26px;position:relative;overflow:hidden;transition:all .24s" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 40px rgba(26,16,21,0.10)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#7B5FAA"></div>
+        <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#7B5FAA;margin-bottom:8px;margin-top:8px">Douleur chronique · Fertilité</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ink);margin-bottom:8px">🌀 Endométriose</div>
+        <div style="font-size:12px;color:var(--ink-s);line-height:1.7;margin-bottom:14px">Dysménorrhée, dyspareunie, douleur pelvienne chronique, impact sur la qualité de vie et la fertilité.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:18px">
+          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(123,95,170,0.08);color:#7B5FAA">EHP-5</span>
+          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(123,95,170,0.08);color:#7B5FAA">NRS ×3</span>
+          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(123,95,170,0.08);color:#7B5FAA">GAD-2</span>
+          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(123,95,170,0.08);color:#7B5FAA">PHQ-2</span>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button onclick="openBilanGyneco('endometriose','conservatrice')" style="flex:1;padding:10px;border-radius:10px;border:1.5px solid #7B5FAA;background:transparent;color:#7B5FAA;font-family:'Jost',sans-serif;font-size:11px;cursor:pointer;transition:all .2s" onmouseover="this.style.background='rgba(123,95,170,0.08)'" onmouseout="this.style.background='transparent'">Conservatrice</button>
+          <button onclick="openBilanGyneco('endometriose','postchir')" style="flex:1;padding:10px;border-radius:10px;border:1.5px solid #7B5FAA;background:#7B5FAA;color:white;font-family:'Jost',sans-serif;font-size:11px;cursor:pointer">Post-chirurgicale</button>
+        </div>
+      </div>
+
+      <!-- PÉRINÉE -->
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:16px;padding:26px;position:relative;overflow:hidden;transition:all .24s" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 40px rgba(26,16,21,0.10)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#C06080"></div>
+        <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#C06080;margin-bottom:8px;margin-top:8px">Plancher pelvien · Incontinence</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ink);margin-bottom:8px">💫 Périnée</div>
+        <div style="font-size:12px;color:var(--ink-s);line-height:1.7;margin-bottom:14px">Incontinence urinaire, prolapsus, dyspareunie, post-partum. Rééducation du plancher pelvien.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:18px">
+          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(192,96,128,0.08);color:#C06080">ICIQ-SF</span>
+          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(192,96,128,0.08);color:#C06080">PFDI-20</span>
+          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(192,96,128,0.08);color:#C06080">FSFI-6</span>
+          <span style="font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(192,96,128,0.08);color:#C06080">PSFS</span>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button onclick="openBilanGyneco('perinee','postpartum')" style="flex:1;padding:10px;border-radius:10px;border:1.5px solid #C06080;background:transparent;color:#C06080;font-family:'Jost',sans-serif;font-size:11px;cursor:pointer;transition:all .2s" onmouseover="this.style.background='rgba(192,96,128,0.08)'" onmouseout="this.style.background='transparent'">Post-partum</button>
+          <button onclick="openBilanGyneco('perinee','autre')" style="flex:1;padding:10px;border-radius:10px;border:1.5px solid #C06080;background:#C06080;color:white;font-family:'Jost',sans-serif;font-size:11px;cursor:pointer">Autre profil</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SITUATIONS ══ -->
+<section id="situations" style="position:relative;z-index:1;padding:80px 52px;background:var(--bg-w);border-top:1px solid var(--line)">
+  <div style="max-width:1100px;margin:0 auto;text-align:center">
+    <p style="font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--ink-xs);margin-bottom:14px">Votre situation</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3.5vw,40px);font-weight:300;color:var(--ink);margin-bottom:14px">Vous reconnaissez-vous <em style="color:var(--rose)">ici ?</em></h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:40px">
+      <div onclick="openChatWith('menopause')" style="background:var(--white);border:1px solid var(--line);border-radius:14px;padding:22px;cursor:pointer;text-align:left;transition:all .22s" onmouseover="this.style.transform='translateY(-2px)';this.style.borderColor='#C4876A'" onmouseout="this.style.transform='';this.style.borderColor=''">
+        <div style="font-size:22px;margin-bottom:10px">🌿</div>
+        <div style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:6px">Ménopause & transition hormonale</div>
+        <div style="font-size:12px;color:var(--ink-s);line-height:1.65">Bouffées de chaleur, fatigue, troubles du sommeil, sécheresse, humeur. Je veux comprendre et agir.</div>
+      </div>
+      <div onclick="openChatWith('endometriose')" style="background:var(--white);border:1px solid var(--line);border-radius:14px;padding:22px;cursor:pointer;text-align:left;transition:all .22s" onmouseover="this.style.transform='translateY(-2px)';this.style.borderColor='#7B5FAA'" onmouseout="this.style.transform='';this.style.borderColor=''">
+        <div style="font-size:22px;margin-bottom:10px">🌀</div>
+        <div style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:6px">Endométriose & douleurs pelviennes</div>
+        <div style="font-size:12px;color:var(--ink-s);line-height:1.65">Règles douloureuses, douleurs diffuses, impact sur le quotidien et la sexualité. Je veux un bilan structuré.</div>
+      </div>
+      <div onclick="openChatWith('perinee')" style="background:var(--white);border:1px solid var(--line);border-radius:14px;padding:22px;cursor:pointer;text-align:left;transition:all .22s" onmouseover="this.style.transform='translateY(-2px)';this.style.borderColor='#C06080'" onmouseout="this.style.transform='';this.style.borderColor=''">
+        <div style="font-size:22px;margin-bottom:10px">💫</div>
+        <div style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:6px">Périnée & plancher pelvien</div>
+        <div style="font-size:12px;color:var(--ink-s);line-height:1.65">Fuites urinaires, lourdeur pelvienne, douleurs lors des rapports, après accouchement. Je veux reprendre confiance.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CHAT OVERLAY ══ -->
+<div id="overlay" onclick="if(event.target===this)closeChat()">
+<div id="chat-panel">
+  <div class="cp-header">
+    <div class="cp-brand">
+      <div class="cp-av">🌿</div>
+      <div>
+        <div class="cp-name">KAP IA — Gynéco</div>
+        <div class="cp-sub">Spécialisé ménopause · endométriose · périnée</div>
+      </div>
+    </div>
+    <button class="cp-close" onclick="closeChat()">✕</button>
+  </div>
+  <div class="msgs" id="msgs"></div>
+  <div class="inp-area">
+    <textarea id="inp" rows="1" placeholder="Votre message..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send()}" oninput="autoGrow(this)"></textarea>
+    <button class="inp-send" onclick="send()"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+  </div>
+</div>
+</div>
+
+<!-- ══ TRACE OVERLAY ══ -->
+<div id="trace-overlay" onclick="overlayClose(event)">
+<div id="trace-flex">
+<div id="trace-panel">
+  <div class="tp-header">
+    <div class="tp-brand">
+      <div class="tp-icon" id="tp-icon">🌿</div>
+      <div>
+        <div class="tp-title" id="tp-title">Bilan KAP Gynéco</div>
+        <div class="tp-sub">Échelles cliniques validées · Score personnalisé</div>
+      </div>
+    </div>
+    <button class="tp-close" onclick="closeTrace()">✕</button>
+  </div>
+
+  <!-- Choix du bilan -->
+  <div id="bilan-choice" style="display:none;flex-direction:column;overflow-y:auto;padding:20px 22px;gap:14px;flex:1">
+    <div style="text-align:center;padding:6px 0">
+      <div style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--ink-xs);margin-bottom:12px">Choisissez votre bilan</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:400;color:var(--ink);margin-bottom:6px">Quelle est votre situation <em style="color:var(--rose)">principale ?</em></h3>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px;position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:#C4876A;border-radius:12px 0 0 12px"></div>
+        <div style="padding-left:10px">
+          <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#C4876A;margin-bottom:4px">Gynécologie · Hormonologie</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink);margin-bottom:8px">🌿 Ménopause</div>
+          <div style="display:flex;gap:7px">
+            <button onclick="openBilanGyneco('menopause','naturelle')" style="flex:1;padding:8px;border-radius:8px;border:1.5px solid #C4876A;background:transparent;color:#C4876A;font-family:'Jost',sans-serif;font-size:10.5px;cursor:pointer">Sans THS</button>
+            <button onclick="openBilanGyneco('menopause','ths')" style="flex:1;padding:8px;border-radius:8px;border:1.5px solid #C4876A;background:#C4876A;color:white;font-family:'Jost',sans-serif;font-size:10.5px;cursor:pointer">Sous THS</button>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px;position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:#7B5FAA;border-radius:12px 0 0 12px"></div>
+        <div style="padding-left:10px">
+          <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#7B5FAA;margin-bottom:4px">Douleur chronique · Fertilité</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink);margin-bottom:8px">🌀 Endométriose</div>
+          <div style="display:flex;gap:7px">
+            <button onclick="openBilanGyneco('endometriose','conservatrice')" style="flex:1;padding:8px;border-radius:8px;border:1.5px solid #7B5FAA;background:transparent;color:#7B5FAA;font-family:'Jost',sans-serif;font-size:10.5px;cursor:pointer">Conservatrice</button>
+            <button onclick="openBilanGyneco('endometriose','postchir')" style="flex:1;padding:8px;border-radius:8px;border:1.5px solid #7B5FAA;background:#7B5FAA;color:white;font-family:'Jost',sans-serif;font-size:10.5px;cursor:pointer">Post-chir.</button>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px;position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:#C06080;border-radius:12px 0 0 12px"></div>
+        <div style="padding-left:10px">
+          <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#C06080;margin-bottom:4px">Plancher pelvien · Incontinence</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink);margin-bottom:8px">💫 Périnée</div>
+          <div style="display:flex;gap:7px">
+            <button onclick="openBilanGyneco('perinee','postpartum')" style="flex:1;padding:8px;border-radius:8px;border:1.5px solid #C06080;background:transparent;color:#C06080;font-family:'Jost',sans-serif;font-size:10.5px;cursor:pointer">Post-partum</button>
+            <button onclick="openBilanGyneco('perinee','autre')" style="flex:1;padding:8px;border-radius:8px;border:1.5px solid #C06080;background:#C06080;color:white;font-family:'Jost',sans-serif;font-size:10.5px;cursor:pointer">Autre profil</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border-radius:10px;border:1px solid var(--line);margin-top:4px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-xs)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span style="font-size:11px;color:var(--ink-xs)">Vos réponses sont confidentielles — elles servent uniquement à personnaliser votre bilan.</span>
+    </div>
+  </div>
+
+  <!-- Progress dots -->
+  <div class="tp-progress" style="display:none">
+    <div class="tp-steps" id="tp-steps"></div>
+    <div class="tp-progress-label" id="tp-progress-label">Étape 1</div>
+  </div>
+
+  <!-- Dynamic step content -->
+  <div class="tp-body" id="tp-body" style="display:none">
+    <div id="step-content"></div>
+  </div>
+
+  <!-- Footer nav -->
+  <div class="tp-footer" id="tp-footer" style="display:none">
+    <button class="tp-btn-back" id="btn-back" onclick="prevStep()" style="visibility:hidden">← Retour</button>
+    <button class="tp-btn-next" id="btn-next" onclick="nextStep()">Suivant →</button>
+  </div>
+
+  <!-- Result -->
+  <div id="trace-result" style="display:none;flex-direction:column;flex:1;overflow:hidden"></div>
+</div>
+
+<div id="step-bubble-gyn">
+  <span class="bub-icon" id="bub-icon-gyn">✦</span>
+  <div style="flex:1;min-width:0">
+    <div class="bub-tag">Pourquoi cette question</div>
+    <div class="bub-title" id="bub-title-gyn">Votre bilan clinique</div>
+    <div class="bub-text" id="bub-text-gyn">Chaque question s'appuie sur une échelle clinique validée. Vos réponses construisent un profil objectif que vous pouvez partager avec votre kiné.</div>
+    <div class="bub-src" id="bub-src-gyn" style="display:none"></div>
+  </div>
+</div>
+
+</div><!-- /trace-flex -->
+</div><!-- /trace-overlay -->
+
+<!-- ══ RGPD ══ -->
+<div id="rgpd-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--ink);color:var(--white);padding:14px 24px;z-index:80000;display:flex;align-items:center;justify-content:space-between;gap:16px">
+  <p style="font-size:12px;line-height:1.5;opacity:.85">Ce site utilise vos échanges avec KAP IA uniquement pour vous répondre en temps réel. <strong>Aucune conversation n'est enregistrée</strong> après la session.</p>
+  <button onclick="rgpdOk()" style="padding:8px 18px;background:var(--rose);border:none;color:white;font-family:'Jost',sans-serif;font-size:12px;cursor:pointer;border-radius:4px;white-space:nowrap">J'ai compris</button>
+</div>
+
+<script>
+// ══ KAP GYNÉCO — SYSTÈME MULTI-BILAN DYNAMIQUE ══
+
+// ══ BULLES EXPLICATIVES ══
+const GYN_BUBBLES = {
+  // ── MÉNOPAUSE ──
+  situation:      {icon:'🌿',title:'Votre vécu en mots',text:'La description libre révèle ce que les échelles ne capturent pas. Le kiné spécialisé s\'appuie sur votre narration pour contextualiser le bilan.',src:''},
+  statut_menopause:{icon:'⏳',title:'Le statut ménopausique',text:'Péri-ménopause, installée, chirurgicale — chaque statut implique un mécanisme physiologique distinct. La transition ovarienne dure en moyenne 4 à 8 ans (Harlow 2012, SWAN Study).',src:'Harlow 2012 · SWAN Study'},
+  age:            {icon:'📅',title:'L\'âge, un facteur modulant',text:'L\'âge module l\'intensité des symptômes et le rapport bénéfice/risque des interventions. La rééducation périnéale est efficace à tout âge.',src:''},
+  mrs_soma:       {icon:'🌡',title:'MRS — Domaine somatique',text:'La Menopause Rating Scale (Heinemann 2004) est l\'outil de référence international. Le domaine somatique explore les bouffées de chaleur, les troubles du sommeil et les douleurs musculo-articulaires.',src:'Heinemann 2004 · Climacteric'},
+  mrs_psy:        {icon:'🧠',title:'MRS — Domaine psychologique',text:'Les symptômes psychologiques (irritabilité, dépression, anxiété) sont souvent sous-estimés. La ménopause double le risque dépressif en péri-phase (Bromberger 2011).',src:'Bromberger 2011 · Psychiatr. Clin.'},
+  mrs_uro:        {icon:'💧',title:'MRS — Domaine urogénital',text:'Le syndrome génito-urinaire de la ménopause (GSM) touche 40 à 60 % des femmes. La rééducation périnéale est la première ligne thérapeutique recommandée (Cochrane 2018).',src:'Dumoulin 2018 · Cochrane'},
+  gsm:            {icon:'🔬',title:'GSM — Syndrome génito-urinaire',text:'La carence œstrogénique entraîne une atrophie vulvo-vaginale. Le score GSM oriente la priorité de la prise en charge périnéale.',src:'Portman 2014 · Menopause'},
+  phq2:           {icon:'🫀',title:'PHQ-2 — Dépistage dépressif',text:'La ménopause est une période de vulnérabilité dépressive documentée. Deux items suffisent à détecter une souffrance nécessitant un suivi spécialisé.',src:'Kroenke 2003 · Med. Care'},
+  eva_douleur:    {icon:'⚡',title:'EVA — Douleur globale',text:'L\'échelle visuelle analogique quantifie l\'intensité douloureuse. Un score ≥ 4 impacte la qualité de vie et justifie une prise en charge prioritaire.',src:''},
+  psfs:           {icon:'🎯',title:'PSFS — Fonctionnel personnalisé',text:'Le Patient-Specific Functional Scale capture ce qui compte vraiment pour vous. Les 3 activités choisies deviennent les objectifs de rééducation.',src:'Chatman 1997 · Phys. Ther.'},
+  sexualite:      {icon:'💜',title:'Impact sur la sexualité',text:'La dyspareunie et la sécheresse vaginale touchent 50 à 60 % des femmes ménopausées. Elles sont traitables — mais rarement spontanément abordées en consultation.',src:''},
+  // ── ENDOMÉTRIOSE ──
+  diagnostic:     {icon:'🔍',title:'Le diagnostic, un parcours long',text:'En moyenne 7 à 10 ans séparent les premiers symptômes du diagnostic d\'endométriose. Le retard diagnostique majore la souffrance et l\'impact socio-professionnel.',src:'Nnoaham 2011 · Hum. Reprod.'},
+  stade:          {icon:'📊',title:'Le stade AFIS/ASRM',text:'Le stade anatomique ne corrèle pas toujours avec l\'intensité de la douleur. Une endométriose stade I peut être très invalidante, un stade IV parfois asymptomatique.',src:'Vercellini 2007 · Hum. Reprod.'},
+  localisation:   {icon:'🗺',title:'Localisation des lésions',text:'La DIE (endométriose profonde) est la forme la plus invalidante. Elle infiltre les organes pelviens et génère une réponse neuro-inflammatoire chronique (Zondervan 2020, NEJM).',src:'Zondervan 2020 · N. Engl. J. Med.'},
+  nrs_dysm:       {icon:'🩸',title:'Dysménorrhée — Douleur menstruelle',text:'La dysménorrhée sévère (EVA ≥ 7) est le symptôme cardinal de l\'endométriose. Elle résulte de la synthèse locale de prostaglandines et de l\'innervation des lésions.',src:''},
+  nrs_dyspar:     {icon:'💔',title:'Dyspareunie — Douleur aux rapports',text:'La dyspareunie profonde est présente dans 40 à 50 % des endométrioses. La kinésithérapie pelvienne (désensibilisation, manualthérapie) réduit ce symptôme dans 60 % des cas.',src:'Yosef 2016 · Pain'},
+  nrs_pelvien:    {icon:'⚡',title:'Douleur pelvienne chronique',text:'La douleur pelvienne hors règles évoque une sensibilisation centrale — mécanisme présent dans 30 à 50 % des endométrioses profondes. Elle répond mal aux traitements hormonaux seuls.',src:'Tracey 2009 · Nat. Rev. Neurosci.'},
+  ehp5:           {icon:'📋',title:'EHP-5 — Qualité de vie spécifique',text:'L\'Endometriosis Health Profile-5 est l\'outil de référence pour mesurer l\'impact de l\'endométriose sur la qualité de vie. Un score élevé justifie une prise en charge pluridisciplinaire urgente.',src:'Jones 2001 · Hum. Reprod.'},
+  impact_travail: {icon:'💼',title:'Impact socio-professionnel',text:'70 % des femmes avec endométriose déclarent que la maladie affecte leur performance au travail. La quantification de cet impact est essentielle pour la reconnaissance médicale et professionnelle.',src:'Simoens 2012 · Hum. Reprod.'},
+  jours_incapacite:{icon:'📅',title:'Jours d\'incapacité',text:'Le nombre de jours d\'arrêt est l\'indicateur le plus parlant de l\'impact fonctionnel. Il sert de mesure de résultat principale dans les études cliniques sur l\'endométriose.',src:''},
+  die_symptoms:   {icon:'🔬',title:'Symptômes DIE — Organes adjacents',text:'L\'infiltration rectale et vésicale par la DIE génère des symptômes digestifs et urinaires cycliques. Leur présence confirme la sévérité de l\'atteinte et oriente vers une équipe chirurgicale spécialisée.',src:'Zondervan 2020 · NEJM'},
+  cs_screen:      {icon:'🧠',title:'Sensibilisation centrale — Dépistage',text:'La sensibilisation centrale transforme le système nerveux : la douleur devient un signal amplifié, déconnecté des lésions. Elle explique pourquoi l\'endométriose peut faire mal partout, tout le temps.',src:'Neblett 2013 · J. Pain'},
+  fertilite:      {icon:'🌱',title:'Fertilité et endométriose',text:'L\'endométriose réduit la fertilité naturelle de 20 à 50 % selon le stade. Un suivi en AMP (Assistance Médicale à la Procréation) est recommandé dès le stade III, même avant tout projet actif.',src:'Missmer 2010 · Hum. Reprod.'},
+  // ── PÉRINÉE ──
+  contexte_perinee:{icon:'💫',title:'Le contexte périnéal',text:'L\'origine des troubles périnéaux conditionne le protocole de rééducation. Post-partum, ménopause, sport ou chirurgie — chaque contexte a ses spécificités et son timing optimal.',src:''},
+  sympt:          {icon:'💧',title:'Symptômes périnéaux',text:'L\'incontinence urinaire d\'effort, l\'incontinence par urgence et le prolapsus sont trois entités distinctes avec des mécanismes différents. L\'identification précise oriente la rééducation.',src:'Haylen 2010 · Int. Urogynecol. J.'},
+  iciq:           {icon:'📋',title:'ICIQ — Incontinence urinaire',text:'L\'International Consultation on Incontinence Questionnaire est l\'outil validé de référence pour quantifier les fuites et leur impact sur la qualité de vie.',src:'Avery 2004 · BJOG'},
+  pfdi:           {icon:'📊',title:'PFDI — Gêne fonctionnelle',text:'Le Pelvic Floor Distress Inventory capture la gêne liée aux symptômes vésicaux, anorectaux et au prolapsus. Un score PFDI > 100 indique un impact sévère.',src:'Barber 2005 · Am. J. Obstet. Gynecol.'},
+  fsfi:           {icon:'💜',title:'FSFI — Fonction sexuelle',text:'Le Female Sexual Function Index évalue 6 domaines : désir, excitation, lubrification, orgasme, satisfaction, douleur. La dysfonction sexuelle touche 40 à 60 % des femmes avec troubles périnéaux.',src:'Rosen 2000 · J. Sex Marital Ther.'},
+};
+
+function updateGynBubble(stepId){
+  var b = GYN_BUBBLES[stepId];
+  var el = document.getElementById('step-bubble-gyn');
+  if(!el) return;
+  if(!b){ el.classList.remove('visible'); return; }
+  document.getElementById('bub-icon-gyn').textContent = b.icon||'✦';
+  document.getElementById('bub-title-gyn').textContent = b.title;
+  document.getElementById('bub-text-gyn').textContent = b.text;
+  var src = document.getElementById('bub-src-gyn');
+  if(src){ src.textContent = b.src||''; src.style.display = b.src ? '' : 'none'; }
+  el.classList.add('visible');
+  el.style.animation='none'; void el.offsetWidth;
+  el.style.animation='bubbleIn .4s cubic-bezier(.4,0,.2,1)';
+}
+
+// ══ MODAL KINÉ (code 2603) ══
+function openKineModal(){
+  // Afficher le formulaire de code dans le résultat
+  var rv = document.getElementById('gyn-result-view');
+  var kv = document.getElementById('gyn-kine-view');
+  var cf = document.getElementById('kine-code-form');
+  var rb = document.getElementById('kine-report-body');
+  if(!rv||!kv) return;
+  rv.style.display='none';
+  kv.style.display='flex';
+  cf.style.display='flex';
+  rb.style.display='none';
+  document.getElementById('kine-code-input').value='';
+  document.getElementById('kine-code-error').style.display='none';
+  setTimeout(()=>document.getElementById('kine-code-input').focus(),200);
+}
+function closeKineView(){
+  var rv = document.getElementById('gyn-result-view');
+  var kv = document.getElementById('gyn-kine-view');
+  if(rv) rv.style.display='';
+  if(kv) kv.style.display='none';
+}
+function submitKineCode(){
+  var code = document.getElementById('kine-code-input').value.trim();
+  if(code !== '2603'){
+    document.getElementById('kine-code-error').style.display='block';
+    document.getElementById('kine-code-input').value='';
+    return;
+  }
+  document.getElementById('kine-code-form').style.display='none';
+  document.getElementById('kine-report-body').style.display='block';
+  buildKineReport();
+}
+function submitKineCode(){
+  var code = document.getElementById('kine-code-input').value.trim();
+  if(code !== '2603'){
+    document.getElementById('kine-code-error').style.display='block';
+    document.getElementById('kine-code-input').value='';
+    document.getElementById('kine-code-input').focus();
+    return;
+  }
+  document.getElementById('kine-code-form').style.display='none';
+  document.getElementById('kine-report-body').style.display='block';
+  buildKineReport();
+}
+function closeKineModal(){
+  var m = document.getElementById('kine-modal');
+  if(m) m.classList.remove('open');
+}
+
+function buildKineReport(){
+  var body = document.getElementById('kine-report-body');
+  if(!body) return;
+  var d = gynData;
+  var col = GYNECO_COLORS[currentBilan]||{name:'Bilan',bc:'#7B5FAA',emoji:'⬡'};
+  var kap = computeKAPScoreGyn();
+  var lbl = gynScoreLabel(kap.global);
+  var date = new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  var bc = col.bc;
+
+  // ── Helpers ──
+  function scaleSum(obj){ return Object.values(obj||{}).filter(v=>v!=null).reduce((a,b)=>a+b,0); }
+  function scaleCount(obj){ return Object.values(obj||{}).filter(v=>v!=null).length; }
+  function nrsLabel(v){ if(v==null)return'—'; if(v<=3)return'Légère'; if(v<=6)return'Modérée'; return'Sévère'; }
+  function nrsColor(v){ if(v==null)return'#888'; if(v<=3)return'#2E8B57'; if(v<=6)return'#D97706'; return'#C04040'; }
+  function pct(score,max){ return max>0?Math.round(score/max*100):0; }
+  function bar(score,max,color){
+    var p=pct(score,max);
+    return `<div style="display:flex;align-items:center;gap:8px">
+      <div style="flex:1;height:6px;background:#EEE;border-radius:3px;overflow:hidden">
+        <div style="width:${p}%;height:100%;background:${color||bc};border-radius:3px;transition:width .4s"></div>
+      </div>
+      <span style="font-size:11px;color:#666;min-width:35px;text-align:right">${score}/${max}</span>
+    </div>`;
+  }
+  function chip(txt,color){
+    return `<span style="display:inline-block;background:${color||bc}18;color:${color||bc};font-size:10px;letter-spacing:.5px;padding:2px 10px;border-radius:99px;margin:2px;border:1px solid ${color||bc}30">${txt}</span>`;
+  }
+  function row(label,value,note){
+    return `<tr style="border-bottom:1px solid #F0EEF5">
+      <td style="padding:8px 10px 8px 0;font-size:11.5px;color:#6B6080;width:48%;vertical-align:top">${label}</td>
+      <td style="padding:8px 0;font-size:12px;color:#1A1028;font-weight:400;vertical-align:top">${value||'—'}${note?`<div style="font-size:10.5px;color:#9990AA;margin-top:2px">${note}</div>`:''}</td>
+    </tr>`;
+  }
+  function section(title,icon,content){
+    return `<div style="margin-bottom:20px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid ${bc}22">
+        <span style="font-size:16px">${icon}</span>
+        <span style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:${bc};font-weight:500">${title}</span>
+      </div>
+      ${content}
+    </div>`;
+  }
+
+  // ══ SECTION 1 — EN-TÊTE ══
+  var scoreColor = kap.global>=70?'#2E8B57':kap.global>=40?'#D97706':'#C04040';
+  var header = `<div style="background:linear-gradient(135deg,${bc}12,${bc}06);border-radius:14px;padding:18px 20px;margin-bottom:20px;border:1px solid ${bc}20">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between">
+      <div>
+        <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:${bc};margin-bottom:4px">KAP · Rapport clinique · Accès kiné</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:#1A1028;margin-bottom:2px">${col.emoji} Bilan ${col.name}</div>
+        <div style="font-size:12px;color:#6B6080">${date}</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:32px;font-weight:700;color:${scoreColor};line-height:1">${kap.global!=null?kap.global:'—'}</div>
+        <div style="font-size:10px;color:${scoreColor};font-weight:500">/100 · ${lbl.label}</div>
+      </div>
+    </div>
+    <div style="margin-top:14px">${bar(kap.global||0,100,scoreColor)}</div>
+  </div>`;
+
+  // ══ SECTION 2 — CONTEXTE PATIENT ══
+  var contextRows = '';
+  if(currentBilan==='menopause'){
+    var statutLabels={peri:'Péri-ménopause',menopause_recente:'Ménopause confirmée < 2 ans',menopause_installee:'Ménopause installée > 2 ans',chirurgicale:'Ménopause chirurgicale'};
+    contextRows += row('Statut',statutLabels[d.statut_menopause]||d.statut_menopause);
+    contextRows += row('Tranche d\'âge',d.age);
+    if(d.statut_traitement) contextRows += row('Traitement en cours',d.statut_traitement);
+    if(Array.isArray(d.chir_cicatrice)&&d.chir_cicatrice.length) contextRows += row('Symptômes post-chir.',d.chir_cicatrice.join(', '));
+    if(d.chir_delai) contextRows += row('Délai post-opératoire',d.chir_delai);
+    if(Array.isArray(d.osseuse)&&d.osseuse.length) contextRows += row('Santé osseuse',d.osseuse.join(', '));
+  } else if(currentBilan==='endometriose'){
+    var diagLabels={confirme_coelio:'Confirmé par cœlioscopie',confirme_irm:'Confirmé IRM/écho',suspicion:'Forte suspicion clinique',en_cours:'Bilan en cours'};
+    contextRows += row('Diagnostic',diagLabels[d.diagnostic]||d.diagnostic);
+    contextRows += row('Stade AFIS/ASRM',d.stade);
+    if(Array.isArray(d.lesions)&&d.lesions.length) contextRows += row('Localisations',d.lesions.join(', '));
+    if(Array.isArray(d.die_symptoms)&&d.die_symptoms.length) contextRows += row('Symptômes DIE',d.die_symptoms.join(', '));
+    if(d.impact_travail) contextRows += row('Impact professionnel',d.impact_travail);
+    if(d.jours_incapacite) contextRows += row('Jours d\'incapacité/mois',d.jours_incapacite);
+    if(d.fertilite) contextRows += row('Projet fertilité',d.fertilite);
+  } else {
+    var ctxLabels={postpartum:'Post-partum',menopause_perinee:'Ménopause',post_op:'Post-chirurgical',sportive:'Liée au sport',idiopathique:'Progressive / idiopathique'};
+    contextRows += row('Contexte',ctxLabels[d.contexte_perinee]||d.contexte_perinee);
+    if(Array.isArray(d.sympt)&&d.sympt.length) contextRows += row('Symptômes déclarés',d.sympt.join(', '));
+  }
+  if(d.situation) contextRows += row('Description libre',`<em style="color:#4A3860">"${d.situation.slice(0,160)}${d.situation.length>160?'…':''}"</em>`);
+  var contextSection = section('Profil patient','👤',`<table style="width:100%;border-collapse:collapse">${contextRows}</table>`);
+
+  // ══ SECTION 3 — SCORES AUX ÉCHELLES ══
+  var scoresContent = '';
+
+  if(currentBilan==='menopause'){
+    // MRS total
+    var mrs_all=[...Object.values(d.mrs_soma||{}),...Object.values(d.mrs_psy||{}),...Object.values(d.mrs_uro||{})].filter(v=>v!=null);
+    if(mrs_all.length){
+      var mrsT=mrs_all.reduce((a,b)=>a+b,0), mrsMax=mrs_all.length*4;
+      var mrsInterp = pct(mrsT,mrsMax)>50?'Charge symptomatique significative (Heinemann 2004)':'Charge modérée';
+      scoresContent+=`<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;font-weight:500;color:#1A1028">MRS Total (Menopause Rating Scale)</span><span style="font-size:11px;color:${bc}">${mrsT}/${mrsMax} · ${pct(mrsT,mrsMax)}%</span></div>${bar(mrsT,mrsMax)}<div style="font-size:11px;color:#9990AA;margin-top:3px">${mrsInterp}</div></div>`;
+      // Sous-scores
+      ['mrs_soma','mrs_psy','mrs_uro'].forEach(k=>{
+        var obj=d[k]||{};
+        var vals=Object.values(obj).filter(v=>v!=null);
+        if(!vals.length)return;
+        var s2=vals.reduce((a,b)=>a+b,0),m2=vals.length*4;
+        var names={mrs_soma:'Somatique',mrs_psy:'Psychologique',mrs_uro:'Urogénital'};
+        scoresContent+=`<div style="margin-bottom:8px;padding-left:12px;border-left:2px solid ${bc}30"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:11px;color:#6B6080">${names[k]}</span><span style="font-size:11px;color:#1A1028">${s2}/${m2}</span></div>${bar(s2,m2,bc+'99')}</div>`;
+      });
+    }
+    // GSM
+    var gsmV=Object.values(d.gsm||{}).filter(v=>v!=null);
+    if(gsmV.length){
+      var gsmT=gsmV.reduce((a,b)=>a+b,0),gsmMax=gsmV.length*4;
+      scoresContent+=`<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;font-weight:500;color:#1A1028">GSM (Syndrome génito-urinaire ménopause)</span><span style="font-size:11px;color:${bc}">${gsmT}/${gsmMax}</span></div>${bar(gsmT,gsmMax)}<div style="font-size:11px;color:#9990AA;margin-top:3px">${gsmT>=4?'⚠ GSM documenté — rééducation périnéale indiquée en 1ère ligne':'Absence de GSM significatif'}</div></div>`;
+    }
+    // PHQ-2
+    var phqV=Object.values(d.phq2||{}).filter(v=>v!=null);
+    if(phqV.length){
+      var phqT=phqV.reduce((a,b)=>a+b,0);
+      scoresContent+=`<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;font-weight:500;color:#1A1028">PHQ-2 (Dépistage dépressif)</span><span style="font-size:11px;color:${phqT>=3?'#C04040':'#2E8B57'}">${phqT}/6 · ${phqT>=3?'⚠ Positif':'Négatif'}</span></div>${bar(phqT,6,phqT>=3?'#C04040':'#2E8B57')}<div style="font-size:11px;color:#9990AA;margin-top:3px">${phqT>=3?'Score ≥ 3 : orientation vers suivi spécialisé recommandée':'Pas de signal dépressif significatif'}</div></div>`;
+    }
+  } else if(currentBilan==='endometriose'){
+    // NRS Pain scores
+    [['nrs_dysm','Dysménorrhée (règles)'],['nrs_dyspar','Dyspareunie (rapports)'],['nrs_pelvien','Douleur pelvienne chronique']].forEach(([k,label])=>{
+      if(d[k]==null)return;
+      scoresContent+=`<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:12px;font-weight:500;color:#1A1028">${label}</span><span style="font-size:12px;font-weight:600;color:${nrsColor(d[k])}">${d[k]}/10 · ${nrsLabel(d[k])}</span></div>${bar(d[k],10,nrsColor(d[k]))}</div>`;
+    });
+    // EHP-5
+    var ehpV=Object.values(d.ehp5||{}).filter(v=>v!=null);
+    if(ehpV.length){
+      var ehpT=ehpV.reduce((a,b)=>a+b,0),ehpMax=ehpV.length*4;
+      scoresContent+=`<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;font-weight:500;color:#1A1028">EHP-5 (Qualité de vie · endométriose)</span><span style="font-size:11px;color:${bc}">${ehpT}/${ehpMax}</span></div>${bar(ehpT,ehpMax)}<div style="font-size:11px;color:#9990AA;margin-top:3px">${pct(ehpT,ehpMax)>50?'⚠ Impact sévère sur la qualité de vie (Bourdel 2015)':'Impact modéré sur la qualité de vie'}</div></div>`;
+    }
+    // PHQ-2 + GAD-2
+    var pgV=[...Object.values(d.phq2||{}),...Object.values(d.gad2||{})].filter(v=>v!=null);
+    if(pgV.length){
+      var pgT=pgV.reduce((a,b)=>a+b,0),pgMax=pgV.length*3;
+      scoresContent+=`<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;font-weight:500;color:#1A1028">PHQ-2 + GAD-2 (Anxiété / Dépression)</span><span style="font-size:11px;color:${pgT>=4?'#C04040':'#2E8B57'}">${pgT}/${pgMax} · ${pgT>=4?'⚠ Positif':'Négatif'}</span></div>${bar(pgT,pgMax,pgT>=4?'#C04040':'#2E8B57')}</div>`;
+    }
+    // CSI
+    if(d.cs_items){
+      var csV=Object.values(d.cs_items).filter(v=>v!=null);
+      if(csV.length){
+        var csT=csV.reduce((a,b)=>a+b,0);
+        scoresContent+=`<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;font-weight:500;color:#1A1028">CSI — Sensibilisation centrale</span><span style="font-size:11px;color:${csT>=10?'#C04040':'#2E8B57'}">${csT}/20 · ${csT>=10?'⚠ Seuil atteint':'Sous le seuil'}</span></div>${bar(csT,20,csT>=10?'#C04040':bc)}<div style="font-size:11px;color:#9990AA;margin-top:3px">${csT>=10?'Composante de sensibilisation centrale probable (Neblett 2013) — approche neuromodulation indiquée':'Pas de sensibilisation centrale significative'}</div></div>`;
+      }
+    }
+  } else {
+    // Périnée
+    var iciqV=Object.values(d.iciq||{}).filter(v=>v!=null);
+    if(iciqV.length){
+      var iciqT=iciqV.reduce((a,b)=>a+b,0),iciqMax=iciqV.length*5;
+      scoresContent+=`<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;font-weight:500;color:#1A1028">ICIQ (Incontinence urinaire)</span><span style="font-size:11px;color:${bc}">${iciqT}/${iciqMax}</span></div>${bar(iciqT,iciqMax)}<div style="font-size:11px;color:#9990AA;margin-top:3px">${pct(iciqT,iciqMax)>40?'Impact significatif sur la qualité de vie · rééducation prioritaire':'Impact modéré'}</div></div>`;
+    }
+    var pfdiV=Object.values(d.pfdi||{}).filter(v=>v!=null);
+    if(pfdiV.length){
+      var pfdiT=pfdiV.reduce((a,b)=>a+b,0),pfdiMax=pfdiV.length*4;
+      scoresContent+=`<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;font-weight:500;color:#1A1028">PFDI (Gêne plancher pelvien)</span><span style="font-size:11px;color:${bc}">${pfdiT}/${pfdiMax}</span></div>${bar(pfdiT,pfdiMax)}<div style="font-size:11px;color:#9990AA;margin-top:3px">${pfdiT>=8?'⚠ Gêne sévère (Barber 2007) — prise en charge active recommandée':'Gêne modérée'}</div></div>`;
+    }
+    var fsfiV=Object.values(d.fsfi||{}).filter(v=>v!=null);
+    if(fsfiV.length){
+      var fsfiT=fsfiV.reduce((a,b)=>a+b,0),fsfiMax=fsfiV.length*4;
+      scoresContent+=`<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;font-weight:500;color:#1A1028">FSFI (Fonction sexuelle)</span><span style="font-size:11px;color:${bc}">${fsfiT}/${fsfiMax}</span></div>${bar(fsfiT,fsfiMax)}</div>`;
+    }
+  }
+  var scoresSection = section('Scores cliniques validés','📊',scoresContent||'<div style="color:#9990AA;font-size:12px">Données non renseignées</div>');
+
+  // ══ SECTION 4 — PSFS ══
+  var psfsContent='';
+  if(d.psfs&&d.psfs.filter(p=>p.label&&p.label.trim()).length){
+    psfsContent='<table style="width:100%;border-collapse:collapse">';
+    d.psfs.filter(p=>p.label&&p.label.trim()).forEach((p,i)=>{
+      var scoreColor2=p.score<=3?'#C04040':p.score<=6?'#D97706':'#2E8B57';
+      psfsContent+=`<tr style="border-bottom:1px solid #F0EEF5">
+        <td style="padding:9px 10px 9px 0;font-size:12px;color:#1A1028;vertical-align:middle">${p.label}</td>
+        <td style="padding:9px 0;text-align:right;white-space:nowrap;vertical-align:middle">
+          <span style="font-size:14px;font-weight:600;color:${scoreColor2}">${p.score}/10</span>
+          <div style="width:80px;height:5px;background:#EEE;border-radius:3px;overflow:hidden;display:inline-block;margin-left:8px;vertical-align:middle"><div style="width:${p.score*10}%;height:100%;background:${scoreColor2};border-radius:3px"></div></div>
+        </td>
+      </tr>`;
+    });
+    psfsContent+='</table><div style="font-size:10.5px;color:#9990AA;margin-top:8px">PSFS — Patient-Specific Functional Scale · Chatman 1997 · Objectifs à réévaluer à chaque séance</div>';
+  } else { psfsContent='<div style="color:#9990AA;font-size:12px">Aucun objectif fonctionnel saisi</div>'; }
+  var psfsSection = section('Objectifs fonctionnels (PSFS)','🎯',psfsContent);
+
+  // ══ SECTION 5 — POINTS D'ATTENTION CLINIQUE ══
+  var flags=[];
+  if(currentBilan==='menopause'){
+    if(Object.values(d.phq2||{}).filter(v=>v!=null).reduce((a,b)=>a+b,0)>=3) flags.push({icon:'🔴',txt:'PHQ-2 positif — risque dépressif significatif → orientation spécialisée recommandée',color:'#C04040'});
+    if(Object.values(d.gsm||{}).filter(v=>v!=null).reduce((a,b)=>a+b,0)>=4) flags.push({icon:'🟠',txt:'GSM documenté — rééducation périnéale en 1ère ligne avant tout traitement local',color:'#D97706'});
+    if(d.statut_menopause==='chirurgicale') flags.push({icon:'🟡',txt:'Ménopause chirurgicale — démarrage précoce de la rééducation recommandé (dès 6 semaines post-op)',color:'#B87333'});
+    if(Array.isArray(d.osseuse)&&d.osseuse.some(v=>v==='osteopenie'||v==='fracture')) flags.push({icon:'🟠',txt:'Fragilité osseuse déclarée — programme d\'exercices avec impact osseux prioritaire',color:'#D97706'});
+  } else if(currentBilan==='endometriose'){
+    if(d.nrs_pelvien>=7) flags.push({icon:'🔴',txt:`Douleur pelvienne sévère NRS ${d.nrs_pelvien}/10 — approche multimodale urgente`,color:'#C04040'});
+    if(d.cs_items&&Object.values(d.cs_items).filter(v=>v!=null).reduce((a,b)=>a+b,0)>=10) flags.push({icon:'🔴',txt:'Sensibilisation centrale probable (CSI ≥ 10) — techniques de neuromodulation et d\'éducation à la douleur prioritaires',color:'#C04040'});
+    if(Array.isArray(d.lesions)&&d.lesions.includes('die')) flags.push({icon:'🟠',txt:'DIE confirmée — thérapie manuelle viscérale spécialisée indiquée',color:'#D97706'});
+    if(['oui_actif','oui_inquiete'].includes(d.fertilite)) flags.push({icon:'🟡',txt:'Projet de grossesse — coordination avec équipe AMP recommandée',color:'#B87333'});
+    if(Object.values(d.phq2||{}).filter(v=>v!=null).reduce((a,b)=>a+b,0)+Object.values(d.gad2||{}).filter(v=>v!=null).reduce((a,b)=>a+b,0)>=4) flags.push({icon:'🟠',txt:'Détresse psychologique significative — soutien psychologique ou prise en charge pluridisciplinaire',color:'#D97706'});
+  } else {
+    if(d.contexte_perinee==='postpartum') flags.push({icon:'🟡',txt:'Post-partum — bilan périnéal complet recommandé · rééducation précoce si pas encore commencée',color:'#B87333'});
+    if(Array.isArray(d.sympt)&&d.sympt.includes('prolapsus')) flags.push({icon:'🟠',txt:'Prolapsus déclaré — évaluation du stade et protocole progressif de renforcement',color:'#D97706'});
+  }
+  var flagsContent = flags.length
+    ? flags.map(f=>`<div style="display:flex;gap:10px;padding:9px 12px;background:${f.color}0D;border-left:3px solid ${f.color};border-radius:0 8px 8px 0;margin-bottom:8px;font-size:12px;color:#1A1028;line-height:1.5">${f.icon} ${f.txt}</div>`).join('')
+    : '<div style="font-size:12px;color:#9990AA">Aucun signal d\'alerte identifié</div>';
+  var flagsSection = section('Points d\'attention clinique','⚑',flagsContent);
+
+  // ══ SECTION 6 — RECOMMANDATIONS SÉANCE 1 ══
+  var recos = {
+    menopause:[
+      d.statut_menopause==='chirurgicale'?'Évaluation cicatricielle et mobilisation des fascias péri-pelviens':'Évaluation du plancher pelvien (tonus, trophicité, coordination)',
+      Object.values(d.gsm||{}).filter(v=>v!=null).reduce((a,b)=>a+b,0)>=4?'Protocole GSM : électrostimulation basse fréquence + travail trophique muqueux':'Bilan de continence et test de force périnéale (Oxford scale)',
+      'Programme APA : exercices avec impact et résistance (osseux) + travail équilibre',
+      Object.values(d.phq2||{}).filter(v=>v!=null).reduce((a,b)=>a+b,0)>=3?'Orientation psychologique recommandée — psychoéducation en parallèle':'Éducation thérapeutique ménopause : mécanismes, ressources, auto-soins'
+    ],
+    endometriose:[
+      Array.isArray(d.lesions)&&d.lesions.includes('die')?'Thérapie manuelle viscérale — déverrouillage des adhérences péri-rectales et vésicales':'Bilan fonctionnel périnéal complet',
+      d.cs_items&&Object.values(d.cs_items).filter(v=>v!=null).reduce((a,b)=>a+b,0)>=10?'Éducation neurophysiologique de la douleur (Butler & Moseley) — séance dédiée':'Désensibilisation progressive du plancher pelvien',
+      d.nrs_dyspar>=5?'Rééducation dyspareunie : travail en exposition graduelle, dilatateurs si indiqués':'Mobilisation des fascias périnéaux et lombopelviens',
+      'TENS antalgique (électrostimulation transcutanée) pour la gestion des poussées'
+    ],
+    perinee:[
+      d.contexte_perinee==='postpartum'?'Bilan complet plancher pelvien post-partum — cicatrice périnéale si épisiotomie':'Bilan fonctionnel plancher pelvien : force, endurance, coordination',
+      Array.isArray(d.sympt)&&d.sympt.includes('iu_effort')?'Protocole renfrocement sphinctérien — programme Kegel supervisé avec biofeedback':'Évaluation statique pelvienne et test de prolapsus',
+      'Apprentissage de la commande périnéale et de la gestion des pressions abdominales',
+      'Électrostimulation si hypoactivité musculaire confirmée — programme 8 semaines'
+    ]
+  };
+  var recosForBilan = recos[currentBilan]||[];
+  var recosContent = `<ol style="margin:0;padding-left:18px">` +
+    recosForBilan.map((r,i)=>`<li style="font-size:12px;color:#1A1028;line-height:1.6;margin-bottom:6px;padding-left:4px">${r}</li>`).join('') +
+    `</ol><div style="font-size:10.5px;color:#9990AA;margin-top:10px">Ces recommandations sont générées automatiquement à partir des réponses — à adapter selon l'examen clinique.</div>`;
+  var recosSection = section('Recommandations · Séance 1','💡',recosContent);
+
+  // ══ FOOTER ══
+  var footer = `<div style="margin-top:16px;padding-top:12px;border-top:1px solid #EEE;font-size:10px;color:#9990AA;text-align:center;line-height:1.6">
+    KAP · Kinésithérapie · Activité · Prévention · Cabinet KAP Gagny (93) &amp; Chessy (77)<br>
+    Outil de préparation à la séance. Ne constitue pas un diagnostic médical. Données saisies par la patiente.
+  </div>`;
+
+  body.innerHTML = header + contextSection + scoresSection + psfsSection + flagsSection + recosSection + footer;
+}
+
+// ══ RÔLE DU KINÉ SPÉCIALISÉ PAR PATHOLOGIE ══
+function buildKineRoleSection(bilan){
+  var col = GYNECO_COLORS[bilan]||{bc:'#7B5FAA'};
+  var content = {
+    menopause:{
+      title:'Ce que peut faire le kiné spécialisé ménopause',
+      icon:'🌿',
+      items:[
+        {t:'Rééducation périnéale & GSM',d:'La sécheresse vaginale, les dyspareunies et l\'incontinence urinaire liées à la carence œstrogénique répondent très bien à la rééducation périnéale. Électrostimulation, biofeedback et travail manuel permettent de restaurer la trophicité tissulaire et le tonus sphinctérien — sans médicaments.'},
+        {t:'Travail musculo-squelettique & osseux',d:'La perte osseuse s\'accélère après la ménopause (jusqu\'à 3 %/an). Le kiné prescrit et supervise des exercices avec impact et résistance — les seuls prouvés efficaces pour maintenir la densité minérale osseuse (Karlsson 1995). Il traite aussi les douleurs articulaires liées à la carence œstrogénique.'},
+        {t:'Activité physique adaptée (APA)',d:'L\'exercice régulier réduit les bouffées de chaleur de 30 %, améliore le sommeil, l\'humeur et la composition corporelle. Le kiné construit un programme individualisé compatible avec votre condition physique actuelle et vos objectifs.'},
+        {t:'Rééducation posturale & équilibre',d:'La ménopause installée modifie la posture et augmente le risque de chute. Le kiné travaille l\'équilibre, la proprioception et la statique rachidienne — en prévention des fractures ostéoporotiques.'}
+      ]
+    },
+    endometriose:{
+      title:'Ce que peut faire le kiné spécialisé endométriose',
+      icon:'🌀',
+      items:[
+        {t:'Thérapie manuelle viscérale',d:'Les adhérences et la fibrose autour des lésions d\'endométriose créent des tensions mécaniques sur les organes pelviens. La mobilisation viscérale douce libère ces restrictions, améliore la mobilité des organes et réduit les douleurs pelviennes chroniques — y compris en dehors des règles.'},
+        {t:'Désensibilisation & neuromodulation',d:'En cas de sensibilisation centrale (douleur chronique amplifiée), le kiné utilise des techniques de désensibilisation progressive : travail sur les fascias, neurostimulation transcutanée (TENS), et éducation à la neurophysiologie de la douleur. Cette approche peut réduire l\'hyperalgésie de 40 à 60 %.'},
+        {t:'Rééducation périnéale spécialisée',d:'La dyspareunie — douleur lors des rapports — touche 40 à 50 % des femmes avec endométriose. Le kiné travaille la désensibilisation des muscles du plancher pelvien (souvent en hypertonicité), le relâchement des contractures et la rééducation de la pénétration par exposition graduée.'},
+        {t:'Éducation thérapeutique & autogestion',d:'Comprendre les mécanismes de sa douleur transforme la relation à la maladie. Le kiné enseigne des stratégies d\'autogestion : positionnement antalgique, automassage, gestion des poussées, adaptation des activités — pour reprendre le contrôle sur la maladie.'}
+      ]
+    },
+    perinee:{
+      title:'Ce que peut faire le kiné spécialisé périnée',
+      icon:'💫',
+      items:[
+        {t:'Rééducation du plancher pelvien',d:'Le plancher pelvien est un groupe musculaire comme les autres — il se rééduque. Le kiné évalue le tonus, la force, l\'endurance et la coordination des muscles périnéaux, puis construit un programme personnalisé. Résultat : 50 à 80 % de réduction des fuites urinaires (Cochrane 2018).'},
+        {t:'Biofeedback & électrostimulation',d:'Le biofeedback (rétrocontrôle musculaire visuel ou sonore) permet d\'apprendre à contracter et relâcher correctement les muscles périnéaux — souvent impossibles à percevoir sans aide. L\'électrostimulation est utilisée pour les muscles hypotoniques qui ne répondent plus aux commandes volontaires.'},
+        {t:'Traitement du prolapsus',d:'La kinésithérapie peut stabiliser, voire réduire un prolapsus de stade I-II. Elle renforce le plancher pelvien, améliore la statique pelvienne et enseigne la gestion des pressions abdominales — pour repousser ou éviter la chirurgie.'},
+        {t:'Rééducation fonctionnelle & reprise du sport',d:'Le kiné réadapte progressivement les activités : reprise de la course, des sports à impact, des activités quotidiennes. Il enseigne la gestion des pressions (hypopressif), les bonnes postures et les adaptations gestuelles pour protéger le périnée sur le long terme.'}
+      ]
+    }
+  };
+
+  var c = content[bilan];
+  if(!c) return '';
+  return `<div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--bc-line,var(--line))">
+    <div style="font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--bc,var(--rose));margin-bottom:14px">${c.icon} ${c.title}</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      ${c.items.map(item=>`<div style="background:var(--bc-bg,rgba(107,78,139,0.05));border-radius:12px;padding:12px 14px">
+        <div style="font-size:12.5px;font-weight:500;color:var(--ink-m);margin-bottom:4px">${item.t}</div>
+        <div style="font-size:11.5px;color:var(--ink-s);line-height:1.65">${item.d}</div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+const GYNECO_COLORS = {
+  menopause:    {name:'Ménopause',     emoji:'🌿', bc:'#C4876A', bc_l:'#D97706'},
+  endometriose: {name:'Endométriose',  emoji:'🌀', bc:'#7B5FAA', bc_l:'#A78BFA'},
+  perinee:      {name:'Périnée',       emoji:'💫', bc:'#C06080', bc_l:'#EC4899'}
+};
+
+let currentBilan='menopause', currentMode='naturelle';
+let gynStep=1, gynTotalSteps=18, gynSteps=[];
+const gynData={};
+
+function resetGynData(){
+  Object.keys(gynData).forEach(k=>delete gynData[k]);
+  gynData.psfs=[{label:'',score:5},{label:'',score:5},{label:'',score:5}];
+  gynData.mrs_soma={};gynData.mrs_psy={};gynData.mrs_uro={};
+  gynData.gsm={};gynData.ehp5={};gynData.phq2={};gynData.gad2={};
+  gynData.iciq={};gynData.pfdi={};gynData.fsfi={};
+  gynData.symptomes=[];gynData.traitements=[];gynData.lesions=[];
+  gynData.eva_douleur=3;gynData.eva_fatigue=5;
+  gynData.nrs_dysm=6;gynData.nrs_dyspar=4;gynData.nrs_pelvien=5;
+}
+resetGynData();
+
+const EVA_DESCS={0:"Aucune douleur — vous vous sentez bien",1:"Très légère — à peine perceptible",2:"Légère — présente mais discrète",3:"Modérée légère — gênante par moments",4:"Modérée — impacte certaines activités",5:"Modérée — présente mais gérable",6:"Importante — limite vos activités",7:"Forte — difficile à ignorer",8:"Très forte — difficile de se concentrer",9:"Sévère — quasi-impossible de fonctionner",10:"Maximale — insupportable"};
+
+// ══ STEP CONFIGURATIONS ══
+
+function buildMenopauseSteps(mode){
+  const base=[
+    {id:'situation',label:'Votre situation',type:'textarea',
+     q:'Décrivez ce que vous vivez en ce moment',sub:'Symptômes principaux, depuis combien de temps, ce qui vous impacte le plus.',
+     key:'situation',ph:'Ex : bouffées de chaleur la nuit, fatigue importante depuis 6 mois, irritabilité...',maxlen:400},
+    {id:'statut_menopause',label:'Statut ménopause',type:'chips_single',
+     q:'Où en êtes-vous dans votre transition ?',key:'statut_menopause',
+     opts:[{v:'peri',l:'Péri-ménopause — cycles irréguliers, symptômes débutants'},{v:'menopause_recente',l:'Ménopause confirmée < 2 ans'},{v:'menopause_installee',l:'Ménopause installée > 2 ans'},{v:'chirurgicale',l:'Ménopause chirurgicale (ovariectomie)'}]},
+    {id:'age',label:'Âge',type:'chips_single',
+     q:'Dans quelle tranche d\'âge vous situez-vous ?',key:'age',
+     opts:[{v:'moins45',l:'Moins de 45 ans'},{v:'45_50',l:'45 – 50 ans'},{v:'50_55',l:'50 – 55 ans'},{v:'55_60',l:'55 – 60 ans'},{v:'plus60',l:'Plus de 60 ans'}]},
+    {id:'mrs_soma',label:'MRS — Somatique',type:'scale_items',
+     q:'Ces symptômes — au cours du dernier mois',
+     sub:'MRS — Menopause Rating Scale (Heinemann 2004) · Domaine somatique · 0 = Absent · 4 = Très sévère',key:'mrs_soma',
+     scale:{min:0,max:4,lbls:['Absent','Léger','Modéré','Sévère','Très sévère']},
+     items:[
+       {id:'s1',l:'Bouffées de chaleur, sueurs (diurnes ou nocturnes)'},
+       {id:'s2',l:'Gêne cardiaque — palpitations, irrégularité du cœur'},
+       {id:'s3',l:'Troubles du sommeil — difficultés à s\'endormir ou se réveils'},
+       {id:'s4',l:'Douleurs musculaires et articulaires'}
+     ]},
+    {id:'mrs_psy',label:'MRS — Psychologique',type:'scale_items',
+     q:'Ces symptômes — au cours du dernier mois',
+     sub:'MRS — Domaine psychologique · 0 = Absent · 4 = Très sévère',key:'mrs_psy',
+     scale:{min:0,max:4,lbls:['Absent','Léger','Modéré','Sévère','Très sévère']},
+     items:[
+       {id:'p1',l:'Humeur dépressive — tristesse, envie de pleurer'},
+       {id:'p2',l:'Irritabilité — nervosité, agressivité'},
+       {id:'p3',l:'Anxiété — tension intérieure, panique'},
+       {id:'p4',l:'Fatigue physique et mentale — diminution des performances'},
+       {id:'p5',l:'Troubles de la mémoire et de la concentration'}
+     ]},
+    {id:'mrs_uro',label:'MRS — Uro-génital',type:'scale_items',
+     q:'Ces symptômes uro-génitaux',
+     sub:'MRS — Domaine uro-génital · 0 = Absent · 4 = Très sévère',key:'mrs_uro',
+     scale:{min:0,max:4,lbls:['Absent','Léger','Modéré','Sévère','Très sévère']},
+     items:[
+       {id:'u1',l:'Sécheresse vaginale — douleurs pendant ou après les rapports sexuels'},
+       {id:'u2',l:'Problèmes urinaires — fréquence accrue, urgences, brûlures'},
+       {id:'u3',l:'Baisse de libido — modification du désir sexuel'}
+     ]},
+    {id:'eva_douleur_fatigue',label:'Douleur & Fatigue',type:'dual_eva',
+     q:'Votre niveau de gêne',keys:['eva_douleur','eva_fatigue'],
+     labels:['🌡 Douleur / gêne physique globale','😴 Fatigue générale']},
+    {id:'psfs',label:'Vos activités-cibles',type:'psfs',
+     q:'3 activités que la ménopause vous empêche de faire normalement',
+     sub:'PSFS · 0 = impossible · 10 = parfaitement normal',key:'psfs',
+     phs:['Ex : dormir une nuit complète','Ex : travailler sans baisse de concentration','Ex : activité sportive régulière']},
+    {id:'phq2',label:'Humeur',type:'scale_items',
+     q:'Au cours des 2 dernières semaines — avec quelle fréquence ?',
+     sub:'PHQ-2 · 0 = Jamais · 3 = Presque tous les jours',key:'phq2',
+     scale:{min:0,max:3,lbls:['Jamais','Quelques jours','+ d\'une semaine','Presque ts les jours']},
+     items:[
+       {id:'ph1',l:'Peu d\'intérêt ou de plaisir à faire les choses'},
+       {id:'ph2',l:'Sentiment de tristesse, de déprime ou d\'absence d\'espoir'}
+     ]},
+    {id:'gsm',label:'GSM — Syndrome uro-génital',type:'scale_items',
+     q:'Ces symptômes génitaux — actuellement',
+     sub:'GSM — Genitourinary Syndrome of Menopause · 0 = Absent · 4 = Quotidien et invalidant',key:'gsm',
+     scale:{min:0,max:4,lbls:['Absent','Rare','Occasionnel','Fréquent','Quotidien']},
+     items:[
+       {id:'g1',l:'Sécheresse ou irritation vaginale'},
+       {id:'g2',l:'Douleurs lors des rapports sexuels (dyspareunie)'},
+       {id:'g3',l:'Fuites urinaires à l\'effort (éternuement, sport)'},
+       {id:'g4',l:'Urgences urinaires — envies soudaines et difficiles à retenir'}
+     ]},
+    {id:'sommeil',label:'Sommeil',type:'chips_single',
+     q:'Comment dormez-vous actuellement ?',key:'sommeil',
+     opts:[{v:'bien',l:'Bien — 7h ou plus, qualité satisfaisante'},{v:'difficile',l:'Difficile — endormissement ou réveils'},{v:'tres_perturbe',l:'Très perturbé — bouffées nocturnes, réveils fréquents'},{v:'chronique',l:'Insomnie chronique installée'}]},
+    {id:'activite_physique',label:'Activité physique',type:'chips_single',
+     q:'Votre niveau d\'activité physique actuel ?',key:'activite',
+     opts:[{v:'regulier',l:'Régulier — 3x/semaine ou plus'},{v:'moderee',l:'Modérée — 1-2x/semaine'},{v:'limitee',l:'Limitée par les symptômes'},{v:'aucune',l:'Peu ou pas d\'activité physique'}]},
+    {id:'traitements',label:'Traitements en cours',type:'chips_multi',
+     q:'Que prenez-vous actuellement ?',sub:'Plusieurs réponses possibles',key:'traitements',
+     opts:[{v:'ths',l:'THS (traitement hormonal de substitution)'},{v:'phyto',l:'Phytothérapie / compléments'},{v:'antidep',l:'Antidépresseurs'},{v:'hypnotiques',l:'Somnifères / hypnotiques'},{v:'lubrifiants',l:'Lubrifiants vaginaux'},{v:'kine',l:'Kiné en cours'},{v:'rien',l:'Aucun traitement'}]},
+    {id:'impact_sexualite',label:'Sexualité',type:'chips_single',
+     q:'La ménopause impacte-t-elle votre vie intime ?',key:'sexualite',
+     opts:[{v:'non',l:'Non, pas d\'impact significatif'},{v:'peu',l:'Légèrement — quelques gênes'},{v:'moderement',l:'Modérément — je l\'évite parfois'},{v:'fortement',l:'Fortement — c\'est une source d\'inquiétude ou de douleur'}]},
+    {id:'objectif',label:'Votre objectif',type:'textarea',
+     q:'Dans 4 semaines, qu\'aimeriez-vous améliorer ?',
+     sub:'Soyez précise sur ce qui compte le plus pour vous',
+     key:'objectif',ph:'Dans 4 semaines, je voudrais pouvoir...',maxlen:200},
+    {id:'trajectoire',label:'Trajectoire',type:'progress_opts',
+     q:'Par rapport aux débuts — qu\'est-ce qui est différent ?',sub:'Même un tout petit changement compte',key:'trajectoire'}
+  ];
+
+  const ths_extra=[
+    {id:'ths_type',label:'Type de THS',type:'chips_single',
+     q:'Quel type de THS prenez-vous ?',key:'ths_type',
+     opts:[{v:'oestro_prog',l:'Œstrogènes + progestérone (combiné)'},{v:'oestro_seul',l:'Œstrogènes seuls (post-hystérectomie)'},{v:'local',l:'THS local uniquement (ovule, crème vaginale)'},{v:'phyto_soja',l:'Phyto-œstrogènes (soja, trèfle rouge)'},{v:'inconnu',l:'Je ne sais pas exactement'}]},
+    {id:'ths_duree',label:'Durée du THS',type:'chips_single',
+     q:'Depuis combien de temps prenez-vous ce traitement ?',key:'ths_duree',
+     opts:[{v:'moins6m',l:'Moins de 6 mois'},{v:'6m_2a',l:'6 mois – 2 ans'},{v:'plus2a',l:'Plus de 2 ans'}]},
+    {id:'ths_efficace',label:'Efficacité perçue',type:'chips_single',
+     q:'Le THS améliore-t-il vos symptômes ?',key:'ths_efficace',
+     opts:[{v:'bien',l:'Oui, très bien — nette amélioration'},{v:'partiel',l:'Partiellement — certains symptômes persistent'},{v:'peu',l:'Peu efficace jusqu\'ici'},{v:'effets2',l:'Quelques effets secondaires gênants'}]}
+  ];
+
+  // ── Étapes conditionnelles ménopause chirurgicale ──
+  const chir_extra=[
+    {id:'chir_cicatrice',label:'Cicatrice & plancher',type:'chips_multi',
+     q:'Suite à l\'intervention, avez-vous ces symptômes ?',key:'chir_cicatrice',
+     condition:(d)=>d.statut_menopause==='chirurgicale',
+     opts:[{v:'cicatrice_sens',l:'Cicatrice sensible ou douloureuse'},{v:'pesanteur',l:'Pesanteur pelvienne'},{v:'incontinence',l:'Fuites urinaires'},{v:'constipation',l:'Troubles digestifs / constipation'},{v:'dyspar',l:'Douleurs lors des rapports'}]},
+    {id:'chir_delai',label:'Délai post-op',type:'chips_single',
+     q:'Depuis combien de temps avez-vous été opérée ?',key:'chir_delai',
+     condition:(d)=>d.statut_menopause==='chirurgicale',
+     opts:[{v:'moins6m',l:'Moins de 6 mois'},{v:'6_12m',l:'6 à 12 mois'},{v:'1_3ans',l:'1 à 3 ans'},{v:'plus3ans',l:'Plus de 3 ans'}]}
+  ];
+
+  var result=[...base,...chir_extra];
+
+  // ── Branches profondes selon statut ──
+  // Péri-ménopause : ajouter questions cycles irréguliers
+  const peri_extra=[
+    {id:'cycles_peri',label:'Cycles irréguliers',type:'chips_multi',
+     q:'Comment se manifestent vos irrégularités de cycles ?',key:'cycles_peri',
+     condition:(d)=>d.statut_menopause==='peri',
+     opts:[{v:'spanio',l:'Cycles espacés (> 35 jours)'},{v:'poly',l:'Cycles rapprochés (< 21 jours)'},{v:'metro',l:'Saignements entre les règles'},{v:'dysm',l:'Règles plus douloureuses qu\'avant'},{v:'abond',l:'Règles plus abondantes'}]},
+    {id:'peri_cycle_impact',label:'Impact du cycle',type:'chips_single',
+     q:'Vos symptômes varient-ils au cours du cycle ?',key:'peri_cycle_impact',
+     condition:(d)=>d.statut_menopause==='peri',
+     opts:[{v:'oui_fort',l:'Oui — très marqués en pré-menstruel'},{v:'oui_peu',l:'Oui — légèrement'},{v:'non',l:'Non — constants tout le mois'}]}
+  ];
+
+  // Ménopause installée > 2 ans : os, cardiovasculaire, tissus
+  const install_extra=[
+    {id:'osseuse',label:'Santé osseuse',type:'chips_multi',
+     q:'Concernant votre santé osseuse depuis la ménopause :',key:'osseuse',
+     condition:(d)=>['menopause_installee','chirurgicale'].includes(d.statut_menopause),
+     opts:[{v:'osteopenie',l:'Ostéopénie / ostéoporose diagnostiquée'},{v:'fracture',l:'Fracture de fragilité'},{v:'douleurs_dos',l:'Douleurs dorsales / rachialgies'},{v:'defi',l:'Aucun problème osseux connu'}]},
+    {id:'cardiovasculaire',label:'Santé cardiovasculaire',type:'chips_multi',
+     q:'Parmi ces facteurs de risque cardiovasculaire, lesquels vous concernent ?',key:'cardiovasc',
+     condition:(d)=>['menopause_installee','chirurgicale'].includes(d.statut_menopause),
+     opts:[{v:'hta',l:'Hypertension artérielle'},{v:'cholesterol',l:'Hypercholestérolémie'},{v:'diabete',l:'Diabète ou prédiabète'},{v:'surpoids',l:'Surpoids / obésité'},{v:'sedentaire',l:'Mode de vie sédentaire'},{v:'aucun',l:'Aucun de ces facteurs'}]}
+  ];
+
+  var all=[...result,...peri_extra,...install_extra];
+
+  if(mode==='ths'){
+    return [...all.slice(0,2),...ths_extra,...all.slice(2)];
+  }
+  return all;
+}
+
+function buildEndometrioSeSteps(mode){
+  const base=[
+    {id:'situation',label:'Votre situation',type:'textarea',
+     q:'Décrivez votre situation avec l\'endométriose',sub:'Depuis quand, symptômes principaux, impact sur votre vie.',
+     key:'situation',ph:'Ex : diagnostiquée il y a 3 ans, règles très douloureuses, douleurs pelviennes en dehors des règles...',maxlen:400},
+    {id:'diagnostic',label:'Diagnostic',type:'chips_single',
+     q:'Votre diagnostic est-il confirmé ?',key:'diagnostic',
+     opts:[{v:'confirme_coelio',l:'Confirmé par cœlioscopie'},{v:'confirme_irm',l:'Confirmé par IRM / échographie'},{v:'suspicion',l:'Forte suspicion clinique, pas encore opérée'},{v:'en_cours',l:'Bilan diagnostique en cours'}]},
+    {id:'stade',label:'Stade',type:'chips_single',
+     q:'Connaissez-vous le stade de votre endométriose ?',key:'stade',
+     opts:[{v:'stade1',l:'Stade I — minime'},{v:'stade2',l:'Stade II — légère'},{v:'stade3',l:'Stade III — modérée (endométriomes...)'},{v:'stade4',l:'Stade IV — sévère (DIE, adhérences...)'},{v:'inconnu',l:'Je ne sais pas / pas précisé'}]},
+    {id:'localisation',label:'Localisation connue',type:'chips_multi',
+     q:'Où se trouvent les lésions (si connu) ?',sub:'Plusieurs réponses possibles',key:'lesions',
+     opts:[{v:'peritoine',l:'Péritoine — lésions superficielles'},{v:'ovaires',l:'Ovaires — endométriomes'},{v:'die',l:'Endométriose profonde (DIE — rectale, vésicale...)'},{v:'cicatrice',l:'Endométriose de cicatrice'},{v:'inconnu',l:'Non précisé / inconnu'}]},
+    {id:'nrs_dysm',label:'Douleur — Règles',type:'eva',
+     q:'Douleur lors des règles (dysménorrhée)',sub:'0 = aucune douleur · 10 = insupportable',key:'nrs_dysm'},
+    {id:'nrs_dyspar',label:'Douleur — Rapports',type:'eva',
+     q:'Douleur lors des rapports sexuels (dyspareunie)',sub:'0 = aucune · 10 = rapports impossibles',key:'nrs_dyspar'},
+    {id:'nrs_pelvien',label:'Douleur pelvienne chronique',type:'eva',
+     q:'Douleur pelvienne en dehors des règles',sub:'0 = aucune · 10 = présente tout le temps',key:'nrs_pelvien'},
+    {id:'ehp5',label:'EHP-5 — Qualité de vie',type:'scale_items',
+     q:'Au cours des 4 dernières semaines — dans quelle mesure ?',
+     sub:'EHP-5 — Endometriosis Health Profile (Cox 2007) · 0 = Jamais · 4 = Toujours',key:'ehp5',
+     scale:{min:0,max:4,lbls:['Jamais','Rarement','Parfois','Souvent','Toujours']},
+     items:[
+       {id:'e1',l:'Vous avez éprouvé des douleurs'},
+       {id:'e2',l:'Votre humeur a été affectée'},
+       {id:'e3',l:'Vous avez dû annuler des activités en raison de vos symptômes'},
+       {id:'e4',l:'Votre énergie a été réduite'},
+       {id:'e5',l:'Vous vous êtes sentie contrôlée par l\'endométriose plutôt que de la contrôler'}
+     ]},
+    {id:'jours_incapacite',label:'Jours d\'incapacité',type:'chips_single',
+     q:'En moyenne, combien de jours par mois êtes-vous incapable de vos activités normales à cause de la douleur ?',key:'jours_incapacite',
+     opts:[{v:'aucun',l:'0 jour'},{v:'1_2',l:'1 – 2 jours'},{v:'3_5',l:'3 – 5 jours'},{v:'6_10',l:'6 – 10 jours'},{v:'plus10',l:'Plus de 10 jours'}]},
+    {id:'impact_professionnel',label:'Impact professionnel',type:'chips_single',
+     q:'L\'endométriose impacte-t-elle votre travail ou vos études ?',key:'impact_travail',
+     opts:[{v:'non',l:'Non, pas d\'impact'},{v:'presenteisme',l:'Je vais au travail mais suis moins efficace'},{v:'arrets_ponctuels',l:'Arrêts ponctuels lors des règles'},{v:'arrets_reguliers',l:'Arrêts réguliers'},{v:'inapte',l:'Inaptitude partielle ou totale'}]},
+    {id:'psfs',label:'Vos activités-cibles',type:'psfs',
+     q:'3 activités que l\'endométriose vous empêche de faire normalement',
+     sub:'PSFS · 0 = impossible · 10 = parfaitement normal',key:'psfs',
+     phs:['Ex : sport / yoga sans douleur','Ex : semaine de travail complète','Ex : vie intime épanouie']},
+    {id:'phq2',label:'Humeur',type:'scale_items',
+     q:'Au cours des 2 dernières semaines',
+     sub:'PHQ-2 · 0 = Jamais · 3 = Presque tous les jours',key:'phq2',
+     scale:{min:0,max:3,lbls:['Jamais','Quelques jours','+ d\'une sem.','Presque ts les jours']},
+     items:[
+       {id:'ph1',l:'Peu d\'intérêt ou de plaisir à faire les choses'},
+       {id:'ph2',l:'Sentiment de tristesse, de déprime ou d\'espoir absent'}
+     ]},
+    {id:'gad2',label:'Anxiété',type:'scale_items',
+     q:'Au cours des 2 dernières semaines',
+     sub:'GAD-2 · 0 = Jamais · 3 = Presque tous les jours',key:'gad2',
+     scale:{min:0,max:3,lbls:['Jamais','Quelques jours','+ d\'une sem.','Presque ts les jours']},
+     items:[
+       {id:'g1',l:'Sentiment d\'anxiété, d\'inquiétude ou de nervosité'},
+       {id:'g2',l:'Incapacité à arrêter de s\'inquiéter ou à contrôler ses inquiétudes'}
+     ]},
+    {id:'fertilite',label:'Projet de fertilité',type:'chips_single',
+     q:'Avez-vous un projet de grossesse ?',key:'fertilite',
+     opts:[{v:'non_concerne',l:'Non concernée / pas de projet'},{v:'projet_avenir',l:'Projet dans les prochaines années'},{v:'projet_actif',l:'Projet actif en cours'},{v:'difficultes',l:'Difficultés à concevoir — bilan en cours ou PMA'},{v:'grossesse_achevee',l:'Désir de grossesse achevé'}]},
+    {id:'traitements',label:'Traitements en cours',type:'chips_multi',
+     q:'Quels traitements prenez-vous ?',sub:'Plusieurs réponses possibles',key:'traitements',
+     opts:[{v:'pilule',l:'Pilule contraceptive continue'},{v:'dienogest',l:'Diénogest (Visanne...)'},{v:'gnrh',l:'Analogues GnRH (Décapeptyl, Lupron...)'},{v:'sterilet_hormonal',l:'Stérilet hormonal (Mirena...)'},{v:'antidouleurs',l:'Antalgiques (paracétamol, ibuprofène...)'},{v:'neuropathiques',l:'Antinévralgiques (prégabaline, amitriptyline...)'},{v:'rien',l:'Aucun traitement actuellement'}]},
+    {id:'objectif',label:'Votre objectif',type:'textarea',
+     q:'Dans 4 semaines, qu\'aimeriez-vous améliorer ?',sub:'Ce qui compte le plus pour vous en ce moment.',
+     key:'objectif',ph:'Dans 4 semaines, je voudrais...',maxlen:200},
+    {id:'trajectoire',label:'Trajectoire',type:'progress_opts',
+     q:'Par rapport au début — comment ça évolue ?',sub:'Même un tout petit changement compte',key:'trajectoire'}
+  ];
+
+  const postchir_extra=[
+    {id:'chir_type',label:'Type de chirurgie',type:'chips_single',
+     q:'Quel type de chirurgie avez-vous eu ?',key:'chir_type',
+     opts:[{v:'coelio_exerese',l:'Cœlioscopie — exérèse de lésions'},{v:'coelio_fulguration',l:'Cœlioscopie — fulguration/vaporisation'},{v:'hystero',l:'Hystérectomie totale ou partielle'},{v:'ovariectomie',l:'Ovariectomie (ablation d\'un ou deux ovaires)'},{v:'autre',l:'Autre chirurgie gynécologique'}]},
+    {id:'chir_delai',label:'Délai post-chirurgie',type:'chips_single',
+     q:'Quand a eu lieu votre opération ?',key:'chir_delai',
+     opts:[{v:'moins3m',l:'< 3 mois'},{v:'3m_6m',l:'3 – 6 mois'},{v:'6m_1a',l:'6 mois – 1 an'},{v:'plus1a',l:'Plus d\'1 an'}]},
+    {id:'recidive',label:'Récidive',type:'chips_single',
+     q:'Avez-vous constaté un retour des symptômes depuis l\'opération ?',key:'recidive',
+     opts:[{v:'non',l:'Non — amélioration maintenue'},{v:'partiel',l:'Amélioration partielle — quelques symptômes persistent'},{v:'oui',l:'Oui — retour des douleurs comparable à avant'},{v:'aggravation',l:'Aggravation depuis la chirurgie'}]}
+  ];
+
+  // ── Étapes conditionnelles endométriose ──
+  const cond_extra=[
+    // DIE → symptômes digestifs et vésicaux
+    {id:'die_symptoms',label:'Symptômes DIE',type:'chips_multi',
+     q:'Ces symptômes sont-ils présents en lien avec vos règles ou de façon chronique ?',key:'die_symptoms',
+     condition:(d)=>Array.isArray(d.lesions)&&d.lesions.includes('die'),
+     opts:[{v:'rectite',l:'Douleurs rectales / ténesmes'},{v:'dysuries',l:'Brûlures urinaires, urgences'},{v:'sang_urines',l:'Sang dans les urines (cataménial)'},{v:'sang_selles',l:'Sang dans les selles pendant les règles'},{v:'constipation_die',l:'Constipation chronique'}]},
+    // Sensibilisation centrale si douleur pelvienne ≥ 5
+    {id:'cs_screen',label:'Sensibilisation centrale',type:'scale_items',
+     q:'Évaluez ces symptômes au cours du dernier mois',
+     sub:'Centrale Sensitization Inventory — items clés (Neblett 2013) · 0 = Jamais · 4 = Toujours',key:'cs_items',
+     condition:(d)=>d.nrs_pelvien!=null&&d.nrs_pelvien>=5,
+     scale:{min:0,max:4,lbls:['Jamais','Rarement','Parfois','Souvent','Toujours']},
+     items:[
+       {id:'c1',l:'Je suis sensible à la lumière, aux bruits ou aux odeurs'},
+       {id:'c2',l:'J\'ai du mal à me concentrer lorsque j\'ai de la douleur'},
+       {id:'c3',l:'Ma douleur persiste même en dehors des règles, sans lésion identifiable'},
+       {id:'c4',l:'Je ressens de la douleur à des endroits inhabituels (bras, jambes, dos)'},
+       {id:'c5',l:'La fatigue aggrave fortement ma douleur'}
+     ]},
+    // Stade sévère → impact fertilité
+    {id:'fertilite',label:'Fertilité',type:'chips_single',
+     q:'Le projet de grossesse est-il une préoccupation pour vous ?',key:'fertilite',
+     condition:(d)=>['stade3','stade4'].includes(d.stade)||Array.isArray(d.lesions)&&d.lesions.includes('ovaires'),
+     opts:[{v:'oui_actif',l:'Oui — projet en cours ou à venir'},{v:'oui_inquiete',l:'Oui — préoccupée mais pas de projet immédiat'},{v:'non',l:'Non — ce n\'est pas ma préoccupation principale'},{v:'deja_fait',l:'Grossesse(s) déjà réalisée(s)'}]}
+  ];
+
+  var all_steps=[...base,...cond_extra];
+
+  if(mode==='postchir'){
+    return [all_steps[0],...postchir_extra,...all_steps.slice(1)];
+  }
+  return all_steps;
+}
+
+function buildPerineeSteps(mode){
+  const base=[
+    {id:'situation',label:'Votre situation',type:'textarea',
+     q:'Décrivez votre situation en quelques mots',sub:'Symptômes principaux, depuis combien de temps, ce qui déclenche.',
+     key:'situation',ph:'Ex : fuites urinaires depuis l\'accouchement, surtout en toussant ou en courant...',maxlen:400},
+    {id:'profil',label:'Profil principal',type:'chips_single',
+     q:'Quelle est la cause principale de votre problème ?',key:'profil',
+     opts:[{v:'postpartum',l:'Post-partum — suite à un accouchement'},{v:'menopause_perinee',l:'Ménopause — relâchement lié aux changements hormonaux'},{v:'post_op',l:'Post-chirurgical (hystérectomie, chirurgie pelvienne)'},{v:'sportive',l:'Liée au sport — effort intense, sports à impacts'},{v:'idiopathique',l:'Progressive / sans cause identifiée'}]},
+    {id:'symptomes',label:'Symptômes',type:'chips_multi',
+     q:'Quels symptômes ressentez-vous ?',sub:'Plusieurs réponses possibles',key:'symptomes',
+     opts:[{v:'iu_effort',l:'Fuites à l\'effort — éternuement, toux, sport'},{v:'iu_urgence',l:'Fuites par urgences — envie soudaine impossible à retenir'},{v:'iu_mixte',l:'Mixte — les deux types de fuites'},{v:'prolapsus',l:'Sensation de descente d\'organe / lourdeur pelvienne'},{v:'dyspareunie',l:'Douleurs lors des rapports sexuels'},{v:'constipation',l:'Difficultés à aller à la selle'},{v:'douleurs_pelviennes',l:'Douleurs pelviennes ou périnéales chroniques'}]},
+    {id:'iciq',label:'ICIQ-SF — Incontinence',type:'scale_items',
+     q:'Votre incontinence urinaire — ces 4 dernières semaines',
+     sub:'ICIQ-SF — International Consultation on Incontinence (Gold Standard ICS 2001) · Répondez à chaque item',key:'iciq',
+     scale:{min:0,max:5,lbls:['Jamais','1x/semaine','2-3x/sem','1x/jour','Pls fois/j','Toujours']},
+     items:[
+       {id:'i1',l:'À quelle fréquence avez-vous des fuites urinaires ?'}
+     ]},
+    {id:'iciq_quantite',label:'ICIQ — Quantité des fuites',type:'chips_single',
+     q:'Quelle quantité de fuites urinaires avez-vous en général ?',key:'iciq_quantite',
+     opts:[{v:'aucune',l:'Aucune fuite'},{v:'petite',l:'Petite quantité — quelques gouttes'},{v:'moderee',l:'Quantité modérée'},{v:'grande',l:'Grande quantité'}]},
+    {id:'iciq_impact',label:'ICIQ — Impact sur la vie',type:'chips_single',
+     q:'Dans quelle mesure les fuites urinaires perturbent-elles votre vie quotidienne ?',key:'iciq_impact',
+     opts:[{v:'0',l:'0 — Pas du tout'},{v:'1_3',l:'1 à 3 — Peu'},{v:'4_6',l:'4 à 6 — Modérément'},{v:'7_10',l:'7 à 10 — Beaucoup'}]},
+    {id:'pfdi',label:'PFDI-20 — Gêne fonctionnelle',type:'scale_items',
+     q:'Ces symptômes vous gênent-ils ?',
+     sub:'PFDI-20 court — Pelvic Floor Distress Inventory · 0 = Pas du tout gênant · 4 = Extrêmement gênant',key:'pfdi',
+     scale:{min:0,max:4,lbls:['Pas du tout','Peu','Modérément','Beaucoup','Extrêmement']},
+     items:[
+       {id:'p1',l:'Sensation de ne pas vider complètement la vessie'},
+       {id:'p2',l:'Devoir pousser ou adopter une position particulière pour uriner'},
+       {id:'p3',l:'Sensation de boule ou de quelque chose qui sort du vagin'},
+       {id:'p4',l:'Devoir pousser le vagin ou la zone périnéale pour aller à la selle'},
+       {id:'p5',l:'Fuites de selles ou de gaz à des moments inopportuns'},
+       {id:'p6',l:'Douleur ou gêne dans la zone périnéale ou pelvienne'}
+     ]},
+    {id:'dyspareunie_nrs',label:'Dyspareunie',type:'eva',
+     q:'Douleur lors des rapports sexuels (dyspareunie)',sub:'0 = aucune douleur · 10 = rapports impossibles ou très douloureux',key:'eva_douleur'},
+    {id:'fsfi6',label:'FSFI-6 — Sexualité',type:'scale_items',
+     q:'Au cours des 4 dernières semaines — votre vie sexuelle',
+     sub:'FSFI-6 (Isidori 2010) — Female Sexual Function Index · Répondez si vous avez eu une activité sexuelle · 0 = Pas d\'activité sexuelle / 5 = Toujours/Très satisfaisant',
+     conditional:'sexualite',key:'fsfi',
+     scale:{min:0,max:5,lbls:['Absent/NA','Presque jamais','Parfois','La moitié','La plupart','Toujours']},
+     items:[
+       {id:'f1',l:'Vous avez ressenti du désir ou de l\'intérêt sexuel'},
+       {id:'f2',l:'Vous avez ressenti de l\'excitation lors d\'une activité sexuelle'},
+       {id:'f3',l:'Vous avez été lubrifiée (humidité vaginale)'},
+       {id:'f4',l:'Vous avez atteint l\'orgasme lors d\'une activité sexuelle'},
+       {id:'f5',l:'Vous avez été satisfaite de la profondeur de la pénétration'},
+       {id:'f6',l:'Vous avez ressenti de la douleur lors de la pénétration vaginale'}
+     ]},
+    {id:'psfs',label:'Vos activités-cibles',type:'psfs',
+     q:'3 activités que vos symptômes vous empêchent de faire normalement',
+     sub:'PSFS · 0 = impossible · 10 = parfaitement normal',key:'psfs',
+     phs:['Ex : courir 20 min sans fuite','Ex : sauter sans protection','Ex : reprise du sport']},
+    {id:'activite_sport',label:'Sport & activité',type:'chips_single',
+     q:'Votre situation sportive actuelle ?',key:'activite_sport',
+     opts:[{v:'stop',l:'J\'ai arrêté le sport à cause des symptômes'},{v:'adapte',l:'Je pratique mais j\'adapte (port de protections, évitements)'},{v:'normal',l:'Je pratique normalement malgré les symptômes'},{v:'pas_sport',l:'Je ne pratiquais pas de sport avant'}]},
+    {id:'reeducation_ante',label:'Rééducation antérieure',type:'chips_single',
+     q:'Avez-vous déjà fait de la rééducation périnéale ?',key:'reeducation',
+     opts:[{v:'non_jamais',l:'Non, jamais'},{v:'oui_recommande',l:'Recommandée mais pas encore commencée'},{v:'oui_termine',l:'Oui, terminée — avec résultats partiels'},{v:'en_cours',l:'En cours actuellement'}]},
+    {id:'traitements',label:'Prise en charge actuelle',type:'chips_multi',
+     q:'Que faites-vous ou prenez-vous actuellement ?',sub:'Plusieurs réponses possibles',key:'traitements',
+     opts:[{v:'protection',l:'Protections / serviettes au quotidien'},{v:'pessaire',l:'Pessaire (anneau de soutien)'},{v:'kine',l:'Kiné périnéale en cours'},{v:'biofeedback',l:'Biofeedback / electrostimulation'},{v:'oestrogenes_locaux',l:'Œstrogènes locaux (ovules, crème)'},{v:'medicaments',l:'Traitement médicamenteux (Betmiga, Driptan...)'},{v:'chirurgie_prev',l:'Chirurgie prévue (bandelette, promontofixation...)'}]},
+    {id:'objectif',label:'Votre objectif',type:'textarea',
+     q:'Dans 4 semaines, qu\'aimeriez-vous améliorer ?',
+     sub:'Soyez précise sur ce qui compte le plus pour vous',
+     key:'objectif',ph:'Dans 4 semaines, je voudrais pouvoir...',maxlen:200},
+    {id:'trajectoire',label:'Trajectoire',type:'progress_opts',
+     q:'Par rapport au début — qu\'est-ce qui est différent ?',sub:'Même un tout petit changement compte',key:'trajectoire'}
+  ];
+
+  const postpartum_extra=[
+    {id:'accouchement_type',label:'Type d\'accouchement',type:'chips_single',
+     q:'Comment s\'est passé votre accouchement ?',key:'accouchement_type',
+     opts:[{v:'voie_basse_normal',l:'Voie basse — sans instrument'},{v:'forceps_ventouse',l:'Voie basse — avec forceps ou ventouse'},{v:'cesarienne_prog',l:'Césarienne programmée'},{v:'cesarienne_urgence',l:'Césarienne en urgence'}]},
+    {id:'dechirure',label:'Déchirure périnéale',type:'chips_single',
+     q:'Y a-t-il eu une déchirure ou une épisiotomie ?',key:'dechirure',
+     opts:[{v:'non',l:'Non'},{v:'episode',l:'Épisiotomie'},{v:'dechirure_1_2',l:'Déchirure grade 1 ou 2'},{v:'dechirure_3_4',l:'Déchirure grade 3 ou 4 (sphincter)'},{v:'inconnu',l:'Je ne sais pas exactement'}]},
+    {id:'accouchement_delai',label:'Délai depuis l\'accouchement',type:'chips_single',
+     q:'Quand a eu lieu l\'accouchement ?',key:'accouchement_delai',
+     opts:[{v:'moins2m',l:'Moins de 2 mois'},{v:'2m_6m',l:'2 – 6 mois'},{v:'6m_1a',l:'6 mois – 1 an'},{v:'plus1a',l:'Plus d\'1 an'}]},
+    {id:'allaitement',label:'Allaitement',type:'chips_single',
+     q:'Allaitez-vous actuellement ?',key:'allaitement',
+     opts:[{v:'non',l:'Non'},{v:'sein',l:'Oui, allaitement au sein'},{v:'mixte',l:'Oui, allaitement mixte'},{v:'termine',l:'Allaitement terminé'}]}
+  ];
+
+  if(mode==='postpartum'){
+    return [base[0],...postpartum_extra,...base.slice(1)];
+  }
+  return base;
+}
+
+function buildGynSteps(bilan,mode){
+  switch(bilan){
+    case 'menopause':    return buildMenopauseSteps(mode);
+    case 'endometriose': return buildEndometrioSeSteps(mode);
+    case 'perinee':      return buildPerineeSteps(mode);
+    default:             return buildMenopauseSteps(mode);
+  }
+}
+
+// ══ RENDERERS ══
+function renderStepHTML(step,idx,total){
+  var col=GYNECO_COLORS[currentBilan].bc;
+  var h=`<div class="tp-step-num">Étape ${idx} sur ${total} · ${step.label}</div>`;
+  h+=`<div class="tp-step-q">${step.q}${step.sub?`<br><em style="font-size:12px;color:var(--ink-s);font-weight:300">${step.sub}</em>`:''}</div>`;
+
+  switch(step.type){
+    case 'textarea':
+      h+=`<textarea class="tp-textarea" placeholder="${step.ph||''}" oninput="gynData['${step.key}']=this.value">${gynData[step.key]||''}</textarea>`;
+      if(step.maxlen) h+=`<div style="text-align:right;font-size:11px;color:var(--ink-xs);margin-top:5px">${(gynData[step.key]||'').length}/${step.maxlen}</div>`;
+      break;
+    case 'chips_single':
+      h+=`<div class="tp-chips">`;
+      step.opts.forEach(o=>{
+        var sel=gynData[step.key]===o.v?'selected':'';
+        h+=`<div class="tp-chip ${sel}" onclick="gynData['${step.key}']='${o.v}';document.querySelectorAll('#step-content .tp-chip').forEach(c=>c.classList.remove('selected'));this.classList.add('selected')">${o.l}</div>`;
+      });
+      h+=`</div>`;break;
+    case 'chips_multi':
+      var stored=gynData[step.key]||[];
+      h+=`<div class="tp-chips">`;
+      step.opts.forEach(o=>{
+        var sel=stored.includes(o.v)?'selected':'';
+        h+=`<div class="tp-chip ${sel}" onclick="toggleGynChip(this,'${step.key}','${o.v}')">${o.l}</div>`;
+      });
+      h+=`</div>`;break;
+    case 'eva':
+      var val=gynData[step.key]!=null?gynData[step.key]:5;
+      h+=`<div class="eva-wrap">
+        <div class="eva-value" id="geva-disp">${val}</div>
+        <input type="range" class="eva-slider" min="0" max="10" value="${val}" step="1"
+          oninput="gynData['${step.key}']=parseInt(this.value);document.getElementById('geva-disp').textContent=this.value">
+        <div class="eva-labels"><span>0 — Aucune douleur</span><span>10 — Maximale</span></div>
+        </div>`;break;
+    case 'dual_eva':
+      h+=`<div style="margin-top:8px">`;
+      step.keys.forEach((k,i)=>{
+        var v=gynData[k]!=null?gynData[k]:5;
+        h+=`<div class="dual-eva-item">
+          <div class="dual-eva-label">${step.labels[i]}</div>
+          <div class="dual-eva-val" id="gdeva-${k}">${v}</div>
+          <input type="range" class="eva-slider" min="0" max="10" value="${v}" step="1"
+            oninput="gynData['${k}']=parseInt(this.value);document.getElementById('gdeva-${k}').textContent=this.value">
+          <div class="eva-labels"><span>0</span><span>10</span></div>
+          </div>`;
+      });
+      h+=`</div>`;break;
+    case 'psfs':
+      var ps=gynData.psfs;
+      h+=`<div>`;
+      for(var i=0;i<3;i++){
+        var pi=i;
+        h+=`<div class="psfs-item">
+          <div class="psfs-label-row">
+            <div class="psfs-num">${i+1}</div>
+            <input class="psfs-input" placeholder="${step.phs?step.phs[i]:'Activité '+(i+1)}" value="${ps[i].label||''}"
+              oninput="gynData.psfs[${pi}].label=this.value">
+          </div>
+          <div class="psfs-score-row">
+            <div class="psfs-score-label">Niveau actuel</div>
+            <input type="range" class="psfs-slider" min="0" max="10" value="${ps[i].score}" step="1"
+              oninput="gynData.psfs[${pi}].score=parseInt(this.value);document.getElementById('gpsfs-v-${pi}').textContent=this.value">
+            <div class="psfs-score-val" id="gpsfs-v-${pi}">${ps[i].score}</div>
+          </div>
+          <div style="font-size:10px;color:var(--ink-xs);margin-top:3px">0 = impossible · 10 = parfaitement normal</div>
+          </div>`;
+      }
+      h+=`</div>`;break;
+    case 'scale_items':
+      var scl=step.scale, stored_si=gynData[step.key]||{};
+      // Conditional FSFI
+      if(step.conditional==='sexualite'){
+        var hasSex=(gynData.symptomes||[]).includes('dyspareunie')||(gynData.sexualite&&gynData.sexualite!=='non');
+        if(!hasSex){
+          h+=`<p style="font-size:13px;color:var(--ink-s);padding:14px;background:var(--bg);border-radius:10px;border:1px solid var(--line)">
+            Le FSFI-6 s'applique si vous avez une activité sexuelle ou si la dyspareunie est un symptôme déclaré.<br>
+            <em style="font-size:11px;color:var(--ink-xs)">Cette étape est ignorée — cliquez Suivant.</em></p>`;
+          break;
+        }
+      }
+      h+=`<div>`;
+      step.items.forEach(item=>{
+        var cur=stored_si[item.id];
+        h+=`<div class="msk-scale-item">
+          <div class="msk-scale-label">${item.l}</div>
+          <div class="msk-scale-opts">`;
+        for(var v=scl.min;v<=scl.max;v++){
+          var sel=cur===v?'sel':'';
+          var lbl=scl.lbls[v-scl.min]||v;
+          h+=`<div class="msk-scale-opt ${sel}" onclick="gynData['${step.key}']['${item.id}']=${v};this.closest('.msk-scale-opts').querySelectorAll('.msk-scale-opt').forEach(o=>o.classList.remove('sel'));this.classList.add('sel')">
+            <span class="msk-scale-opt-num">${v}</span>${lbl}</div>`;
+        }
+        h+=`</div></div>`;
+      });
+      h+=`</div>`;break;
+    case 'progress_opts':
+      h+=`<div class="tp-progress-opts">
+        <div class="tp-progress-opt${gynData[step.key]==='mieux'?' selected':''}" onclick="gynData['${step.key}']='mieux';document.querySelectorAll('#step-content .tp-progress-opt').forEach(o=>o.classList.remove('selected'));this.classList.add('selected')">
+          <span class="tp-progress-opt-icon">📈</span><div class="tp-progress-opt-label">C'est mieux</div></div>
+        <div class="tp-progress-opt${gynData[step.key]==='pareil'?' selected':''}" onclick="gynData['${step.key}']='pareil';document.querySelectorAll('#step-content .tp-progress-opt').forEach(o=>o.classList.remove('selected'));this.classList.add('selected')">
+          <span class="tp-progress-opt-icon">➡️</span><div class="tp-progress-opt-label">Pareil</div></div>
+        <div class="tp-progress-opt${gynData[step.key]==='difficile'?' selected':''}" onclick="gynData['${step.key}']='difficile';document.querySelectorAll('#step-content .tp-progress-opt').forEach(o=>o.classList.remove('selected'));this.classList.add('selected')">
+          <span class="tp-progress-opt-icon">📉</span><div class="tp-progress-opt-label">Plus difficile</div></div>
+        </div>`;break;
+  }
+  return h;
+}
+
+function toggleGynChip(el,key,val){
+  var arr=gynData[key];
+  if(!Array.isArray(arr)){gynData[key]=[];arr=gynData[key];}
+  var idx=arr.indexOf(val);
+  if(idx===-1){arr.push(val);el.classList.add('selected');}
+  else{arr.splice(idx,1);el.classList.remove('selected');}
+}
+
+// ══ NAVIGATION ══
+function initGynProgress(){
+  var total=gynSteps.length;
+  var container=document.getElementById('tp-steps');
+  if(!container) return;
+  container.innerHTML='';
+  for(var i=1;i<=total;i++){
+    var step=document.createElement('div');step.className='tp-step';
+    var dot=document.createElement('div');dot.className='tp-step-dot'+(i===1?' active':'');dot.id='dot-'+i;dot.textContent=i;
+    var line=document.createElement('div');line.className='tp-step-line';line.id='line-'+i;
+    step.appendChild(dot);step.appendChild(line);container.appendChild(step);
+  }
+}
+
+function updateGynProgress(step){
+  var total=gynSteps.length;
+  for(var i=1;i<=total;i++){
+    var dot=document.getElementById('dot-'+i);if(!dot)continue;
+    dot.classList.remove('active','done');
+    if(i<step){dot.classList.add('done');dot.innerHTML='✓';}
+    else if(i===step){dot.classList.add('active');dot.textContent=i;}
+    else dot.textContent=i;
+    var line=document.getElementById('line-'+i);
+    if(line)line.classList.toggle('done',i<step);
+  }
+  var lbl=document.getElementById('tp-progress-label');
+  if(lbl)lbl.textContent=`Étape ${step} sur ${total} · ${gynSteps[step-1].label}`;
+  document.getElementById('btn-next').textContent=step===total?'Voir mon bilan →':'Suivant →';
+  document.getElementById('btn-back').style.visibility=step>1?'visible':'hidden';
+}
+
+// ══ CONDITIONAL STEP NAVIGATION ══
+function visibleSteps(){
+  return gynSteps.filter(s=>!s.condition||s.condition(gynData));
+}
+function getNextIdx(cur){
+  var idx=cur;
+  do{ idx++; }while(idx<gynSteps.length && gynSteps[idx] && gynSteps[idx].condition && !gynSteps[idx].condition(gynData));
+  return idx;
+}
+function getPrevIdx(cur){
+  var idx=cur;
+  do{ idx--; }while(idx>0 && gynSteps[idx-1] && gynSteps[idx-1].condition && !gynSteps[idx-1].condition(gynData));
+  return idx;
+}
+
+function showGynStep(n){
+  var sc=document.getElementById('step-content');if(!sc)return;
+  var vis=visibleSteps();
+  var visIdx=vis.indexOf(gynSteps[n-1])+1;
+  sc.innerHTML=renderStepHTML(gynSteps[n-1],visIdx,vis.length);
+  updateGynProgress(n);
+  // Bulle explicative
+  if(gynSteps[n-1]) updateGynBubble(gynSteps[n-1].id||gynSteps[n-1].key||'');
+}
+
+function nextStep(){
+  var nextIdx=getNextIdx(gynStep-1);
+  if(nextIdx>=gynSteps.length){showGynResult();return;}
+  gynStep=nextIdx+1;showGynStep(gynStep);
+}
+function prevStep(){
+  if(gynStep<=1)return;
+  var prevIdx=getPrevIdx(gynStep-1);
+  gynStep=prevIdx+1;showGynStep(gynStep);
+}
+
+function openBilanGyneco(bilan,mode){
+  currentBilan=bilan;currentMode=mode;
+  var col=GYNECO_COLORS[bilan];
+  var panel=document.getElementById('trace-panel');
+  if(panel)panel.dataset.bilan=bilan;
+  gynSteps=buildGynSteps(bilan,mode);
+  gynTotalSteps=gynSteps.length;
+  gynStep=1;
+  resetGynData();
+  var title=document.getElementById('tp-title');
+  if(title)title.textContent=col.name+' — '+(mode==='postpartum'?'Post-partum':mode==='postchir'?'Post-chirurgicale':mode==='ths'?'Sous THS':mode==='naturelle'?'Sans THS':'Conservatrice');
+  var icon=document.getElementById('tp-icon');
+  if(icon)icon.textContent=col.emoji;
+  document.getElementById('trace-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('bilan-choice').style.display='none';
+  document.getElementById('tp-body').style.display='';
+  document.getElementById('tp-footer').style.display='';
+  document.querySelector('.tp-progress').style.display='';
+  document.getElementById('trace-result').style.display='none';
+  initGynProgress();showGynStep(1);
+}
+
+function openTrace(){
+  var panel=document.getElementById('trace-panel');
+  if(panel)panel.dataset.bilan='menopause';
+  document.getElementById('trace-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('bilan-choice').style.display='flex';
+  document.querySelector('.tp-progress').style.display='none';
+  document.getElementById('tp-body').style.display='none';
+  document.getElementById('tp-footer').style.display='none';
+  document.getElementById('trace-result').style.display='none';
+}
+function closeTrace(){
+  var panel=document.getElementById('trace-panel');
+  if(panel)panel.classList.remove('result-mode');
+  document.getElementById('trace-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function overlayClose(e){if(e.target===document.getElementById('trace-overlay'))closeTrace();}
+
+// ══ KAP SCORE ══
+function getPsfsAvgGyn(){
+  var filled=gynData.psfs.filter(p=>p.label&&p.label.trim().length>0);
+  if(!filled.length)return null;
+  return Math.round(filled.reduce((a,p)=>a+p.score,0)/filled.length/10*100);
+}
+function getScaleInv(obj,min,max){
+  var vals=Object.values(obj).filter(v=>v!=null&&!isNaN(v));
+  if(!vals.length)return null;
+  var avg=vals.reduce((a,b)=>a+b,0)/vals.length;
+  return Math.round((max-avg)/(max-min)*100);
+}
+function getScaleDirect(obj,min,max){
+  var vals=Object.values(obj).filter(v=>v!=null&&!isNaN(v));
+  if(!vals.length)return null;
+  var avg=vals.reduce((a,b)=>a+b,0)/vals.length;
+  return Math.round((avg-min)/(max-min)*100);
+}
+function evaInv(key,def){
+  var v=gynData[key]!=null?gynData[key]:def;
+  return Math.round((10-v)/10*100);
+}
+
+function computeKAPScoreGyn(){
+  var psfs=getPsfsAvgGyn();
+  switch(currentBilan){
+    case 'menopause':{
+      var mrs_all=[...Object.values(gynData.mrs_soma),...Object.values(gynData.mrs_psy),...Object.values(gynData.mrs_uro)].filter(v=>v!=null);
+      var mrs=mrs_all.length?Math.round((4*mrs_all.length-mrs_all.reduce((a,b)=>a+b,0))/(4*mrs_all.length)*100):null;
+      var gsm_inv=getScaleInv(gynData.gsm,0,4);
+      var phq_inv=getScaleInv(gynData.phq2,0,3);
+      var eva_inv=evaInv('eva_douleur',3);
+      var dims={S:mrs,G:gsm_inv,P:psfs,H:phq_inv,E:eva_inv};
+      return computeWeightedGlobal(dims,{S:.30,G:.20,P:.20,H:.15,E:.15});
+    }
+    case 'endometriose':{
+      var nrs_avg=null;
+      var nrs_vals=[gynData.nrs_dysm,gynData.nrs_dyspar,gynData.nrs_pelvien].filter(v=>v!=null);
+      if(nrs_vals.length)nrs_avg=Math.round((10*nrs_vals.length-nrs_vals.reduce((a,b)=>a+b,0))/(10*nrs_vals.length)*100);
+      var ehp=getScaleInv(gynData.ehp5,0,4);
+      var jours_map={'aucun':100,'1_2':85,'3_5':65,'6_10':40,'plus10':15};
+      var impact=gynData.jours_incapacite?jours_map[gynData.jours_incapacite]||50:null;
+      var psy_vals=[...Object.values(gynData.phq2),...Object.values(gynData.gad2)].filter(v=>v!=null);
+      var psy=psy_vals.length?Math.round((3*psy_vals.length-psy_vals.reduce((a,b)=>a+b,0))/(3*psy_vals.length)*100):null;
+      var dims={D:nrs_avg,Q:ehp,I:impact,P:psfs,H:psy};
+      return computeWeightedGlobal(dims,{D:.25,Q:.25,I:.20,P:.15,H:.15});
+    }
+    case 'perinee':{
+      // ICIQ: freq(0-5) + quantite(0-3) + impact(0-10) → max 18
+      var iciq_f=Object.values(gynData.iciq)[0]||0;
+      var iciq_q_map={'aucune':0,'petite':1,'moderee':2,'grande':3};
+      var iciq_q=iciq_q_map[gynData.iciq_quantite]||0;
+      var iciq_i_map={'0':0,'1_3':2,'4_6':5,'7_10':8};
+      var iciq_i=iciq_i_map[gynData.iciq_impact]||0;
+      var iciq_total=iciq_f+iciq_q+iciq_i;
+      var iciq_score=Math.round((18-iciq_total)/18*100);
+      var pfdi_inv=getScaleInv(gynData.pfdi,0,4);
+      var fsfi=getScaleDirect(gynData.fsfi,0,5);
+      var eva_inv=evaInv('eva_douleur',0);
+      var dims={I:iciq_score,F:pfdi_inv,P:psfs,S:fsfi,E:eva_inv};
+      return computeWeightedGlobal(dims,{I:.30,F:.25,P:.20,S:.15,E:.10});
+    }
+  }
+  return {global:null,dims:{}};
+}
+
+function computeWeightedGlobal(dims,weights){
+  var totalW=0,totalS=0;
+  Object.keys(dims).forEach(k=>{if(dims[k]!=null){totalW+=weights[k];totalS+=dims[k]*weights[k];}});
+  var global=totalW>0?Math.round(totalS/totalW):null;
+  return {global,dims};
+}
+
+function generateImmatGyn(){
+  var codes={menopause:'KM',endometriose:'KE',perinee:'KP'};
+  var now=new Date();
+  var y=now.getFullYear().toString().slice(-2);
+  var m=String(now.getMonth()+1).padStart(2,'0');
+  var d=String(now.getDate()).padStart(2,'0');
+  return (codes[currentBilan]||'KG')+'-'+y+m+d+'-'+Math.floor(Math.random()*9000+1000);
+}
+
+function gynScoreLabel(score){
+  if(score==null)return{label:'—',desc:'Données insuffisantes'};
+  if(score>=80)return{label:'✦ Ressources solides',desc:'Des marges de confort préservées.'};
+  if(score>=60)return{label:'Bonne trajectoire',desc:'Des progrès possibles avec un accompagnement ciblé.'};
+  if(score>=40)return{label:'En progression',desc:'La situation impacte le quotidien — le chemin est tracé.'};
+  if(score>=20)return{label:'Chemin à parcourir',desc:'Un accompagnement adapté fait la différence.'};
+  return{label:'Situation difficile',desc:'Un soutien renforcé est recommandé.'};
+}
+
+// ══ RESULT ══
+function showGynResult(){
+  var bub=document.getElementById('step-bubble-gyn');
+  if(bub) bub.classList.remove('visible');
+  var kap=computeKAPScoreGyn();
+  var lbl=gynScoreLabel(kap.global);
+  var col=GYNECO_COLORS[currentBilan];
+  var immat=generateImmatGyn();
+  var panel=document.getElementById('trace-panel');
+  if(panel)panel.classList.add('result-mode');
+  document.getElementById('tp-body').style.display='none';
+  document.getElementById('tp-footer').style.display='none';
+  document.querySelector('.tp-progress').style.display='none';
+  var result=document.getElementById('trace-result');
+  result.style.display='flex';result.style.flexDirection='column';result.style.flex='1';result.style.overflow='hidden';
+  var date=new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
+  var dimNames={S:'Symptômes MRS',G:'Syndrome GSM',P:'PSFS · Activités',H:'Humeur · Anxiété',E:'Confort & Douleur',
+                D:'Douleur pelvienne',Q:'EHP-5 · Qualité de vie',I:currentBilan==='perinee'?'ICIQ · Incontinence':'Impact fonctionnel',F:currentBilan==='perinee'?'PFDI · Gêne pelvienne':'Fertilité'};
+
+  function buildDim(key,score){
+    if(score==null)return'';
+    var color=score>=70?'#16A34A':score>=45?col.bc:'#A05010';
+    return`<div class="kap-dim">
+      <div class="kap-dim-row"><span class="kap-dim-name">${dimNames[key]||key}</span><span class="kap-dim-val" style="color:${color}">${score}</span></div>
+      <div class="kap-dim-track"><div class="kap-dim-fill" id="dim-bar-${key}" style="width:0%;background:${color}"></div></div>
+    </div>`;
+  }
+
+  result.innerHTML=`
+  <div class="kap-res-top">
+    <div class="kap-res-top-label">${col.name} · ${date}</div>
+    <button class="kap-res-close" onclick="closeTrace()">✕</button>
+  </div>
+  <div id="gyn-result-view" style="display:flex;flex-direction:column;flex:1;overflow:hidden">
+  <div class="kap-res-body">
+    <div class="kap-res-left">
+      <div class="kap-score-wrap">
+        <div style="font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--bc,var(--rose));margin-bottom:10px">KAP Score ${col.name}</div>
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px">
+          <div class="kap-score-num" id="res-num">0</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:var(--bc,var(--rose));margin-bottom:2px">${lbl.label}</div>
+            <div style="font-size:12px;color:var(--ink-s)">${lbl.desc}</div>
+          </div>
+        </div>
+        <div class="kap-score-bar-track"><div class="kap-score-bar-fill" id="res-bar" style="width:0%"></div></div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--bc-line,var(--line));border-radius:14px;padding:16px">
+        <div style="font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-xs);margin-bottom:14px">Détail par dimension</div>
+        ${Object.keys(kap.dims).map(k=>buildDim(k,kap.dims[k])).join('')}
+      </div>
+      <div class="kap-immat-wrap" style="margin-top:14px">
+        <div>
+          <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-xs);margin-bottom:3px">Numéro de bilan</div>
+          <div class="kap-immat-num">${immat}</div>
+        </div>
+        <div style="font-size:11px;color:var(--ink-s);line-height:1.5">À communiquer à votre kiné.</div>
+      </div>
+    </div>
+    <div class="kap-res-right">
+      <div class="kap-res-msg-zone">
+        <div class="kap-res-headline">${buildGynHeadline(kap)}</div>
+        <div class="kap-res-text">${buildGynMessage(kap)}</div>
+        ${buildKineRoleSection(currentBilan)}
+        ${buildEvidenceCards(currentBilan,gynData)}
+      </div>
+      <div class="kap-res-footer">
+        <button class="kap-res-btn-redo" onclick="closeTrace()">↺ Recommencer</button>
+        <button class="kap-res-btn-redo" onclick="downloadGynPDF('${immat}')">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><polyline points="9 14 12 17 15 14"/></svg>
+          PDF
+        </button>
+        <button class="btn-kine-pro" onclick="openKineModal()">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Kiné
+        </button>
+        <button class="kap-res-btn-chat" onclick="startChatAfterGyn()">Parler avec KAP IA →</button>
+      </div>
+    </div>  </div>
+</div>
+<div id="gyn-kine-view" style="display:none;flex-direction:column;flex:1;overflow:hidden">
+  <div style="padding:14px 20px;border-bottom:1px solid var(--bc-line,var(--line));display:flex;align-items:center;gap:12px;flex-shrink:0">
+    <button onclick="closeKineView()" style="background:none;border:none;cursor:pointer;color:var(--ink-xs);font-size:18px;padding:0 4px">←</button>
+    <div style="font-size:13px;font-weight:500;color:var(--ink)">Rapport clinique · Kiné</div>
+  </div>
+  <div id="kine-code-form" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 28px;gap:16px;flex:1">
+    <div style="font-size:36px">🔐</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;color:var(--ink);text-align:center">Accès réservé au kiné</div>
+    <div style="font-size:12px;color:var(--ink-s);text-align:center">Entrez le code d'accès pour consulter le rapport clinique complet</div>
+    <input id="kine-code-input" type="password" placeholder="••••"
+      style="border:1.5px solid var(--bc-line,var(--line));border-radius:12px;padding:12px 20px;font-size:20px;letter-spacing:8px;text-align:center;width:180px;font-family:'Jost',sans-serif;background:var(--white);outline:none;color:var(--ink)"
+      onkeydown="if(event.key==='Enter')submitKineCode()"
+      oninput="document.getElementById('kine-code-error').style.display='none'">
+    <div id="kine-code-error" style="display:none;color:#C04040;font-size:12px">Code incorrect</div>
+    <button onclick="submitKineCode()" style="background:var(--bc,var(--rose));color:white;border:none;border-radius:22px;padding:11px 26px;font-family:'Jost',sans-serif;font-size:13px;cursor:pointer">Accéder</button>
+  </div>
+  <div id="kine-report-body" style="display:none;overflow-y:auto;padding:20px 22px;flex:1"></div>
+</div>
+  </div>
+
+`;
+
+  setTimeout(()=>{
+    if(kap.global!=null){
+      document.getElementById('res-num').textContent=kap.global;
+      document.getElementById('res-bar').style.width=kap.global+'%';
+    }
+    Object.keys(kap.dims).forEach(k=>{
+      var b=document.getElementById('dim-bar-'+k);
+      if(b&&kap.dims[k]!=null)b.style.width=kap.dims[k]+'%';
+    });
+  },150);
+}
+
+// ══ BASE DE DONNÉES EVIDENCE ══
+const EVIDENCE_DB={
+  menopause:[
+    {authors:'Heinemann et al.',year:2004,journal:'Climacteric',
+     title:'MRS — Menopause Rating Scale',
+     finding:'La MRS est l\'outil validé de référence : un score somatique > 8/16 indique une charge symptomatique significative justifiant une prise en charge active.',
+     tag:'Évaluation',
+     trigger:(d)=>{var v=Object.values(d.mrs_soma||{}).filter(x=>x!=null);return v.some(x=>x>=2)}},
+    {authors:'Dumoulin et al.',year:2018,journal:'Cochrane Database Syst. Rev.',
+     title:'Rééducation périnéale & GSM',
+     finding:'La rééducation périnéale réduit les symptômes génito-urinaires de la ménopause (GSM) de 60 à 70 %, indépendamment du traitement hormonal. Recommandée en première intention.',
+     tag:'Traitement',
+     trigger:(d)=>{var v=Object.values(d.gsm||{}).filter(x=>x!=null);return v.reduce((a,b)=>a+b,0)>=4}},
+    {authors:'Thurston & Joffe',year:2011,journal:'Obstet. Gynecol. Clin.',
+     title:'Bouffées de chaleur & risque cardiovasculaire',
+     finding:'Les bouffées de chaleur fréquentes (> 6/jour) sont associées à un risque cardiovasculaire accru à long terme. L\'activité physique réduit leur fréquence de 30 %.',
+     tag:'Risque',
+     trigger:(d)=>(d.mrs_soma&&d.mrs_soma.s1!=null&&d.mrs_soma.s1>=3)},
+    {authors:'Bromberger & Kravitz',year:2011,journal:'Psychiatr. Clin.',
+     title:'Dépression péri-ménopausique',
+     finding:'Le risque de dépression est 2 à 4 fois plus élevé en péri-ménopause qu\'en pré-ménopause. Les items PHQ positifs nécessitent une orientation spécialisée.',
+     tag:'Santé mentale',
+     trigger:(d)=>{var v=Object.values(d.phq2||{}).filter(x=>x!=null);return v.reduce((a,b)=>a+b,0)>=2}}
+  ],
+  endometriose:[
+    {authors:'Nnoaham et al.',year:2011,journal:'Hum. Reprod.',
+     title:'Impact mondial de l\'endométriose',
+     finding:'L\'endométriose affecte la qualité de vie de façon comparable à des maladies chroniques graves (diabète, polyarthrite). 8 ans séparent en moyenne les premiers symptômes du diagnostic.',
+     tag:'Épidémiologie',
+     trigger:(d)=>true},
+    {authors:'Tracey & Bushnell',year:2009,journal:'Nat. Rev. Neurosci.',
+     title:'Sensibilisation centrale & endométriose',
+     finding:'La sensibilisation centrale est présente dans 30 à 50 % des endométrioses profondes. Elle explique les douleurs chroniques en dehors des règles et résiste aux traitements hormonaux seuls.',
+     tag:'Neurologie',
+     trigger:(d)=>(d.nrs_pelvien>=5||(d.cs_items&&Object.values(d.cs_items).filter(x=>x!=null).reduce((a,b)=>a+b,0)>=10))},
+    {authors:'Zondervan et al.',year:2020,journal:'N. Engl. J. Med.',
+     title:'Physiopathologie de l\'endométriose profonde',
+     finding:'L\'endométriose profonde (DIE) infiltre les organes pelviens et déclenche une réponse inflammatoire neuro-vasculaire. La kinésithérapie pelvienne réduit significativement la dyspareunie (60 % d\'amélioration).',
+     tag:'DIE',
+     trigger:(d)=>Array.isArray(d.lesions)&&d.lesions.includes('die')},
+    {authors:'Missmer et al.',year:2010,journal:'Hum. Reprod.',
+     title:'Endométriose & fertilité',
+     finding:'L\'endométriose des stades III-IV réduit les chances de grossesse naturelle de 20 à 50 %. La prise en charge chirurgicale précoce améliore le pronostic fertilité.',
+     tag:'Fertilité',
+     trigger:(d)=>['stade3','stade4'].includes(d.stade)&&['oui_actif','oui_inquiete'].includes(d.fertilite)},
+    {authors:'Bourdel et al.',year:2015,journal:'J. Minim. Invasive Gynecol.',
+     title:'EHP-5 — mesure de qualité de vie',
+     finding:'L\'EHP-5 détecte finement l\'impact de l\'endométriose sur la qualité de vie. Un score > 40/100 est associé à un retentissement professionnel et social significatif.',
+     tag:'QdV',
+     trigger:(d)=>{var v=Object.values(d.ehp5||{}).filter(x=>x!=null);return v.reduce((a,b)=>a+b,0)>=20}}
+  ],
+  perinee:[
+    {authors:'Dumoulin et al.',year:2018,journal:'Cochrane Database Syst. Rev.',
+     title:'Rééducation périnéale — incontinence urinaire',
+     finding:'La rééducation périnéale réduit les fuites urinaires d\'effort de 50 à 80 % et est le traitement de première ligne recommandé avant toute chirurgie.',
+     tag:'IU Effort',
+     trigger:(d)=>Array.isArray(d.sympt)&&d.sympt.includes('iu_effort')},
+    {authors:'Handa et al.',year:2011,journal:'Obstet. Gynecol.',
+     title:'Post-partum & plancher pelvien',
+     finding:'12 mois post-partum, 30 % des femmes présentent une incontinence urinaire persistante. La rééducation initiale précoce (< 6 semaines) réduit ce risque de 60 %.',
+     tag:'Post-partum',
+     trigger:(d)=>d.contexte_perinee==='postpartum'},
+    {authors:'Bø & Nygaard',year:2020,journal:'Br. J. Sports Med.',
+     title:'Sport & plancher pelvien',
+     finding:'1 femme sur 3 pratiquant un sport à impact présente des fuites. Le renforcement périnéal adapté permet dans 70 % des cas de reprendre l\'activité sans symptômes.',
+     tag:'Sport',
+     trigger:(d)=>d.contexte_perinee==='sportive'},
+    {authors:'Barber et al.',year:2007,journal:'Am. J. Obstet. Gynecol.',
+     title:'PFDI — gêne fonctionnelle périnéale',
+     finding:'Le PFDI-20 est l\'échelle de référence pour quantifier la gêne liée aux troubles du plancher pelvien. Un score PFDI > 100 indique un impact sévère sur la qualité de vie.',
+     tag:'QdV',
+     trigger:(d)=>{var v=Object.values(d.pfdi||{}).filter(x=>x!=null);return v.reduce((a,b)=>a+b,0)>=40}}
+  ]
+};
+
+function buildEvidenceCards(bilan,d){
+  var db=EVIDENCE_DB[bilan]||[];
+  var selected=db.filter(e=>e.trigger(d)).slice(0,3);
+  if(!selected.length)return'';
+  var tagColors={
+    'Évaluation':'#7B5FAA','Traitement':'#2E8B57','Neurologie':'#C0446A','DIE':'#8B4A8B',
+    'Fertilité':'#C4876A','QdV':'#4A7B9D','Épidémiologie':'#6B6B6B','Risque':'#B87333',
+    'Santé mentale':'#5B7FA6','IU Effort':'#C06080','Post-partum':'#7B9E6B','Sport':'#6B8BAA'
+  };
+  return`<div style="margin-top:18px">
+    <details>
+      <summary style="cursor:pointer;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--bc,var(--rose));display:flex;align-items:center;gap:8px;list-style:none;padding:8px 0;border-top:1px solid var(--bc-line,var(--line))">
+        <span style="font-size:14px">⬡</span> Preuves scientifiques · ${selected.length} étude${selected.length>1?'s':''} pertinente${selected.length>1?'s':''}
+        <span style="margin-left:auto;opacity:.5;font-size:10px">▾</span>
+      </summary>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+        ${selected.map(e=>{
+          var tc=tagColors[e.tag]||'#7B7B7B';
+          return`<div style="background:var(--white);border:1px solid var(--bc-line,var(--line));border-radius:12px;padding:12px 14px">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+              <span style="background:${tc}18;color:${tc};font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:2px 8px;border-radius:99px;font-weight:500">${e.tag}</span>
+              <span style="font-size:11px;color:var(--ink-xs)">${e.authors}, ${e.year} · <em>${e.journal}</em></span>
+            </div>
+            <div style="font-size:11.5px;font-weight:500;color:var(--ink-m);margin-bottom:4px">${e.title}</div>
+            <div style="font-size:12px;color:var(--ink-s);line-height:1.65">${e.finding}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </details>
+  </div>`;
+}
+
+function buildGynHeadline(kap){
+  var g=kap.global;
+  if(g==null)return'Votre <em>profil clinique</em>.';
+  if(g>=70)return'Ce que vous vivez <em>est objectivé</em> — et des ressources sont là.';
+  if(g>=45)return'Votre parcours est <em>documenté</em>.';
+  return'Ce que vous traversez <em>est réel</em> et mérite une prise en charge structurée.';
+}
+
+function buildGynMessage(kap){
+  var msg='';
+  switch(currentBilan){
+    case 'menopause':{
+      var mrs_all=[...Object.values(gynData.mrs_soma),...Object.values(gynData.mrs_psy),...Object.values(gynData.mrs_uro)].filter(v=>v!=null);
+      if(mrs_all.length){
+        var mrsScore=mrs_all.reduce((a,b)=>a+b,0);
+        var mrsMax=mrs_all.length*4;
+        var mrs_pct=Math.round(mrsScore/mrsMax*100);
+        msg+=`La MRS (Menopause Rating Scale) indique un score de <strong>${mrsScore}/${mrsMax}</strong> — soit ${mrs_pct}% de la charge symptomatique maximale. ${mrs_pct>50?'Un niveau significatif qui justifie une prise en charge active (Heinemann 2004).':'Un niveau modéré — un accompagnement ciblé peut rapidement améliorer votre confort.'}`;
+      }
+      var gsm_vals=Object.values(gynData.gsm).filter(v=>v!=null);
+      if(gsm_vals.length&&gsm_vals.reduce((a,b)=>a+b,0)>=4) msg+=`<br><br>Le syndrome génito-urinaire de la ménopause (GSM) est documenté. La rééducation périnéale est recommandée comme première ligne de traitement (Cochrane 2018) — elle réduit les symptômes de 60 à 70% indépendamment du THS.`;
+      var phq_vals=Object.values(gynData.phq2).filter(v=>v!=null);
+      if(phq_vals.length&&phq_vals.reduce((a,b)=>a+b,0)>=2) msg+=`<br><br>Les items PHQ-2 signalent une vigilance à porter sur l\'humeur. La ménopause est associée à une vulnérabilité dépressive documentée — un suivi médical ou psychologique peut être utile en complément.`;
+
+      // Branches profondes selon sous-type
+      if(gynData.statut_menopause==='peri'){
+        msg+=`<br><br><strong>Péri-ménopause</strong> — La transition ovarienne est en cours. Cette phase est souvent la plus symptomatique (Harlow 2012, SWAN Study). Une approche kinésithérapique préventive du périnée à ce stade réduit de 40 % le risque d'incontinence à la ménopause installée.`;
+        if(Array.isArray(gynData.cycles_peri)&&gynData.cycles_peri.includes('dysm'))
+          msg+=` Les douleurs de règles plus intenses en péri-ménopause sont documentées — elles répondent bien à la rééducation manuelle du plancher pelvien.`;
+      }
+      if(gynData.statut_menopause==='chirurgicale'){
+        msg+=`<br><br><strong>Ménopause chirurgicale</strong> — La chute brutale des œstrogènes après ovariectomie est associée à une symptomatologie plus intense que la ménopause naturelle (Rocca 2011). La rééducation périnéale post-chirurgicale est recommandée dès la 6e semaine.`;
+        if(Array.isArray(gynData.chir_cicatrice)&&gynData.chir_cicatrice.includes('cicatrice_sens'))
+          msg+=` La sensibilité cicatricielle est présente — la désensibilisation manuelle et la mobilisation cicatricielle font partie du protocole kinésithérapique de première intention.`;
+      }
+      if(['menopause_installee','chirurgicale'].includes(gynData.statut_menopause)&&Array.isArray(gynData.osseuse)&&!gynData.osseuse.includes('defi'))
+        msg+=`<br><br>La surveillance osseuse est essentielle : le remodelage osseux s'accélère dans les 5 ans suivant la ménopause (jusqu'à 3 % de perte/an). L'activité physique avec impact est le levier préventif le plus efficace (Vuori 2001).`;
+      break;
+    }
+    case 'endometriose':{
+      var nrs_vals=[gynData.nrs_dysm,gynData.nrs_dyspar,gynData.nrs_pelvien].filter(v=>v!=null);
+      if(nrs_vals.length){
+        var nrs_avg=(nrs_vals.reduce((a,b)=>a+b,0)/nrs_vals.length).toFixed(1);
+        msg+=`Votre douleur moyenne NRS est de <strong>${nrs_avg}/10</strong>. La prise en charge multimodale de l\'endométriose — kinésithérapie pelvienne, traitement hormonal, soutien psychologique — réduit significativement la douleur chronique (Nnoaham 2011).`;
+      }
+      var ehp_vals=Object.values(gynData.ehp5).filter(v=>v!=null);
+      if(ehp_vals.length){
+        var ehp_score=ehp_vals.reduce((a,b)=>a+b,0);
+        msg+=`<br><br>L\'EHP-5 indique un score de <strong>${ehp_score}/${ehp_vals.length*4}</strong> — votre qualité de vie est ${ehp_score>12?'significativement impactée':'modérément impactée'} par l\'endométriose.`;
+      }
+      var psy_all=[...Object.values(gynData.phq2),...Object.values(gynData.gad2)].filter(v=>v!=null);
+      if(psy_all.length&&psy_all.reduce((a,b)=>a+b,0)>=3) msg+=`<br><br>Les items PHQ-2/GAD-2 signalent un retentissement psychologique significatif. 86% des femmes avec endométriose présentent des symptômes anxieux ou dépressifs — un soutien psychologique est recommandé (Nnoaham et al., Human Reproduction 2011).`;
+
+      // Sensibilisation centrale (CSI)
+      if(gynData.cs_items){
+        var cs_sum=Object.values(gynData.cs_items).reduce((a,b)=>a+(b||0),0);
+        if(cs_sum>=10){
+          msg+=`<br><br><strong>Sensibilisation centrale détectée</strong> — Le profil CSI (score ${cs_sum}/20) est évocateur d'une composante de sensibilisation centrale. Ce mécanisme neurologique, présent dans 30 à 50 % des endométrioses profondes (Tracey & Bushnell 2009), explique pourquoi les douleurs persistent en dehors des règles et résistent aux traitements hormonaux seuls. La kinésithérapie neuromodulatoire — désensibilisation, thérapie manuelle viscérale, éducation à la douleur — est spécifiquement indiquée.`;
+        }
+      }
+      // DIE spécifique
+      if(Array.isArray(gynData.lesions)&&gynData.lesions.includes('die')){
+        msg+=`<br><br><strong>Endométriose profonde (DIE)</strong> — Les lésions infiltrantes génèrent une réponse inflammatoire neuro-vasculaire complexe (Zondervan 2020, NEJM). La kinésithérapie pelvienne réduit la dyspareunie dans 60 % des cas et améliore la qualité de vie indépendamment du traitement chirurgical.`;
+        if(Array.isArray(gynData.die_symptoms)&&gynData.die_symptoms.length>1)
+          msg+=` Les symptômes digestifs/urinaires signalés renforcent l'indication d'une prise en charge viscérale spécialisée.`;
+      }
+      // Fertilité
+      if(['oui_actif','oui_inquiete'].includes(gynData.fertilite)){
+        msg+=`<br><br>Le projet de grossesse avec endométriose stade ${gynData.stade||'inconnu'} mérite un suivi gynécologique spécialisé en fertilité. La kinésithérapie n'améliore pas directement la fertilité, mais en réduisant la douleur et l'inflammation pelvienne, elle peut améliorer les conditions d'une grossesse (Missmer 2010).`;
+      }
+      break;
+    }
+    case 'perinee':{
+      var symptList=gynData.symptomes||[];
+      if(symptList.includes('iu_effort')) msg+='L\'incontinence urinaire d\'effort est le symptôme principal. La rééducation périnéale en est le traitement de première ligne — elle réduit les fuites de 50 à 80% selon les études (Cochrane, Dumoulin 2018). ';
+      if(symptList.includes('iu_urgence')) msg+=`L\'incontinence par urgences répond bien aux exercices vésicaux (bladder training) et à la neuromodulation. `;
+      if(symptList.includes('prolapsus')) msg+=`<br><br>La sensation de descente d\'organes est documentée. La rééducation périnéale est recommandée avant toute intervention chirurgicale — elle améliore les symptômes dans 60% des cas de stade modéré (HAS 2021). `;
+      if(symptList.includes('dyspareunie')) msg+=`<br><br>La dyspareunie est une indication directe à la rééducation périnéale manuelle. Une prise en charge spécialisée (kiné formée en périnéologie) est recommandée. `;
+      break;
+    }
+  }
+  if(!msg) msg='Votre bilan a été enregistré. Votre kinésithérapeute dispose maintenant de données structurées pour personnaliser votre prise en charge.';
+  return msg;
+}
+
+function startChatAfterGyn(){
+  closeTrace();
+  var col=GYNECO_COLORS[currentBilan];
+  sit=currentBilan;hist=[];mc=0;
+  var msg=OPENS[currentBilan]||OPENS.general;
+  hist=[{role:'assistant',content:msg}];
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  addKap(msg);
+}
+
+
+function buildGynPDFHtml(kap,lbl,col,bc,date,immat){
+  return `<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Bilan KAP ${col.name} ${immat}</title>
+  <style>@media print{@page{margin:18mm}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+  body{font-family:Georgia,serif;margin:0;padding:36px 40px;color:#1A1015;max-width:720px}
+  .header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid ${bc}40}
+  .immat-block{background:${bc};color:white;border-radius:12px;padding:14px 20px;text-align:center;min-width:180px}
+  h1{font-size:22px;color:${bc};margin:0 0 4px}
+  .score-block{background:${bc}0D;border-radius:14px;padding:20px 24px;margin:20px 0;border:1px solid ${bc}30}
+  .score-num{font-family:Georgia,serif;font-size:64px;color:${bc};line-height:1}
+  .footer{margin-top:22px;padding-top:12px;border-top:1px solid ${bc}25;font-size:9.5px;color:#7A6A55;line-height:1.6}
+  table{border-collapse:collapse;width:100%}
+  td{padding:5px 0;font-size:11px;vertical-align:middle}</style></head><body>
+  <div class="header">
+    <div><h1>Bilan KAP · ${col.name}</h1>
+    <p style="font-size:11px;color:#7A6A55;margin:2px 0">KAP Gynéco · Kinésithérapie spécialisée</p>
+    <p style="font-size:11px;color:#7A6A55;margin:2px 0">${date}</p></div>
+    <div class="immat-block">
+      <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:4px">Numéro de bilan</div>
+      <div style="font-family:monospace;font-size:22px;font-weight:bold;letter-spacing:2px">${immat}</div>
+    </div>
+  </div>
+  <div class="score-block">
+    <div class="score-num">${kap.global!=null?kap.global:'—'}</div>
+    <div style="font-size:15px;color:${bc};font-weight:bold;margin-top:4px">${lbl.label}</div>
+  </div>
+  ${gynData.objectif?`<p style="font-size:12px;background:${bc}0D;padding:12px 16px;border-radius:8px;border:1px solid ${bc}20;line-height:1.7"><strong>Objectif :</strong> ${gynData.objectif}</p>`:''}
+  <div class="footer">KAP Gynéco · Kinésithérapie · Activité · Prévention · Cabinet KAP Gagny (93) &amp; Chessy (77)<br>
+  Outil de préparation à la séance de kinésithérapie. Ne constitue pas un diagnostic médical.</div>
+  </body></html>`;
+}
+
+function downloadGynPDF(immat){
+  var kap=computeKAPScoreGyn();
+  var lbl=gynScoreLabel(kap.global);
+  var col=GYNECO_COLORS[currentBilan];
+  var bc=col.bc;
+  var date=new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  var html=buildGynPDFHtml(kap,lbl,col,bc,date,immat);
+  // Impression via iframe caché (fonctionne sans popup)
+  var iframe=document.createElement('iframe');
+  iframe.style.cssText='position:fixed;top:-9999px;left:-9999px;width:210mm;height:297mm;border:none;';
+  document.body.appendChild(iframe);
+  iframe.srcdoc=html;
+  iframe.onload=function(){
+    try{
+      iframe.contentWindow.focus();
+      iframe.contentWindow.print();
+    }catch(e){}
+    setTimeout(()=>{try{document.body.removeChild(iframe);}catch(e){}},3000);
+  };
+}
+
+// ══ CHAT ══
+let sit='general', hist=[], mc=0;
+const OPENS={
+  menopause:"Bonjour. Je suis KAP IA, spécialisé en kinésithérapie féminine.\n\nLa ménopause est une transition — pas une maladie. Et pourtant elle peut transformer la vie quotidienne de façon significative.\n\nParlez-moi de ce que vous traversez. Qu'est-ce qui vous pèse le plus en ce moment ?",
+  endometriose:"Bonjour. Je suis KAP IA, spécialisé en kinésithérapie pelvienne.\n\nL'endométriose est longtemps restée invisible. Ce que vous vivez est réel — et documenté scientifiquement.\n\nQu'est-ce qui vous amène ici aujourd'hui ? La douleur, la fatigue, l'impact sur votre quotidien ?",
+  perinee:"Bonjour. Je suis KAP IA, spécialisé en rééducation du plancher pelvien.\n\nLes symptômes périnéaux — fuites, lourdeur, douleurs — sont fréquents et souvent silencieux, parce qu'on n'en parle pas.\n\nQu'est-ce qui vous amène ? Je suis là pour vous aider à y voir plus clair.",
+  general:"Bonjour. Je suis KAP IA, spécialisé en kinésithérapie féminine.\n\nMénopause, endométriose, plancher pelvien — c'est mon domaine. Qu'est-ce que je peux faire pour vous ce soir ?"
+};
+
+function addKap(txt){
+  var msgs=document.getElementById('msgs');if(!msgs)return;
+  var d=document.createElement('div');d.className='msg msg-kap';
+  d.innerHTML=txt.replace(/\n/g,'<br>');msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;
+}
+function addUser(txt){
+  var msgs=document.getElementById('msgs');if(!msgs)return;
+  var d=document.createElement('div');d.className='msg msg-user';d.textContent=txt;
+  msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;
+}
+function showDisc(){
+  var msgs=document.getElementById('msgs');if(!msgs)return;
+  var d=document.createElement('div');d.className='disc';d.id='disc';
+  d.innerHTML='<div class="d"></div><div class="d"></div><div class="d"></div>';
+  msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;
+}
+function hideDisc(){var d=document.getElementById('disc');if(d)d.remove();}
+
+async function send(){
+  var inp=document.getElementById('inp');if(!inp)return;
+  var txt=inp.value.trim();if(!txt)return;
+  inp.value='';inp.style.height='';
+  addUser(txt);
+  if(!hist.length){var om=OPENS[sit]||OPENS.general;hist.push({role:'assistant',content:om});addKap(om);}
+  hist.push({role:'user',content:txt});
+  showDisc();mc++;
+  try{
+    var sys=`Tu es KAP IA, un assistant spécialisé en kinésithérapie féminine — ménopause, endométriose, rééducation périnéale. Tu es bienveillant, cliniquement précis, et tu parles avec empathie et respect. Tu cites des données scientifiques lorsque c'est utile mais tu les rends accessibles. Tu ne poses pas de diagnostic. Tu orientes toujours vers une consultation avec un kinésithérapeute ou un médecin pour les situations cliniques.`;
+    var resp=await fetch('https://gentle-poetry-2315.kinepezzali.workers.dev',{
+      method:'POST',headers:{'Content-Type':'application/json',},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:700,system:sys,messages:hist.slice(-12)})
+    });
+    var data=await resp.json();
+    hideDisc();
+    var rep=(data.content&&data.content[0]&&data.content[0].text)||'Je suis là — continuez.';
+    hist.push({role:'assistant',content:rep});addKap(rep);
+  }catch(e){hideDisc();addKap('Un problème de connexion — réessayez dans un instant.');}
+}
+
+function autoGrow(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,130)+'px';}
+function closeChat(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
+function openChatDirect(){
+  sit='general';hist=[];mc=0;
+  var msgs=document.getElementById('msgs');if(msgs)msgs.innerHTML='';
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  var msg=OPENS.general;hist.push({role:'assistant',content:msg});addKap(msg);
+}
+function openChatWith(s){
+  sit=s;hist=[];mc=0;
+  var msgs=document.getElementById('msgs');if(msgs)msgs.innerHTML='';
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  var msg=OPENS[s]||OPENS.general;hist.push({role:'assistant',content:msg});addKap(msg);
+}
+
+// ══ RGPD ══
+function rgpdOk(){localStorage.setItem('kap-rgpd','accepted');document.getElementById('rgpd-banner').style.display='none';}
+window.addEventListener('DOMContentLoaded',()=>{
+  if(!localStorage.getItem('kap-rgpd'))document.getElementById('rgpd-banner').style.display='flex';
+});
+</script>
+
+<!-- ══ MODAL KINÉ ══ -->
+<div id="kine-modal" onclick="if(event.target===this)closeKineModal()">
+  <div id="kine-panel">
+    <div id="kine-panel-header">
+      <div>
+        <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--rose);margin-bottom:2px">Rapport clinique · Accès kiné</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;color:var(--ink)">Synthèse complète du bilan</div>
+      </div>
+      <button onclick="closeKineModal()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--ink-xs);padding:4px">✕</button>
+    </div>
+    <!-- Formulaire code -->
+    <div id="kine-code-form" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 32px;gap:18px">
+      <div style="font-size:40px">🔐</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;color:var(--ink);text-align:center">Accès réservé au kiné</div>
+      <div style="font-size:13px;color:var(--ink-s);text-align:center">Entrez votre code d'accès pour consulter<br>le rapport clinique complet</div>
+      <input id="kine-code-input" type="password" placeholder="Code à 4 chiffres"
+        style="border:1.5px solid var(--line-m);border-radius:12px;padding:12px 18px;font-size:18px;letter-spacing:6px;text-align:center;width:200px;font-family:'Jost',sans-serif;background:var(--white);outline:none"
+        onkeydown="if(event.key==='Enter')submitKineCode()"
+        oninput="document.getElementById('kine-code-error').style.display='none'">
+      <div id="kine-code-error" style="display:none;color:#C04040;font-size:12px">Code incorrect — réessayez</div>
+      <button onclick="submitKineCode()" style="background:var(--rose);color:white;border:none;border-radius:22px;padding:12px 28px;font-family:'Jost',sans-serif;font-size:13px;cursor:pointer;letter-spacing:.5px">Accéder au rapport</button>
+    </div>
+    <!-- Rapport -->
+    <div id="kine-report-body" style="display:none;overflow-y:auto;padding:22px 24px;flex:1"></div>
+  </div>
+</div>
+</body>
+</html>
