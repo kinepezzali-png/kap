@@ -1116,6 +1116,9 @@ textarea::placeholder{color:var(--text-s)}
       <button class="btn-p" onclick="openChatDirect()">Parler maintenant — c'est gratuit</button>
       <button class="btn-g" onclick="document.getElementById('situations').scrollIntoView({behavior:'smooth'})">Trouver ma situation →</button>
     </div>
+    <div style="margin-top:12px;display:flex;justify-content:center">
+      <button onclick="openTrace()" style="padding:10px 26px;border-radius:32px;background:transparent;border:1px solid rgba(168,84,112,0.35);color:#A85470;font-size:12.5px;font-family:'Jost',sans-serif;cursor:pointer;transition:all .22s;letter-spacing:.3px" onmouseover="this.style.background='rgba(168,84,112,0.06)'" onmouseout="this.style.background='transparent'">Faire mon bilan SEREINIA →</button>
+    </div>
   </div>
 
   <!-- Zone basse : scroll hint -->
@@ -1457,7 +1460,7 @@ textarea::placeholder{color:var(--text-s)}
   <div class="kcta-icon">🤝</div>
   <h2>Disponible <em>maintenant</em>,<br>même à 23h.</h2>
   <p>KAP IA ne remplace pas votre kiné. Il fait en sorte que quand vous arrivez en séance, vous êtes déjà informée, rassurée, moins seule. Le soin commence avant la séance.</p>
-  <button class="btn-white" onclick="openChatDirect()">Parler à SEREINIA — c'est gratuit</button>
+  <button class="btn-white" onclick="openChatWithTrace('general')">Parler à SEREINIA — c'est gratuit</button>
 </section>
 
 <!-- FOOTER -->
@@ -1507,10 +1510,9 @@ textarea::placeholder{color:var(--text-s)}
       </div>
       <button class="p-close" onclick="closeChat()">✕</button>
     </div>
-
     <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px 4px;border-bottom:1px solid rgba(168,84,112,0.1)">
       <span style="font-family:'Jost',sans-serif;font-size:11px;color:#A08080;font-style:italic">Pour un bilan complet et personnalisé</span>
-      <button onclick="openTrace()" style="padding:6px 16px;border-radius:20px;background:transparent;border:1.5px solid rgba(168,84,112,0.35);color:#A85470;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;cursor:pointer;white-space:nowrap">✦ Voir mon bilan →</button>
+      <button onclick="openTrace()" style="padding:6px 16px;border-radius:20px;background:transparent;border:1.5px solid rgba(168,84,112,0.35);color:#A85470;font-family:'Jost',sans-serif;font-size:11px;cursor:pointer;white-space:nowrap">✦ Voir mon bilan →</button>
     </div>
 
     <div class="sit-bar">
@@ -1920,8 +1922,9 @@ function closeChat(){
 function bgClose(e){if(e.target===document.getElementById('overlay'))closeChat();}
 
 function addKap(txt){
+  try{
   const{clean,res}=parse(txt);
-  var refData=parseRefs(clean);
+  var refData=typeof parseRefs==='function'?parseRefs(clean):{clean:clean,refs:[]};
   var cleanFinal=refData.clean;
   var refs=refData.refs;
   var refHtml="";
@@ -1945,6 +1948,7 @@ function addKap(txt){
   detectAndShowPanel(clean);
   document.getElementById('msgs').appendChild(row);scr();
   messageCount++;
+  }catch(e){var row2=document.createElement('div');row2.className='mrow';row2.innerHTML='<div class="mkap"><div class="kav">🤝</div><div class="bk">'+txt+'</div></div>';document.getElementById('msgs').appendChild(row2);scr();}
 }
 
 function addUser(txt){
