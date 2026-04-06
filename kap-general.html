@@ -1,0 +1,3088 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAP — Spécialités thérapeutiques</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:     #F8F5F0;
+  --cream-w:   #F2EEE8;
+  --white:     #FDFCFA;
+  --ink:       #161410;
+  --ink-m:     #3A342C;
+  --ink-s:     #7A7268;
+  --ink-xs:    #B0A898;
+  --gold:      #B8933A;
+  --gold-l:    #D4AC58;
+  --gold-pale: #EDD88A;
+  --gold-bg:   rgba(184,147,58,0.07);
+  --gold-line: rgba(184,147,58,0.18);
+  --line:      rgba(22,20,16,0.08);
+  --line-m:    rgba(22,20,16,0.14);
+  --sh:        0 2px 24px rgba(22,20,16,0.06);
+  --sh-m:      0 12px 48px rgba(22,20,16,0.10);
+  --sh-gold:   0 12px 48px rgba(184,147,58,0.12);
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Jost',sans-serif;
+  font-weight:300;
+  line-height:1.72;
+  overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 800px 600px at -5% 0%,rgba(184,147,58,0.04) 0%,transparent 60%),
+    radial-gradient(ellipse 600px 700px at 105% 90%,rgba(22,20,16,0.03) 0%,transparent 60%);
+  pointer-events:none;z-index:0;
+}
+
+/* ── HEADER ── */
+header{
+  position:sticky;top:0;z-index:200;
+  background:rgba(248,245,240,0.95);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--line);
+  padding:18px 56px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.h-logo{display:flex;flex-direction:column;gap:3px}
+.h-kap{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;font-weight:400;
+  letter-spacing:10px;line-height:1;
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-l) 60%,var(--gold-pale) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.h-sub{
+  font-size:9px;font-weight:300;
+  letter-spacing:3.5px;text-transform:uppercase;
+  color:var(--ink-xs);
+}
+nav{display:flex;align-items:center;gap:40px}
+nav a{
+  font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--ink-s);text-decoration:none;transition:color .2s;
+}
+nav a:hover{color:var(--gold)}
+.h-cta{
+  padding:9px 26px;
+  border:1px solid var(--gold-line);
+  background:transparent;
+  color:var(--ink-m);
+  font-size:11px;font-family:'Jost',sans-serif;
+  letter-spacing:1.5px;text-transform:uppercase;
+  cursor:pointer;transition:all .22s;
+  text-decoration:none;display:inline-block;
+}
+.h-cta:hover{background:var(--gold);border-color:var(--gold);color:var(--white)}
+
+/* ── KAP SCORE BADGE ── */
+.kap-score-badge{
+  display:flex;align-items:center;gap:8px;
+  padding:6px 14px 6px 7px;
+  border-radius:26px;border:1px solid var(--gold-line);
+  background:transparent;cursor:pointer;
+  transition:all .22s;position:relative;
+  font-family:'Jost',sans-serif;
+}
+.kap-score-badge:hover{border-color:var(--gold);background:rgba(184,149,82,0.04)}
+.ksb-ring{position:relative;width:32px;height:32px;flex-shrink:0}
+.ksb-ring svg{width:32px;height:32px;transform:rotate(-90deg)}
+.ksb-num{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:500;color:var(--ink);
+}
+.ksb-text{display:flex;flex-direction:column;align-items:flex-start}
+.ksb-label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-xs);line-height:1;margin-bottom:2px}
+.ksb-score{font-size:13px;font-weight:400;color:var(--ink);line-height:1;font-family:'Cormorant Garamond',serif;letter-spacing:.5px}
+.ksb-delta{font-size:10px;margin-left:2px}
+.ksb-empty{font-size:11px;letter-spacing:.5px;color:var(--ink-s);padding:0 4px}
+
+/* Score popup */
+.ksb-popup{
+  position:absolute;top:calc(100% + 10px);right:0;
+  background:var(--cream);border:1px solid var(--gold-line);
+  border-radius:18px;padding:20px;min-width:280px;
+  box-shadow:0 16px 48px rgba(44,36,23,0.12);
+  display:none;z-index:9999;
+  animation:ksbPop .2s ease;
+}
+@keyframes ksbPop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.ksb-popup.open{display:block}
+.ksb-popup-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;color:var(--ink);margin-bottom:2px}
+.ksb-popup-date{font-size:10px;color:var(--ink-xs);margin-bottom:14px}
+.ksb-popup-pillars{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+.ksb-pillar-row{display:flex;align-items:center;gap:8px}
+.ksb-pillar-icon{font-size:13px;width:18px;text-align:center;flex-shrink:0}
+.ksb-pillar-name{font-size:11px;color:var(--ink-s);width:68px;flex-shrink:0}
+.ksb-pillar-track{flex:1;height:4px;background:var(--gold-line);border-radius:2px;overflow:hidden}
+.ksb-pillar-bar{height:4px;border-radius:2px;background:linear-gradient(90deg,var(--gold-d,#8B6914),var(--gold))}
+.ksb-pillar-pts{font-size:10px;color:var(--ink-xs);width:30px;text-align:right;flex-shrink:0}
+.ksb-popup-note{font-size:11px;color:var(--ink-xs);border-top:1px solid var(--gold-line);padding-top:10px;line-height:1.6}
+.ksb-popup-note strong{color:var(--ink-m);font-weight:500}
+.ksb-popup-cta{display:block;text-align:center;margin-top:10px;font-size:11px;color:var(--gold);text-decoration:none;letter-spacing:.5px}
+.ksb-popup-cta:hover{color:var(--ink)}
+
+/* ── HERO ── */
+.hero{
+  position:relative;z-index:1;
+  min-height:90vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;
+  padding:100px 24px 80px;
+  overflow:hidden;
+}
+
+/* Lignes décoratives horizontales */
+.hero-line-top{
+  position:absolute;top:25%;left:0;right:0;
+  height:1px;
+  background:linear-gradient(to right,transparent 5%,var(--gold-line) 30%,var(--gold-line) 70%,transparent 95%);
+  pointer-events:none;
+}
+.hero-line-bot{
+  position:absolute;bottom:25%;left:0;right:0;
+  height:1px;
+  background:linear-gradient(to right,transparent 5%,var(--line) 30%,var(--line) 70%,transparent 95%);
+  pointer-events:none;
+}
+
+/* Numéro décoratif */
+.hero-num{
+  position:absolute;
+  font-family:'Cormorant Garamond',serif;
+  font-size:280px;font-weight:300;
+  color:rgba(184,147,58,0.04);
+  line-height:1;letter-spacing:-10px;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;user-select:none;
+  white-space:nowrap;
+}
+
+.hero-badge{
+  font-size:10px;letter-spacing:5px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:52px;
+  display:flex;align-items:center;gap:20px;
+  position:relative;z-index:2;
+}
+.hero-badge::before,.hero-badge::after{
+  content:'';width:48px;height:1px;
+  background:var(--gold-line);
+}
+
+/* KAP hero */
+.kap-hero{
+  position:relative;z-index:2;
+  margin-bottom:36px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.kap-hero-letters{
+  font-family:'Cormorant Garamond',serif;
+  font-size:96px;font-weight:300;
+  letter-spacing:32px;line-height:1;
+  background:linear-gradient(150deg,var(--ink) 0%,var(--ink-m) 30%,var(--gold) 65%,var(--gold-l) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.kap-hero-sub{
+  font-size:11px;font-weight:300;
+  letter-spacing:5px;text-transform:uppercase;
+  color:var(--ink-xs);
+}
+.kap-sep{
+  width:180px;height:1px;border:none;margin:0 auto;
+  background:linear-gradient(to right,transparent,var(--gold-pale),transparent);
+}
+
+.hero-h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,4vw,50px);
+  font-weight:300;line-height:1.28;
+  color:var(--ink);max-width:640px;
+  margin-bottom:22px;
+  position:relative;z-index:2;
+}
+.hero-h1 em{font-style:italic;color:var(--gold)}
+.hero-p{
+  font-size:15px;font-weight:300;
+  color:var(--ink-s);max-width:520px;
+  line-height:1.82;
+  position:relative;z-index:2;
+}
+
+/* ── SPÉCIALITÉS ── */
+.spec{
+  position:relative;z-index:1;
+  padding:100px 40px 120px;
+}
+.spec-label{
+  font-size:10px;letter-spacing:5px;text-transform:uppercase;
+  color:var(--ink-xs);text-align:center;
+  margin-bottom:20px;
+  display:flex;align-items:center;justify-content:center;gap:24px;
+}
+.spec-label::before,.spec-label::after{
+  content:'';height:1px;width:80px;
+  background:linear-gradient(to right,transparent,var(--ink-xs));
+}
+.spec-label::after{background:linear-gradient(to left,transparent,var(--ink-xs))}
+
+/* Grille asymétrique — MAIA domine */
+/* Rangée top — KAP IA + ENCORE compactes */
+.cards-top{
+  display:grid;
+  grid-template-columns:1fr 1.4fr;
+  gap:20px;
+  max-width:1280px;margin:0 auto;
+}
+/* Rangée modules — 5 cartes hautes */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  grid-template-rows:auto;
+  gap:14px;
+  max-width:1480px;margin:48px auto 0;
+  align-items:stretch;
+}
+.cards .card-main{grid-column:auto;grid-row:auto;}
+.cards .card{grid-column:auto;grid-row:auto;}
+.cards .card-kia-light{grid-column:auto;grid-row:auto;}
+.cards .card-encore-light{grid-column:auto;grid-row:auto;}
+
+/* Cartes unifiées KAP IA et ENCORE — même layout que SEREINIA/Douleur */
+.card-kia-unified{
+  background:var(--white);
+  cursor:pointer;
+}
+.card-kia-unified .card-num{color:var(--ink-xs)}
+.card-kia-unified .card-sub{color:var(--gold);font-size:9px;letter-spacing:3px;text-transform:uppercase}
+.card-kia-unified .card-title{color:var(--gold)}
+.card-kia-unified .card-desc{color:var(--ink-s)}
+.card-kia-unified .card-cta{color:var(--gold)}
+.card-kia-unified:hover{box-shadow:var(--sh-gold)}
+
+.card-encore-unified{
+  background:var(--white);
+}
+.card-encore-unified .card-num{color:var(--ink-xs)}
+.card-encore-unified .card-sub{color:var(--gold);font-size:9px;letter-spacing:3px;text-transform:uppercase}
+.card-encore-unified .card-title{color:var(--gold)}
+.card-encore-unified .card-desc{color:var(--ink-s)}
+.card-encore-unified .card-cta{color:var(--gold)}
+.card-encore-unified:hover{box-shadow:var(--sh-gold)}
+
+/* Équilibrer la hauteur — CTA toujours en bas */
+.cards .card,.cards .card-main,.cards .card-kia-unified,.cards .card-encore-unified{
+  min-height:500px;
+}
+/* Cartes compactes noires */
+.card-compact{
+  padding:28px 32px;
+  display:flex;flex-direction:column;
+  gap:8px;
+  cursor:pointer;
+  transition:all .28s cubic-bezier(.4,0,.2,1);
+  text-decoration:none;color:inherit;
+  position:relative;overflow:hidden;
+  border:1px solid;
+}
+.card-compact::after{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right,var(--gold-pale),var(--gold));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .3s ease;
+}
+.card-compact:hover::after{transform:scaleX(1);}
+.card-compact:hover{transform:translateY(-3px);}
+
+/* KAP IA compact */
+.card-kia-top{
+  background:var(--ink);
+  border-color:var(--ink);
+}
+.card-kia-top:hover{box-shadow:var(--sh-gold);}
+.card-kia-top .cc-num{color:rgba(255,255,255,0.15);}
+.card-kia-top .cc-sub{color:var(--gold-l);}
+.card-kia-top .cc-title{color:var(--white);}
+.card-kia-top .cc-desc{color:rgba(255,255,255,0.5);}
+.card-kia-top .cc-cta{color:var(--gold-l);}
+
+/* ENCORE compact */
+.card-encore-top{
+  background:linear-gradient(135deg,#0E0C08,#1A1508);
+  border-color:rgba(201,168,76,0.25);
+}
+.card-encore-top:hover{box-shadow:0 8px 32px rgba(201,168,76,0.15);border-color:rgba(201,168,76,0.5);}
+.card-encore-top .cc-num{color:rgba(201,168,76,0.15);}
+.card-encore-top .cc-sub{color:rgba(201,168,76,0.6);}
+.card-encore-top .cc-cta{color:var(--gold-l);}
+
+.cc-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:10px;letter-spacing:3px;color:var(--ink-xs);
+  margin-bottom:4px;
+}
+.cc-sub{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:2px;
+  display:flex;align-items:center;gap:6px;
+}
+.cc-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--gold);
+  animation:ceb-pulse 2s ease-in-out infinite;flex-shrink:0;
+}
+@keyframes ceb-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.cc-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:300;
+  color:var(--ink);line-height:1.15;
+  margin-bottom:4px;
+}
+.cc-title-encore{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;font-weight:300;font-style:italic;
+  letter-spacing:2px;
+  background:linear-gradient(135deg,#8B6914,var(--gold),var(--gold-l));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1.1;margin-bottom:4px;
+}
+.cc-desc{
+  font-size:12px;color:var(--ink-s);line-height:1.6;flex:1;
+}
+.cc-cta{
+  font-size:11px;color:var(--gold);
+  display:flex;align-items:center;gap:6px;
+  margin-top:4px;font-family:'Jost',sans-serif;
+}
+.cc-cta svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.5;transition:transform .2s;}
+.card-compact:hover .cc-cta svg{transform:translateX(3px);}
+
+.card{
+  position:relative;
+  background:#EAE5DC;
+  border:1px solid var(--line);
+  padding:44px 36px 40px;
+  display:flex;flex-direction:column;
+  cursor:pointer;
+  transition:all .28s cubic-bezier(.4,0,.2,1);
+  overflow:hidden;
+  text-decoration:none;color:inherit;
+}
+.card:hover{box-shadow:var(--sh-m);transform:translateY(-4px)}
+
+/* Trait or sur hover */
+.card::after{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right,var(--gold),var(--gold-l));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .3s ease;
+}
+.card:hover::after{transform:scaleX(1)}
+
+/* Carte principale MAIA — mise en avant */
+.card-main{
+  background:var(--ink);
+  border-color:var(--ink);
+}
+.card-main::after{
+  background:linear-gradient(to right,var(--gold-pale),var(--gold));
+}
+.card-main:hover{box-shadow:var(--sh-gold)}
+.card-main .card-num{color:rgba(255,255,255,0.2)}
+.card-main .card-sub{color:var(--gold-l)}
+.card-main .card-title{color:var(--white)}
+.card-main .card-desc{color:rgba(255,255,255,0.6)}
+.card-main .card-cta{color:var(--gold-l)}
+.card-main:hover .card-cta{color:var(--gold-pale)}
+
+/* Carte secondaire active — fond crème chaud */
+.card-second{
+  background:var(--cream-w);
+  border-color:var(--line-m);
+}
+.card-second .card-sub{color:var(--gold)}
+.card-second:hover{box-shadow:var(--sh-gold)}
+
+.card-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:11px;font-weight:400;
+  letter-spacing:3px;color:var(--ink-xs);
+  margin-bottom:auto;padding-bottom:40px;
+}
+.card-icon{
+  width:36px;height:36px;
+  margin-bottom:28px;
+}
+.card-icon svg{
+  width:36px;height:36px;
+  stroke:var(--gold);stroke-width:1;fill:none;opacity:.7;
+  transition:opacity .3s;
+}
+.card:hover .card-icon svg{opacity:1}
+.card-main .card-icon svg{stroke:var(--gold-l);opacity:.8}
+
+.card-sub{
+  font-size:9px;letter-spacing:3.5px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:10px;font-weight:300;
+}
+.card-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:24px;font-weight:400;
+  line-height:1.28;color:var(--ink);
+  margin-bottom:14px;
+}
+.card-desc{
+  font-size:13px;font-weight:300;
+  color:var(--ink-s);line-height:1.72;
+  margin-bottom:36px;flex:1;
+}
+.card-cta{
+  display:flex;align-items:center;gap:8px;
+  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--ink-xs);transition:all .25s;
+}
+.card:hover .card-cta{color:var(--gold);gap:14px}
+.card-cta svg{
+  width:14px;height:14px;
+  stroke:currentColor;stroke-width:1.5;fill:none;
+  transition:transform .25s;
+}
+.card:hover .card-cta svg{transform:translateX(3px)}
+
+.card-soon{
+  position:absolute;top:18px;right:18px;
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  padding:4px 10px;
+  border:1px solid var(--line);
+  color:var(--ink-xs);
+  background:var(--cream-w);
+}
+
+/* ── PHILOSOPHIE ── */
+.philo{
+  position:relative;z-index:1;
+  background:var(--ink);
+  padding:100px 56px;
+  text-align:center;
+  overflow:hidden;
+}
+.philo::before{
+  content:'';position:absolute;
+  width:500px;height:500px;border-radius:50%;
+  background:rgba(184,147,58,0.04);
+  top:-150px;right:-150px;pointer-events:none;
+}
+.philo-inner{max-width:640px;margin:0 auto;position:relative;z-index:2}
+.philo-mark{
+  font-family:'Cormorant Garamond',serif;
+  font-size:80px;font-weight:300;
+  color:rgba(184,147,58,0.2);
+  line-height:.7;display:block;margin-bottom:16px;
+}
+.philo blockquote{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(20px,2.8vw,32px);
+  font-weight:300;font-style:italic;
+  line-height:1.52;color:rgba(255,255,255,0.88);
+  margin-bottom:28px;
+}
+.philo blockquote em{color:var(--gold-l);font-style:normal}
+.philo-sep{
+  width:60px;height:1px;border:none;
+  background:var(--gold-line);
+  margin:0 auto 24px;
+}
+.philo-author{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:rgba(255,255,255,0.3);
+}
+
+/* ── FOOTER ── */
+footer{
+  position:relative;z-index:1;
+  padding:52px 56px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--line);
+  flex-wrap:wrap;gap:16px;
+}
+.ft-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:16px;font-weight:400;letter-spacing:8px;
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-l) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.ft-copy{font-size:11px;color:var(--ink-xs);letter-spacing:.5px}
+.ft-links{display:flex;gap:24px}
+.ft-links a{
+  font-size:11px;letter-spacing:1px;text-transform:uppercase;
+  color:var(--ink-xs);text-decoration:none;transition:color .2s;
+}
+.ft-links a:hover{color:var(--gold)}
+
+@media(max-width:1100px){
+  .cards-top{grid-template-columns:1fr 1fr}
+  .cards{grid-template-columns:1fr 1fr;grid-template-rows:auto auto}
+}
+@media(max-width:700px){
+  header{padding:14px 20px}
+  nav{display:none}
+  .hero{padding:70px 20px 60px}
+  .kap-hero-letters{font-size:68px;letter-spacing:20px}
+  .spec{padding:60px 20px 80px}
+  .cards-top{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr}
+  .card-main{grid-column:1}
+  .philo{padding:70px 20px}
+  footer{padding:36px 20px;flex-direction:column;text-align:center}
+  .ft-links{justify-content:center;flex-wrap:wrap}
+}
+
+/* ── VARIABLES ROSE (chat overlay) ── */
+:root{
+  --rose-pale:   #FDF6F7;
+  --rose-blush:  #F9EDEF;
+  --rose-soft:   #F2DEE2;
+  --rose-light:  #E8C8CE;
+  --rose-mid:    #C4798A;
+  --rose-dark:   #A85470;
+  --rose-deep:   #8B3054;
+  --text:        #2E1E20;
+  --text-m:      #5A3840;
+  --text-s:      #9A7880;
+  --border:      rgba(168,84,112,0.10);
+  --border-m:    rgba(168,84,112,0.18);
+}
+
+/* ── OVERLAY KAP IA ── */
+.overlay{position:fixed;inset:0;z-index:1000;background:rgba(22,20,16,0.58);backdrop-filter:blur(10px);display:none;align-items:flex-end;justify-content:center;padding:16px}
+.overlay.open{display:flex}
+.panel{background:var(--rose-pale);border-radius:28px 28px 22px 22px;width:100%;max-width:610px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 -12px 60px rgba(100,40,60,0.22);animation:slideUp .38s cubic-bezier(.4,0,.2,1)}
+@keyframes slideUp{from{transform:translateY(44px);opacity:0}to{transform:translateY(0);opacity:1}}
+.p-head{padding:16px 22px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;flex-shrink:0;background:var(--white)}
+.p-av{width:40px;height:40px;background:linear-gradient(135deg,var(--rose-dark),var(--rose-deep));border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.p-info{flex:1}
+.p-name{font-size:14px;font-weight:500;color:var(--text)}
+.p-status{font-size:11px;color:var(--rose-mid);margin-top:1px}
+.p-close{width:32px;height:32px;border-radius:9px;background:var(--rose-soft);border:none;cursor:pointer;font-size:16px;color:var(--text-m);display:flex;align-items:center;justify-content:center;transition:background .2s}
+.p-close:hover{background:var(--rose-light)}
+.sit-bar{padding:14px 20px;border-bottom:1px solid var(--border);background:var(--rose-blush);flex-shrink:0}
+.sit-bar-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-s);margin-bottom:10px}
+.sit-bar-btns{display:flex;flex-wrap:wrap;gap:7px}
+.s-btn{padding:6px 14px;border-radius:20px;border:1.5px solid var(--border-m);background:var(--white);font-size:12px;color:var(--text-m);cursor:pointer;font-family:'Jost',sans-serif;transition:all .18s}
+.s-btn:hover{border-color:var(--rose-mid);color:var(--rose-deep);background:var(--rose-soft)}
+.s-btn.on{border-color:var(--rose-deep);background:var(--rose-soft);color:var(--rose-deep);font-weight:500}
+.msgs{flex:1;overflow-y:auto;padding:20px 20px 0;display:flex;flex-direction:column;gap:16px;position:relative;}
+.msgs::-webkit-scrollbar{width:3px}
+.msgs::-webkit-scrollbar-thumb{background:var(--rose-light);border-radius:3px}
+.mrow{animation:fadeUp .3s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+.mkap{display:flex;gap:10px;align-items:flex-start}
+.kav{width:34px;height:34px;background:linear-gradient(135deg,var(--rose-dark),var(--rose-deep));border-radius:11px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 3px 10px rgba(168,84,112,0.2)}
+.bk{background:var(--white);border:1px solid var(--border);border-radius:4px 17px 17px 17px;padding:14px 18px;max-width:80%;font-size:13.5px;line-height:1.74;color:var(--text);box-shadow:0 2px 24px rgba(22,20,16,0.06)}
+.bk .sndr{font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--rose-mid);margin-bottom:6px}
+.bk strong{color:var(--rose-dark);font-weight:500}
+.musr{display:flex;justify-content:flex-end}
+.bu{background:linear-gradient(135deg,var(--rose-dark),var(--rose-deep));border-radius:17px 17px 4px 17px;padding:12px 17px;max-width:72%;font-size:13.5px;line-height:1.65;color:white;box-shadow:0 3px 14px rgba(168,84,112,0.24)}
+.resources{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.rpill{display:flex;align-items:center;gap:6px;padding:6px 13px;background:var(--rose-soft);border:1px solid var(--border-m);border-radius:22px;font-size:11.5px;color:var(--rose-deep);text-decoration:none;transition:all .18s;font-family:'Jost',sans-serif}
+.rpill:hover{background:var(--rose-light);border-color:var(--rose-mid);transform:translateY(-1px)}
+.typ{display:flex;gap:10px;align-items:center}
+.tdots{background:var(--white);border:1px solid var(--border);border-radius:4px 17px 17px 17px;padding:12px 16px;display:flex;gap:5px;box-shadow:0 2px 24px rgba(22,20,16,0.06)}
+.tdots span{width:6px;height:6px;background:var(--rose-mid);border-radius:50%;animation:bounce 1.2s ease infinite;opacity:.4}
+.tdots span:nth-child(2){animation-delay:.15s}
+.tdots span:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0);opacity:.35}30%{transform:translateY(-5px);opacity:1}}
+#anc{height:14px}
+.izone{padding:14px 18px 17px;border-top:1px solid var(--border);background:var(--white);flex-shrink:0}
+.disc{background:rgba(168,84,112,0.07);border:1px solid rgba(168,84,112,0.18);border-radius:8px;padding:7px 13px;font-size:11px;color:var(--rose-deep);margin-bottom:9px;display:none;line-height:1.5}
+.disc.on{display:block}
+.ibox{display:flex;align-items:flex-end;gap:9px;background:var(--rose-blush);border:1.5px solid var(--border-m);border-radius:17px;padding:10px 10px 10px 18px;transition:border-color .2s,box-shadow .2s}
+.ibox:focus-within{border-color:var(--rose-mid);box-shadow:0 0 0 3px rgba(168,84,112,0.08)}
+textarea{flex:1;background:transparent;border:none;outline:none;font-family:'Jost',sans-serif;font-size:13.5px;color:var(--text);line-height:1.5;resize:none;min-height:22px;max-height:90px}
+textarea::placeholder{color:var(--text-s)}
+.snd{width:37px;height:37px;border-radius:11px;background:linear-gradient(135deg,var(--rose-dark),var(--rose-deep));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;opacity:.28;pointer-events:none}
+.snd.on{opacity:1;pointer-events:all}
+.snd.on:hover{transform:scale(1.07);box-shadow:0 4px 14px rgba(168,84,112,0.34)}
+.snd svg{width:15px;height:15px;fill:white}
+.ift{text-align:center;font-size:10px;color:var(--text-s);margin-top:8px;opacity:.6}
+
+/* ── ÉQUIPE SOIGNANTE ── */
+.eq-section{position:relative;z-index:1;padding:80px 44px;background:var(--cream-w);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.eq-inner{max-width:980px;margin:0 auto}
+.eq-pro{padding:32px 18px 28px;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;text-align:center;transition:background .2s;position:relative}
+.eq-pro:hover{background:var(--cream-w)}
+.eq-pro::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--gold),var(--gold-l));transform:scaleX(0);transform-origin:left;transition:transform .28s ease}
+.eq-pro:hover::before{transform:scaleX(1)}
+.eq-num{font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:3px;color:var(--ink-xs);margin-bottom:18px;align-self:flex-start}
+.eq-icon{width:30px;height:30px;margin-bottom:16px;color:var(--gold);transition:color .2s}
+.eq-pro:hover .eq-icon{color:var(--gold)}
+.eq-icon svg{width:30px;height:30px}
+.eq-title{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:500;color:var(--ink);margin-bottom:8px}
+.eq-desc{font-size:11px;font-weight:300;color:var(--ink-xs);line-height:1.65;flex:1}
+@media(max-width:900px){.eq-grid{grid-template-columns:repeat(3,1fr)!important}.eq-pro:nth-child(3){border-right:none}.eq-pro:nth-child(n+4){border-top:1px solid var(--line)}}
+@media(max-width:600px){.eq-section{padding:60px 20px}.eq-grid{grid-template-columns:repeat(2,1fr)!important}.eq-pro:nth-child(even){border-right:none}.eq-pro:nth-child(odd){border-right:1px solid var(--line)}}
+
+/* ══ CTA KAP IA — Section orientation ══ */
+.kap-ia-cta {
+  position: relative;
+  z-index: 1;
+  padding: 80px 56px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+  overflow: hidden;
+}
+.kap-ia-cta::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-line);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.kap-ia-cta::after {
+  content: '';
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  border: 1px solid rgba(184,147,58,0.08);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.kap-ia-cta-label {
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--ink-xs);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+  z-index: 2;
+}
+.kap-ia-cta-label::before,
+.kap-ia-cta-label::after {
+  content: '';
+  height: 1px;
+  width: 48px;
+  background: linear-gradient(to right, transparent, var(--gold-line));
+}
+.kap-ia-cta-label::after {
+  background: linear-gradient(to left, transparent, var(--gold-line));
+}
+.kap-ia-cta-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(26px, 3.5vw, 42px);
+  font-weight: 300;
+  line-height: 1.28;
+  color: var(--ink);
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 2;
+}
+.kap-ia-cta-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+.kap-ia-cta-sub {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--ink-s);
+  max-width: 480px;
+  margin: 0 auto 36px;
+  line-height: 1.82;
+  position: relative;
+  z-index: 2;
+}
+.kap-ia-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 36px;
+  border: 1px solid var(--gold-line);
+  background: transparent;
+  color: var(--ink-m);
+  font-size: 12px;
+  font-family: 'Jost', sans-serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .28s;
+  position: relative;
+  z-index: 2;
+}
+.kap-ia-cta-btn:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--white);
+}
+.kap-ia-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: goldBreathe 2.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.kap-ia-cta-btn:hover .kap-ia-dot {
+  background: white;
+}
+@keyframes goldBreathe {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(.5); opacity: .3; }
+}
+.kap-ia-cta-note {
+  font-size: 11px;
+  color: var(--ink-xs);
+  margin-top: 16px;
+  position: relative;
+  z-index: 2;
+  letter-spacing: .5px;
+}
+@media(max-width: 700px) {
+  .kap-ia-cta { padding: 60px 20px; }
+}
+
+/* ══ KAP-TRACE CSS ══ */
+#trace-overlay{
+  position:fixed;inset:0;z-index:9000;
+  background:rgba(46,30,30,0.55);
+  backdrop-filter:blur(12px);
+  display:none;align-items:center;justify-content:center;
+  padding:20px;
+  animation:fadeIn .3s ease;
+}
+#trace-overlay.open{display:flex;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+#trace-panel{
+  background:var(--white);
+  border-radius:28px;
+  width:100%;max-width:560px;
+  max-height:92vh;
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  box-shadow:0 12px 40px rgba(100,40,60,0.13);
+  animation:traceSlideUp .4s cubic-bezier(.4,0,.2,1);
+}
+@keyframes traceSlideUp{from{transform:translateY(32px);opacity:0}to{transform:translateY(0);opacity:1}}
+.tp-header{
+  padding:18px 24px 16px;
+  border-bottom:1px solid rgba(168,84,112,0.11);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;background:var(--white);
+}
+.tp-brand{display:flex;align-items:center;gap:10px}
+.tp-icon{
+  width:36px;height:36px;
+  background:linear-gradient(135deg,#7A3350,#A85470);
+  border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:16px;
+}
+.tp-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:500;color:#2E1E1E}
+.tp-sub{font-size:10px;color:#C9849A;letter-spacing:.5px;margin-top:1px}
+.tp-close{
+  width:32px;height:32px;border-radius:9px;background:#F5E2E2;
+  border:none;cursor:pointer;font-size:15px;color:#6B4A4A;
+  display:flex;align-items:center;justify-content:center;transition:background .2s;
+}
+.tp-close:hover{background:#ECC8C8}
+.tp-progress{
+  padding:14px 24px 12px;
+  border-bottom:1px solid rgba(168,84,112,0.11);
+  flex-shrink:0;background:#FAF0F0;
+}
+.tp-steps{display:flex;align-items:center;gap:0;margin-bottom:8px}
+.tp-step{display:flex;align-items:center;gap:0;flex:1}
+.tp-step-dot{
+  width:28px;height:28px;border-radius:50%;
+  border:2px solid rgba(168,84,112,0.20);background:#FFFFFF;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:500;color:#A08080;
+  transition:all .3s;flex-shrink:0;
+}
+.tp-step-dot.active{background:#A85470;border-color:#A85470;color:white}
+.tp-step-dot.done{background:#C9849A;border-color:#C9849A;color:white;font-size:13px}
+.tp-step-line{flex:1;height:2px;background:rgba(168,84,112,0.11);transition:background .3s}
+.tp-step-line.done{background:#C9849A}
+.tp-step:last-child .tp-step-line{display:none}
+.tp-progress-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#A08080;text-align:center}
+.tp-body{flex:1;overflow-y:auto;padding:28px 28px 20px}
+.tp-body::-webkit-scrollbar{width:3px}
+.tp-body::-webkit-scrollbar-thumb{background:#ECC8C8;border-radius:3px}
+.tp-step-content{display:none;animation:stepIn .35s cubic-bezier(.4,0,.2,1)}
+.tp-step-content.active{display:block}
+@keyframes stepIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
+.tp-step-num{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#C9849A;margin-bottom:8px}
+.tp-step-q{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,26px);font-weight:400;color:#2E1E1E;line-height:1.36;margin-bottom:22px}
+.tp-step-q em{font-style:italic;color:#A85470}
+.eva-wrap{margin-bottom:8px}
+.eva-slider{
+  -webkit-appearance:none;appearance:none;
+  width:100%;height:6px;border-radius:6px;outline:none;cursor:pointer;
+  background:linear-gradient(to right,#A85470 0%,#A85470 var(--val,50%),#F5E2E2 var(--val,50%),#F5E2E2 100%);
+  margin:16px 0;
+}
+.eva-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;
+  width:24px;height:24px;border-radius:50%;
+  background:#A85470;cursor:pointer;
+  box-shadow:0 2px 8px rgba(168,84,112,0.3);transition:transform .15s;
+}
+.eva-slider::-webkit-slider-thumb:hover{transform:scale(1.15)}
+.eva-labels{display:flex;justify-content:space-between;font-size:11px;color:#A08080}
+.eva-value{text-align:center;margin:16px 0;font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:400;color:#A85470;line-height:1}
+.eva-desc{text-align:center;font-size:13px;color:#6B4A4A;font-style:italic;min-height:20px}
+.tp-chips{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:16px}
+.tp-chip{
+  padding:9px 16px;border-radius:22px;
+  border:1.5px solid rgba(168,84,112,0.20);background:#FFFFFF;
+  font-size:12.5px;color:#6B4A4A;cursor:pointer;
+  font-family:'Jost',sans-serif;font-weight:300;
+  transition:all .18s;display:flex;align-items:center;gap:7px;
+}
+.tp-chip:hover{border-color:#C9849A;color:#A85470;background:#F5E2E2}
+.tp-chip.selected{border-color:#A85470;background:#F5E2E2;color:#A85470;font-weight:500}
+.tp-chip-icon{font-size:16px}
+.tp-textarea{
+  width:100%;border:1.5px solid rgba(168,84,112,0.20);border-radius:14px;
+  padding:14px 16px;font-family:'Jost',sans-serif;font-size:13.5px;
+  color:#2E1E1E;background:#FAF0F0;resize:none;
+  outline:none;transition:border-color .2s;min-height:90px;line-height:1.6;
+}
+.tp-textarea:focus{border-color:#C9849A;background:#FFFFFF}
+.tp-textarea::placeholder{color:#A08080}
+.tp-progress-opts{display:flex;gap:10px;margin-bottom:16px}
+.tp-progress-opt{
+  flex:1;padding:14px 10px;border-radius:14px;
+  border:1.5px solid rgba(168,84,112,0.20);background:#FFFFFF;
+  text-align:center;cursor:pointer;transition:all .2s;
+}
+.tp-progress-opt:hover{border-color:#C9849A;background:#F5E2E2}
+.tp-progress-opt.selected{border-color:#A85470;background:#F5E2E2}
+.tp-progress-opt-icon{font-size:22px;display:block;margin-bottom:6px}
+.tp-progress-opt-label{font-size:11.5px;color:#6B4A4A}
+.tp-footer{
+  padding:16px 24px 20px;
+  border-top:1px solid rgba(168,84,112,0.11);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;background:#FFFFFF;
+}
+.tp-btn-back{
+  padding:10px 20px;border-radius:22px;border:1px solid rgba(168,84,112,0.20);
+  background:transparent;color:#A08080;font-family:'Jost',sans-serif;
+  font-size:13px;cursor:pointer;transition:all .2s;
+}
+.tp-btn-back:hover{border-color:#C9849A;color:#A85470}
+.tp-btn-next{
+  padding:12px 28px;border-radius:22px;
+  background:#A85470;border:none;color:white;
+  font-family:'Jost',sans-serif;font-size:13px;cursor:pointer;
+  transition:all .22s;box-shadow:0 4px 16px rgba(168,84,112,0.22);
+}
+.tp-btn-next:hover{background:#7A3350;transform:translateY(-1px)}
+.tp-btn-next:disabled{opacity:.35;pointer-events:none;transform:none}
+#trace-result{display:none}
+.tr-header{padding:20px 24px 16px;border-bottom:1px solid rgba(168,84,112,0.11);display:flex;align-items:center;gap:12px}
+.tr-icon{width:40px;height:40px;background:linear-gradient(135deg,#7A3350,#A85470);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.tr-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;color:#2E1E1E}
+.tr-sub{font-size:11px;color:#C9849A;margin-top:1px}
+.tr-body{padding:22px 24px;overflow-y:auto;flex:1}
+.tr-body::-webkit-scrollbar{width:3px}
+.tr-body::-webkit-scrollbar-thumb{background:#ECC8C8;border-radius:3px}
+.tr-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.tr-card{background:#FAF0F0;border:1px solid rgba(168,84,112,0.11);border-radius:16px;padding:16px;position:relative;overflow:hidden}
+.tr-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.tr-card:nth-child(1)::before{background:linear-gradient(to right,#7A3350,#A85470)}
+.tr-card:nth-child(2)::before{background:linear-gradient(to right,#A85470,#C9849A)}
+.tr-card:nth-child(3)::before{background:linear-gradient(to right,#C9849A,#ECC8C8)}
+.tr-card:nth-child(4)::before{background:linear-gradient(to right,#ECC8C8,rgba(236,200,200,0))}
+.tr-card-label{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:#C9849A;margin-bottom:8px}
+.tr-card-value{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;color:#2E1E1E;line-height:1.4}
+.tr-card-sub{font-size:11px;color:#A08080;margin-top:4px;font-style:italic}
+.tr-ia{background:#FFFFFF;border:1px solid rgba(168,84,112,0.11);border-radius:16px;padding:18px 20px}
+.tr-ia-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.tr-ia-av{width:32px;height:32px;background:linear-gradient(135deg,#7A3350,#A85470);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.tr-ia-name{font-size:12px;font-weight:500;color:#2E1E1E}
+.tr-ia-text{font-size:13.5px;color:#6B4A4A;line-height:1.76}
+.tr-ia-text strong{color:#7A3350;font-weight:500}
+.tr-footer{padding:14px 24px 20px;border-top:1px solid rgba(168,84,112,0.11);display:flex;gap:10px}
+.tr-btn-redo{padding:11px 20px;border-radius:22px;border:1px solid rgba(168,84,112,0.20);background:transparent;color:#A08080;font-family:'Jost',sans-serif;font-size:12px;cursor:pointer;transition:all .2s}
+.tr-btn-redo:hover{border-color:#C9849A;color:#A85470}
+.tr-btn-chat{flex:1;padding:12px 20px;border-radius:22px;background:#A85470;border:none;color:white;font-family:'Jost',sans-serif;font-size:13px;cursor:pointer;transition:all .22s;box-shadow:0 4px 16px rgba(168,84,112,0.22)}
+.tr-btn-chat:hover{background:#7A3350}
+@media(max-width:500px){.tr-cards{grid-template-columns:1fr}.tp-progress-opts{flex-direction:column}#trace-panel{border-radius:20px 20px 0 0;max-height:96vh}}
+
+/* ── CARTE KAP IA — BILAN & CHAT ── */
+.card-kia{
+  background:var(--ink);
+  border-color:var(--ink);
+  cursor:pointer;
+}
+.card-kia::after{
+  background:linear-gradient(to right,var(--gold-pale),var(--gold));
+}
+.card-kia:hover{box-shadow:var(--sh-gold);transform:translateY(-4px)}
+.card-kia .card-num{color:rgba(255,255,255,0.15)}
+.card-kia .card-sub{color:var(--gold-l)}
+.card-kia .card-title{color:var(--white)}
+.card-kia .card-desc{color:rgba(255,255,255,0.6)}
+.card-kia .card-cta{color:var(--gold-l)}
+.card-kia:hover .card-cta{color:var(--gold-pale)}
+.card-kia .card-icon svg{stroke:var(--gold-l);opacity:.8}
+.card-kia .kia-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--gold);
+  display:inline-block;margin-right:6px;
+  animation:pulse-gold 2s ease-in-out infinite;
+}
+@keyframes pulse-gold{
+  0%,100%{box-shadow:0 0 0 0 rgba(184,149,82,0.5);}
+  50%{box-shadow:0 0 0 6px rgba(184,149,82,0);}
+}
+/* MSK devient card standard avec fond crème */
+.card-msk{
+  background:var(--cream-w);
+  border-color:var(--line-m);
+}
+.card-msk .card-sub{color:var(--gold)}
+.card-msk:hover{box-shadow:var(--sh-gold)}
+
+
+/* ── CARTE ENCORE ── */
+.card-encore{
+  background:linear-gradient(135deg,#1A1508 0%,#2A2010 100%);
+  border-color:rgba(201,168,76,0.25);
+}
+.card-encore::after{
+  background:linear-gradient(to right,var(--gold-pale),var(--gold));
+}
+.card-encore:hover{
+  box-shadow:0 8px 32px rgba(184,149,82,0.2);
+  border-color:rgba(201,168,76,0.5);
+}
+.card-encore .card-num{color:rgba(201,168,76,0.2)}
+.card-encore .card-sub{
+  color:var(--gold);
+  display:flex;align-items:center;gap:6px;
+}
+.card-encore .card-sub::before{
+  content:'';
+  width:5px;height:5px;border-radius:50%;
+  background:var(--gold);
+  display:inline-block;
+  animation:pulse-card 2s ease-in-out infinite;
+}
+@keyframes pulse-card{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.4;transform:scale(.7)}
+}
+.card-encore .card-title{
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-l) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.card-encore .card-desc{color:rgba(249,244,232,0.5)}
+.card-encore .card-cta{color:var(--gold-l)}
+.card-encore:hover .card-cta{color:var(--gold-pale)}
+.card-encore .card-icon svg{opacity:1}
+
+
+/* ── BILAN CHOICE ── */
+
+
+
+
+
+
+
+.bc-icon{font-size:26px;margin-bottom:8px;}
+.bc-badge{
+  display:inline-block;background:var(--gold);color:var(--ink);
+  font-size:8px;letter-spacing:1.5px;padding:2px 8px;
+  border-radius:20px;text-transform:uppercase;font-weight:600;margin-bottom:6px;
+}
+
+
+.bc-time{font-size:10px;color:var(--ink-xs);margin-bottom:6px;}
+.bc-desc{font-size:11px;color:var(--ink-s);line-height:1.5;}
+.bc-main-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:26px;font-weight:300;color:var(--text);
+}
+.bc-main-title em{font-style:italic;color:var(--gold);}
+
+
+
+/* ══ ÉCRAN BETA ══ */
+#beta-screen{
+  position:fixed;inset:0;z-index:99999;
+  background:#F8F4EE;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  opacity:1;
+  transition:opacity .5s ease;
+}
+#beta-screen.hide{opacity:0;pointer-events:none;}
+.beta-panel{
+  background:#FAF7F2;
+  border-radius:24px;
+  padding:48px 44px;
+  max-width:560px;width:100%;
+  position:relative;
+  box-shadow:0 32px 80px rgba(0,0,0,0.5);
+}
+.beta-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:32px;letter-spacing:10px;
+  background:linear-gradient(135deg,#8B6914,#B89552,#D4B578);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:4px;
+}
+.beta-badge{
+  display:inline-block;
+  background:linear-gradient(135deg,#8B6914,#B89552);
+  color:#FAF7F2;
+  font-family:'Jost',sans-serif;
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  padding:4px 14px;border-radius:20px;
+  margin-bottom:24px;font-weight:500;
+}
+.beta-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:26px;font-weight:300;
+  color:#1A1611;line-height:1.25;
+  margin-bottom:12px;
+}
+.beta-title em{font-style:italic;color:#8B6914;}
+.beta-text{
+  font-size:13px;color:#5A4E3A;
+  line-height:1.8;margin-bottom:20px;
+}
+.beta-text strong{color:#1A1611;font-weight:500;}
+.beta-context{
+  background:rgba(184,149,82,0.08);
+  border:1px solid rgba(184,149,82,0.2);
+  border-radius:12px;
+  padding:16px 18px;
+  margin-bottom:20px;
+  font-size:12px;color:#5A4E3A;line-height:1.75;
+}
+.beta-context-title{
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:#8B6914;margin-bottom:8px;
+  font-family:'Jost',sans-serif;
+}
+.beta-form{margin-bottom:20px;}
+.beta-label{
+  font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+  color:#7A6E5F;font-family:'Jost',sans-serif;
+  display:block;margin-bottom:6px;margin-top:14px;
+}
+.beta-input{
+  width:100%;padding:11px 14px;
+  border:1.5px solid rgba(184,149,82,0.2);
+  border-radius:10px;background:#FFFDF9;
+  font-family:'Jost',sans-serif;font-size:13px;
+  color:#1A1611;outline:none;
+  transition:border-color .2s;
+}
+.beta-input:focus{border-color:rgba(184,149,82,0.5);}
+.beta-profiles{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:8px;
+  margin-top:6px;
+}
+.beta-profile{
+  padding:10px 12px;border-radius:10px;
+  border:1.5px solid rgba(184,149,82,0.15);
+  background:#FFFDF9;cursor:pointer;
+  text-align:center;font-size:12px;
+  color:#5A4E3A;font-family:'Jost',sans-serif;
+  transition:all .18s;
+}
+.beta-profile:hover{border-color:rgba(184,149,82,0.4);background:#FAF7F2;}
+.beta-profile.selected{
+  border-color:#B89552;
+  background:rgba(184,149,82,0.1);
+  color:#1A1611;font-weight:500;
+}
+.beta-check{
+  display:flex;align-items:flex-start;gap:10px;
+  margin-top:16px;margin-bottom:20px;
+}
+.beta-check input{
+  margin-top:3px;accent-color:#B89552;
+  flex-shrink:0;width:16px;height:16px;cursor:pointer;
+}
+.beta-check label{
+  font-size:12px;color:#5A4E3A;line-height:1.65;cursor:pointer;
+}
+.beta-check label a{color:#B89552;}
+.beta-btn{
+  width:100%;padding:15px;border-radius:30px;
+  background:linear-gradient(135deg,#8B6914,#B89552,#D4B578);
+  border:none;color:#1A1611;
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;font-style:italic;
+  cursor:pointer;transition:all .25s;
+  box-shadow:0 4px 20px rgba(184,149,82,0.25);
+  opacity:.35;pointer-events:none;
+}
+.beta-btn.active{
+  opacity:1;pointer-events:all;
+  box-shadow:0 6px 28px rgba(184,149,82,0.35);
+}
+.beta-btn.active:hover{transform:translateY(-2px);}
+.beta-footer{
+  text-align:center;margin-top:14px;
+  font-size:10px;color:#A89880;line-height:1.6;
+}
+@media(max-width:600px){
+  .beta-panel{padding:32px 24px;}
+  .beta-title{font-size:22px;}
+  .beta-profiles{grid-template-columns:1fr 1fr;}
+}
+
+
+/* ══ BILAN CHOICE — NOUVEAU VISUEL ══ */
+#bilan-choice{
+  display:none;flex-direction:column;align-items:center;
+  justify-content:center;flex:1;padding:28px 24px;gap:20px;text-align:center;
+}
+.bc-header-tag{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--rose-dark);font-weight:500;margin-bottom:2px;
+}
+.bc-header-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:300;color:var(--text);
+  line-height:1.3;margin-bottom:6px;
+}
+.bc-header-title em{font-style:italic;color:var(--rose-dark);}
+.bc-header-sub{
+  font-size:12.5px;color:var(--text-s);line-height:1.65;
+  max-width:320px;margin:0 auto;
+}
+.bc-cards{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:14px;width:100%;
+}
+.bc-card{
+  border-radius:16px;padding:22px 18px;
+  cursor:pointer;transition:all .22s cubic-bezier(.4,0,.2,1);
+  text-align:left;border:1.5px solid transparent;
+  position:relative;
+}
+.bc-card.rapide{
+  background:var(--rose-pale);
+  border-color:var(--border-m);
+}
+.bc-card.rapide:hover{
+  border-color:var(--rose-dark);
+  box-shadow:0 4px 16px rgba(168,84,112,0.12);
+  transform:translateY(-2px);
+}
+.bc-card.approfondi{
+  background:white;
+  border-color:var(--rose-dark);
+  box-shadow:0 2px 12px rgba(168,84,112,0.1);
+}
+.bc-card.approfondi:hover{
+  box-shadow:0 6px 24px rgba(168,84,112,0.18);
+  transform:translateY(-2px);
+}
+.bc-badge{
+  position:absolute;top:-10px;left:50%;
+  transform:translateX(-50%);
+  background:var(--rose-dark);color:white;
+  font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:3px 12px;border-radius:20px;font-weight:500;
+  white-space:nowrap;
+}
+.bc-icon-wrap{
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(168,84,112,0.08);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:12px;
+}
+.bc-icon-wrap svg{stroke:var(--rose-dark);fill:none;stroke-width:1.8;}
+.bc-name{
+  font-size:15px;font-weight:500;
+  color:var(--text);margin-bottom:4px;
+}
+.bc-card.approfondi .bc-name{color:var(--rose-deep);}
+.bc-pills{
+  display:flex;align-items:center;gap:6px;margin-bottom:8px;
+}
+.bc-pill-time{
+  font-size:11px;background:rgba(168,84,112,0.1);
+  color:var(--rose-dark);padding:2px 10px;
+  border-radius:20px;font-weight:500;
+}
+.bc-pill-steps{
+  font-size:11px;color:var(--text-s);
+}
+.bc-desc{
+  font-size:12px;color:var(--text-s);line-height:1.6;margin-bottom:12px;
+}
+.bc-cta{
+  font-size:12px;color:var(--rose-dark);
+  display:flex;align-items:center;gap:4px;font-weight:500;
+}
+.bc-cta svg{stroke:currentColor;fill:none;stroke-width:1.8;transition:transform .2s;}
+.bc-card:hover .bc-cta svg{transform:translateX(3px);}
+.bc-footer{
+  border-top:1px solid var(--border);
+  padding-top:14px;width:100%;
+  display:flex;align-items:flex-start;gap:10px;
+}
+.bc-footer-icon svg{stroke:var(--rose-mid);fill:none;stroke-width:1.5;flex-shrink:0;margin-top:1px;}
+.bc-footer-text{
+  font-size:11px;color:var(--text-s);line-height:1.6;text-align:left;
+}
+@media(max-width:440px){.bc-cards{grid-template-columns:1fr;}}
+
+
+/* ══ DISCLAIMER CHAT ══ */
+.msg-disclaimer{
+  font-size:11px;color:rgba(168,84,112,0.5);
+  font-style:italic;margin-top:8px;
+  padding-top:6px;border-top:1px solid rgba(168,84,112,0.08);
+  line-height:1.5;
+}
+.encore-disclaimer{
+  font-size:11px;color:rgba(201,168,76,0.5);
+  font-style:italic;margin-top:8px;
+  padding-top:6px;border-top:1px solid rgba(201,168,76,0.08);
+  line-height:1.5;
+}
+
+
+/* ══ WATERMARK PHILOSOPHIE ══ */
+.chat-watermark{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(22px,4vw,42px);
+  font-weight:300;
+  font-style:italic;
+  color:rgba(168,84,112,0.08);
+  text-align:center;
+  white-space:normal;width:90%;
+  pointer-events:none;
+  user-select:none;
+  line-height:1.4;
+  z-index:0;
+  letter-spacing:2px;
+}
+.chat-watermark span{display:block;}
+
+
+/* ══ CONSENTEMENT ÉTUDE CLINIQUE ══ */
+#study-overlay{
+  position:fixed;inset:0;z-index:9998;
+  background:rgba(26,22,17,0.88);
+  backdrop-filter:blur(10px);
+  display:none;align-items:center;justify-content:center;
+  padding:20px;
+}
+#study-overlay.show{display:flex;}
+#study-panel{
+  background:#FAF7F2;
+  border-radius:20px;
+  padding:40px 36px;
+  max-width:520px;width:100%;
+  position:relative;
+}
+.sp-badge{
+  display:inline-block;
+  background:rgba(26,90,118,0.1);
+  color:#1A5276;
+  font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
+  padding:4px 12px;border-radius:20px;font-weight:500;
+  margin-bottom:16px;
+}
+.sp-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:26px;font-weight:300;color:#1A1611;
+  line-height:1.3;margin-bottom:10px;
+}
+.sp-title em{font-style:italic;color:#1A5276;}
+.sp-text{
+  font-size:13px;color:#5A4E3A;line-height:1.8;
+  margin-bottom:18px;
+}
+.sp-items{
+  background:rgba(26,90,118,0.05);
+  border:1px solid rgba(26,90,118,0.15);
+  border-radius:12px;
+  padding:16px 18px;
+  margin-bottom:18px;
+}
+.sp-item{
+  font-size:12px;color:#2C2417;line-height:1.8;
+  display:flex;gap:8px;
+}
+.sp-item::before{content:'◦';color:#1A5276;flex-shrink:0;}
+.sp-btns{display:flex;gap:10px;margin-top:20px;}
+.sp-btn-yes{
+  flex:1;padding:13px;border-radius:30px;
+  background:linear-gradient(135deg,#0E4D72,#1A5276,#2471A3);
+  border:none;color:white;
+  font-family:'Jost',sans-serif;font-size:13px;font-weight:500;
+  cursor:pointer;transition:all .22s;
+  box-shadow:0 4px 16px rgba(26,90,118,0.25);
+}
+.sp-btn-yes:hover{box-shadow:0 6px 24px rgba(26,90,118,0.35);transform:translateY(-1px);}
+.sp-btn-no{
+  flex:1;padding:13px;border-radius:30px;
+  background:transparent;
+  border:1px solid rgba(44,36,23,0.15);
+  color:#7A6E5F;
+  font-family:'Jost',sans-serif;font-size:13px;
+  cursor:pointer;transition:all .2s;
+}
+.sp-btn-no:hover{border-color:rgba(44,36,23,0.3);color:#2C2417;}
+.sp-footer{
+  margin-top:14px;font-size:10px;color:#A89880;
+  text-align:center;line-height:1.6;
+}
+
+
+/* ══ PILULES RÉFÉRENCES ══ */
+.ref-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.ref-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;border:1px solid rgba(44,36,23,0.15);background:rgba(44,36,23,0.03);font-size:10px;color:rgba(44,36,23,0.5);text-decoration:none;transition:all .18s;font-family:'Jost',sans-serif;}
+.ref-pill:hover{background:rgba(44,36,23,0.08);border-color:rgba(44,36,23,0.3);color:#2C2417;}
+
+
+/* ══ CONSENTEMENT ÉTUDE CLINIQUE ══ */
+#study-overlay{position:fixed;inset:0;z-index:9998;background:rgba(26,22,17,0.88);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:20px;}
+#study-overlay.show{display:flex;}
+#study-panel{background:#FAF7F2;border-radius:20px;padding:40px 36px;max-width:520px;width:100%;position:relative;}
+.sp-badge{display:inline-block;background:rgba(26,90,118,0.1);color:#1A5276;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;font-weight:500;margin-bottom:16px;}
+.sp-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#1A1611;line-height:1.3;margin-bottom:10px;}
+.sp-title em{font-style:italic;color:#1A5276;}
+.sp-text{font-size:13px;color:#5A4E3A;line-height:1.8;margin-bottom:18px;}
+.sp-items{background:rgba(26,90,118,0.05);border:1px solid rgba(26,90,118,0.15);border-radius:12px;padding:16px 18px;margin-bottom:18px;}
+.sp-item{font-size:12px;color:#2C2417;line-height:1.8;display:flex;gap:8px;}
+.sp-item::before{content:'◦';color:#1A5276;flex-shrink:0;}
+.sp-btns{display:flex;gap:10px;margin-top:20px;}
+.sp-btn-yes{flex:1;padding:13px;border-radius:30px;background:linear-gradient(135deg,#0E4D72,#1A5276,#2471A3);border:none;color:white;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .22s;}
+.sp-btn-no{flex:1;padding:13px;border-radius:30px;background:transparent;border:1px solid rgba(44,36,23,0.15);color:#7A6E5F;font-family:'Jost',sans-serif;font-size:13px;cursor:pointer;}
+.sp-footer{margin-top:14px;font-size:10px;color:#A89880;text-align:center;line-height:1.6;}
+
+.mrow{position:relative;z-index:1;}
+
+/* ══ KAP IA + ENCORE — fond blanc, accents dorés ══ */
+.cards-bottom{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  max-width:1280px;margin:20px auto 0;
+}
+.card-kia-light{
+  background:var(--white);
+  border-color:var(--line);
+}
+.card-kia-light:hover{box-shadow:var(--sh-gold);border-color:var(--gold-line);}
+.card-kia-light .cc-num{color:var(--ink-xs);}
+.card-kia-light .cc-sub{color:var(--gold);}
+.card-kia-light .cc-dot{background:var(--gold);}
+.card-kia-light .cc-title{color:var(--ink);}
+.card-kia-light .cc-desc{color:var(--ink-s);}
+.card-kia-light .cc-cta{color:var(--gold);}
+
+.card-encore-light{
+  background:var(--white);
+  border-color:var(--line);
+}
+.card-encore-light:hover{box-shadow:var(--sh-gold);border-color:var(--gold-line);}
+.card-encore-light .cc-num{color:var(--ink-xs);}
+.card-encore-light .cc-sub{color:var(--gold);}
+.card-encore-light .cc-dot{background:var(--gold);}
+.card-encore-light .cc-title-encore{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;font-weight:300;font-style:italic;
+  letter-spacing:2px;color:var(--gold);line-height:1.1;margin-bottom:4px;
+}
+.card-encore-light .cc-desc{color:var(--ink-s);}
+.card-encore-light .cc-cta{color:var(--gold);}
+
+
+/* ══ PROTOCOLES ══ */
+.proto-save-btn{display:inline-flex;align-items:center;gap:5px;margin-top:10px;padding:5px 12px;border-radius:16px;border:1px solid var(--gold-line);background:transparent;color:var(--ink-xs);font-size:10px;letter-spacing:.5px;font-family:'Jost',sans-serif;cursor:pointer;transition:all .18s;}
+.proto-save-btn:hover{border-color:var(--gold);color:var(--gold-d);background:rgba(184,149,82,0.06)}
+.proto-save-btn.saved{border-color:var(--gold);color:var(--gold-d);pointer-events:none}
+.proto-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--ink);color:var(--gold-l);padding:12px 20px;border-radius:12px;font-size:12px;font-family:'Jost',sans-serif;z-index:99999;transition:transform .3s,opacity .3s;opacity:0;pointer-events:none;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,0.18);}
+.proto-toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+#proto-overlay{display:none;position:fixed;inset:0;z-index:99998;background:rgba(26,22,17,0.55);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:20px;}
+#proto-overlay.open{display:flex}
+#proto-panel{background:var(--cream);border:1px solid var(--gold-line);border-radius:22px;width:100%;max-width:560px;max-height:88vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(26,22,17,0.2);animation:protoIn .3s ease}
+@keyframes protoIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.proto-ph{padding:16px 20px;border-bottom:1px solid var(--gold-line);display:flex;align-items:center;justify-content:space-between;background:var(--cream-w);flex-shrink:0;}
+.proto-ph-num{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:var(--gold-d)}
+.proto-ph-meta{font-size:11px;color:var(--ink-xs);margin-top:2px}
+.proto-ph-x{width:30px;height:30px;border-radius:8px;background:var(--cream-d);border:none;cursor:pointer;font-size:14px;color:var(--ink-s);display:flex;align-items:center;justify-content:center}
+.proto-pb{flex:1;overflow-y:auto;padding:20px;font-size:13px;color:var(--ink);line-height:1.76}
+.proto-pb::-webkit-scrollbar{width:3px}
+.proto-pb::-webkit-scrollbar-thumb{background:var(--gold-line);border-radius:3px}
+.proto-pb strong{color:var(--ink-m)}
+.proto-pf{padding:12px 20px;border-top:1px solid var(--gold-line);display:flex;gap:8px;flex-shrink:0;background:var(--cream-w)}
+.proto-pf-btn{flex:1;padding:9px;border-radius:20px;border:1px solid var(--gold-line);background:transparent;color:var(--ink-s);font-family:'Jost',sans-serif;font-size:12px;cursor:pointer;transition:all .2s}
+.proto-pf-btn:hover{border-color:var(--gold);color:var(--ink)}
+.proto-empty{text-align:center;padding:40px 20px;font-size:13px;color:var(--ink-xs)}
+.proto-search-wrap{position:relative;display:flex;align-items:center}
+.proto-search-input{width:120px;padding:6px 30px 6px 11px;border:1px solid var(--gold-line);border-radius:20px;background:transparent;font-family:'Jost',sans-serif;font-size:11px;color:var(--ink);outline:none;transition:all .2s;letter-spacing:.5px;}
+.proto-search-input::placeholder{color:var(--ink-xs)}
+.proto-search-input:focus{border-color:var(--gold);width:150px;background:rgba(184,149,82,0.03)}
+.proto-search-btn{position:absolute;right:8px;background:none;border:none;cursor:pointer;color:var(--ink-xs);padding:0;display:flex;transition:color .18s}
+.proto-search-btn:hover{color:var(--gold-d)}
+@media(max-width:700px){.proto-search-input{width:90px}.proto-search-input:focus{width:120px}}
+
+
+/* ── CLOSE CHAT BUTTON ── */
+.chat-close-bar{
+  display:flex;flex-direction:column;align-items:center;
+  gap:6px;padding:10px 16px 4px;
+  border-top:1px solid rgba(168,84,112,0.08);
+  margin-top:4px;
+}
+.chat-close-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 22px;border-radius:22px;
+  border:1.5px solid rgba(168,84,112,0.25);
+  background:transparent;
+  color:#A85470;font-family:'Jost',sans-serif;font-size:12px;
+  font-weight:400;letter-spacing:.3px;
+  cursor:pointer;transition:all .22s;
+  text-decoration:none;
+}
+.chat-close-btn:hover{
+  background:#F5E2E2;border-color:#A85470;
+  transform:translateY(-1px);
+}
+.chat-close-btn svg{width:14px;height:14px;fill:#A85470;flex-shrink:0}
+.chat-close-label{
+  font-size:10px;color:#A08080;text-align:center;
+  line-height:1.5;letter-spacing:.2px;font-style:italic;
+}
+
+</style>
+<style id="kap-initial-hide">
+  body { visibility: hidden; }
+</style>
+</head>
+<body>
+<script>
+(function(){
+  var P = 'kap2026';
+  if(sessionStorage.getItem('kap-auth') === P){
+    document.getElementById('kap-initial-hide').remove();
+    return;
+  }
+
+  var style = document.createElement('style');
+  style.textContent = `
+    #kap-gate{position:fixed;inset:0;z-index:99999;background:#F8F4EE;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 1s ease}
+    #kap-gate::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(184,149,58,0.06) 0%,transparent 70%);pointer-events:none}
+    #kg-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+    #kg-logo{font-family:'Cormorant Garamond',serif;font-size:clamp(5rem,16vw,9rem);font-weight:300;line-height:1;margin-bottom:0;opacity:0;transform:translateY(12px);transition:opacity 1.1s ease,transform 1.1s ease;display:flex;align-items:baseline;justify-content:center;gap:0.18em}
+    #kg-logo .kl,#kg-logo .ka,#kg-logo .kp{background:linear-gradient(135deg,#1A1208 0%,#1A1208 15%,#7A5A1A 35%,#C9A84C 52%,#8B6914 68%,#2C1F0A 85%,#1A1208 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    #kg-logo.in{opacity:1;transform:translateY(0)}
+    #kg-sep{width:180px;height:1px;background:linear-gradient(90deg,transparent,rgba(184,149,58,0.4),transparent);margin:14px auto 14px;opacity:0;transition:opacity 0.8s ease 0.6s}
+    #kg-sep.in{opacity:1}
+    #kg-sub{font-family:'Jost',sans-serif;font-size:clamp(0.5rem,1.2vw,0.65rem);font-weight:300;letter-spacing:0.38em;text-transform:uppercase;color:#9A8A78;margin-bottom:52px;opacity:0;transition:opacity 0.8s ease 0.9s}
+    #kg-sub.in{opacity:1}
+    #kg-pwd-wrap{display:none;flex-direction:column;align-items:center;gap:10px;margin-bottom:52px;width:220px}
+    #kg-input{width:100%;padding:12px 16px;background:rgba(255,255,255,0.7);border:1px solid rgba(184,149,58,0.3);border-radius:2px;font-family:'Jost',sans-serif;font-size:0.88rem;letter-spacing:0.5em;text-align:center;color:#2C2416;outline:none;transition:border-color 0.2s}
+    #kg-input:focus{border-color:rgba(184,149,58,0.7)}
+    #kg-input::placeholder{color:#C0B0A0;letter-spacing:0.3em}
+    #kg-err{font-family:'Jost',sans-serif;font-size:0.65rem;letter-spacing:0.2em;color:rgba(180,60,40,0.9);display:none}
+    #kg-btn{font-family:'Jost',sans-serif;font-size:0.62rem;font-weight:400;letter-spacing:0.42em;text-transform:uppercase;color:#FAF7F2;background:linear-gradient(135deg,#8B6914 0%,#B89552 60%,#8B6914 100%);border:none;padding:14px 50px;border-radius:1px;cursor:pointer;box-shadow:0 4px 20px rgba(184,149,58,0.2);transition:transform 0.2s,box-shadow 0.2s,opacity 0.6s ease;opacity:0}
+    #kg-btn.in{opacity:1}
+    #kg-btn:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(184,149,58,0.3)}
+    #kg-city{position:absolute;bottom:28px;font-family:'Jost',sans-serif;font-size:0.56rem;letter-spacing:0.35em;text-transform:uppercase;color:rgba(184,149,58,0.4)}
+  `;
+  document.head.appendChild(style);
+
+  var gate = document.createElement('div');
+  gate.id = 'kap-gate';
+  gate.innerHTML = `
+    <div id="kg-wrap">
+      <div id="kg-logo"><span class="kl">K</span><span class="ka">A</span><span class="kp">P</span></div>
+      <div id="kg-sep"></div>
+      <div id="kg-sub">Kiné · Activité · Prévention</div>
+      <div id="kg-pwd-wrap">
+        <input id="kg-input" type="password" placeholder="· · · · · · · ·" autocomplete="current-password">
+        <div id="kg-err">Accès refusé</div>
+      </div>
+      <button id="kg-btn" onclick="kapGo()">Entrer</button>
+    </div>
+    <div id="kg-city">Gagny · Chessy</div>
+  `;
+
+  document.addEventListener('DOMContentLoaded', function(){
+    document.body.prepend(gate);
+    document.getElementById('kap-initial-hide').remove();
+    setTimeout(function(){ document.getElementById('kg-logo').classList.add('in'); }, 80);
+    setTimeout(function(){ document.getElementById('kg-sep').classList.add('in'); }, 500);
+    setTimeout(function(){ document.getElementById('kg-sub').classList.add('in'); }, 750);
+    setTimeout(function(){ document.getElementById('kg-btn').classList.add('in'); }, 1100);
+    var inp = document.getElementById('kg-input');
+    inp.addEventListener('keydown', function(e){ if(e.key==='Enter') kapGo(); });
+    inp.addEventListener('focus', function(){ this.style.borderColor='rgba(184,149,58,0.65)'; });
+    inp.addEventListener('blur', function(){ this.style.borderColor='rgba(184,149,58,0.28)'; });
+    var btn = document.getElementById('kg-btn');
+    btn.addEventListener('mouseenter', function(){ this.style.transform='translateY(-1px)'; this.style.boxShadow='0 8px 32px rgba(184,149,58,0.32)'; });
+    btn.addEventListener('mouseleave', function(){ this.style.transform=''; this.style.boxShadow='0 4px 24px rgba(184,149,58,0.18)'; });
+  });
+
+  var phase = 0;
+  window.kapGo = function(){
+    if(phase === 0){
+      phase = 1;
+      var sub = document.getElementById('kg-sub');
+      sub.style.transition = 'opacity 0.35s ease';
+      sub.style.opacity = '0';
+      setTimeout(function(){
+        sub.style.display = 'none';
+        document.getElementById('kg-pwd-wrap').style.display = 'flex';
+        document.getElementById('kg-input').focus();
+        document.getElementById('kg-btn').textContent = 'Confirmer';
+      }, 350);
+    } else {
+      var v = document.getElementById('kg-input').value;
+      if(v === P){
+        sessionStorage.setItem('kap-auth', P);
+        // Beta-screen prêt SOUS la gate avant le fondu — aucun flash
+        var bs = document.getElementById('beta-screen');
+        if(bs){ bs.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+        var g = document.getElementById('kap-gate');
+        g.style.opacity = '0';
+        setTimeout(function(){ g.remove(); }, 1000);
+      } else {
+        var err = document.getElementById('kg-err');
+        var inp2 = document.getElementById('kg-input');
+        err.style.display = 'block';
+        inp2.value = '';
+        inp2.style.borderColor = 'rgba(200,80,60,0.5)';
+        inp2.focus();
+        setTimeout(function(){
+          err.style.display = 'none';
+          inp2.style.borderColor = 'rgba(184,149,58,0.28)';
+        }, 2000);
+      }
+    }
+  };
+})();
+</script>
+
+<!-- ══ ÉCRAN BETA ══ -->
+<div id="beta-screen">
+  <div class="beta-panel">
+
+    <div class="beta-logo">KAP</div>
+    <div class="beta-badge">✦ Version bêta — accès anticipé</div>
+
+    <h2 class="beta-title">
+      Vous êtes parmi les<br>
+      <em>premiers à tester KAP.</em>
+    </h2>
+
+    <p class="beta-text">
+      KAP est une plateforme d'accompagnement kinésithérapique par IA,
+      actuellement en phase de test. <strong>Ce n'est pas un produit fini.</strong>
+      Votre avis va directement façonner ce qu'il deviendra.
+    </p>
+
+    <div class="beta-context">
+      <div class="beta-context-title">Ce que vous testez</div>
+      KAP IA recueille votre ressenti et vous oriente — comme le ferait un
+      kinésithérapeute lors d'un premier contact. Ce n'est pas un diagnostic,
+      pas une prescription. C'est un outil d'orientation et d'éducation.
+      <br><br>
+      <strong>Aucune décision de santé ne doit être prise sur la seule base de ce bilan, sans l'avis de votre professionnel de santé.</strong>
+      <br><br>
+      Votre retour est la seule chose qui compte à ce stade.
+    </div>
+
+    <div class="beta-form">
+      <label class="beta-label">Votre prénom (optionnel)</label>
+      <input class="beta-input" type="text" id="beta-prenom"
+        placeholder="Pour personnaliser votre expérience"
+        oninput="betaUpdate()">
+
+      <label class="beta-label">Vous êtes...</label>
+      <div class="beta-profiles">
+        <div class="beta-profile" data-val="patient" onclick="selectBetaProfile(this)">
+          🧑 Patient
+        </div>
+        <div class="beta-profile" data-val="kiné" onclick="selectBetaProfile(this)">
+          💪 Kinésithérapeute
+        </div>
+        <div class="beta-profile" data-val="médecin" onclick="selectBetaProfile(this)">
+          🩺 Médecin
+        </div>
+        <div class="beta-profile" data-val="autre" onclick="selectBetaProfile(this)">
+          ✦ Autre profil
+        </div>
+      </div>
+    </div>
+
+    <div class="beta-check">
+      <input type="checkbox" id="beta-consent" onchange="betaUpdate()">
+      <label for="beta-consent">
+        Je comprends que je participe à un <strong>test bêta</strong> —
+        KAP IA ne remplace pas un professionnel de santé et mes données
+        ne seront pas exploitées commercialement.
+        <a href="confidentialite.html" target="_blank">En savoir plus</a>
+      </label>
+    </div>
+
+    <button class="beta-btn" id="beta-btn" onclick="enterBeta()">
+      Accéder à KAP →
+    </button>
+
+    <div class="beta-footer">
+      Développé par PEZZALI AMAR DELATORRE, kinésithérapeute D.E.<br>
+      Cabinet KAP · Gagny (93) · Chessy (77) · Île-de-France
+    </div>
+
+  </div>
+</div>
+
+
+<header>
+  <div class="h-logo">
+    <div class="h-kap">KAP</div>
+    <div class="h-sub">Kiné · Activité · Prévention</div>
+  </div>
+  <nav>
+    <a href="#specialites">Spécialités</a>
+    <a href="#philosophie">Philosophie</a>
+    <div class="kap-score-badge" id="kap-score-badge" onclick="toggleScoreBadge()" style="display:none">
+      <div class="ksb-ring" id="ksb-ring">
+        <svg viewBox="0 0 32 32">
+          <defs><linearGradient id="ksb-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#8B6914"/>
+            <stop offset="100%" stop-color="#D4B578"/>
+          </linearGradient></defs>
+          <circle cx="16" cy="16" r="12" fill="none" stroke="rgba(184,149,82,0.15)" stroke-width="2.5"/>
+          <circle cx="16" cy="16" r="12" fill="none" stroke="url(#ksb-grad)" stroke-width="2.5"
+            stroke-linecap="round" id="ksb-progress"
+            stroke-dasharray="75.4" stroke-dashoffset="20"/>
+        </svg>
+        <div class="ksb-num" id="ksb-num">—</div>
+      </div>
+      <div class="ksb-text">
+        <span class="ksb-label">KAP Score</span>
+        <span class="ksb-score" id="ksb-score-text">—</span>
+      </div>
+      <!-- popup -->
+      <div class="ksb-popup" id="ksb-popup">
+        <div class="ksb-popup-title">Votre KAP Score</div>
+        <div class="ksb-popup-date" id="ksb-popup-date"></div>
+        <div class="ksb-popup-pillars" id="ksb-popup-pillars"></div>
+        <div class="ksb-popup-note" id="ksb-popup-note"></div>
+        <a class="ksb-popup-cta" href="kap-trace-bilan.html">Faire un nouveau bilan →</a>
+      </div>
+    </div>
+    <div class="proto-search-wrap">
+      <input class="proto-search-input" id="proto-search-inp" type="text" placeholder="KAP-0042" onkeydown="onProtoKey(event)">
+      <button class="proto-search-btn" onclick="searchProtocol()" title="Rechercher un protocole">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="4"/><path d="M10.5 10.5l3 3"/></svg>
+      </button>
+    </div>
+    <a href="#contact" class="h-cta">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-line-top"></div>
+  <div class="hero-line-bot"></div>
+  <div class="hero-num">KAP</div>
+
+  <div class="hero-badge">Groupe KAP · Fondé à Gagny · 2024</div>
+
+  <div class="kap-hero">
+    <div class="kap-hero-letters">KAP</div>
+    <div class="kap-hero-sub">Kiné · Activité · Prévention</div>
+  </div>
+  <hr class="kap-sep">
+
+  <h1 class="hero-h1">
+    Des soins <em>pensés</em> pour chaque<br>trajectoire de vie
+  </h1>
+  <p class="hero-p">
+    Le groupe KAP réunit des spécialités thérapeutiques en kinésithérapie,
+    fondées sur la rigueur clinique, l'accompagnement humain
+    et la prévention active.
+  </p>
+</section>
+
+<!-- ── BANDEAU PROGRÈS ── -->
+<a href="kap-progres.html" style="
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  background:var(--cream-d);border-top:1px solid var(--gold-line);border-bottom:1px solid var(--gold-line);
+  padding:16px 56px;text-decoration:none;transition:background .2s;
+  font-family:'Jost',sans-serif;
+" onmouseover="this.style.background='rgba(184,149,82,0.08)'" onmouseout="this.style.background='var(--cream-d)'">
+  <div style="display:flex;align-items:center;gap:14px">
+    <span style="font-size:14px">🔬</span>
+    <div>
+      <div style="font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold-d,#8B6914);margin-bottom:2px">La médecine change le monde en silence</div>
+      <div style="font-size:13px;color:var(--ink-m,#2C2417);font-weight:300">Venin d'abeilles contre le cancer · Vaccins anti-tumeur ARNm · Paraplégiques qui remarche — et pourquoi KAP s'inscrit dans ce mouvement</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:var(--gold,#B89552);white-space:nowrap;display:flex;align-items:center;gap:6px;flex-shrink:0">
+    Découvrir
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+  </div>
+</a>
+
+<section class="spec" id="specialites">
+  <div class="spec-label">Nos spécialités</div>
+  <div style="text-align:center;margin-bottom:52px">
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,54px);font-weight:300;color:var(--ink);line-height:1.15;margin-bottom:14px">Cinq disciplines.<br><em style="color:var(--gold)">Une seule philosophie.</em></h2>
+    <p style="font-size:14px;color:var(--ink-xs);max-width:520px;margin:0 auto;line-height:1.8">Chaque module intègre les échelles cliniques validées, un bilan personnalisé et une intelligence artificielle formée par un kiné D.E.</p>
+  </div>
+  <div class="cards">
+
+    <!-- 01 · Douleur chronique — card-main (sombre) -->
+    <a class="card card-main" href="kap-douleur.html">
+      <span class="card-num">01</span>
+      <div class="card-icon">
+        <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="2,18 8,18 11,9 14,27 17,14 20,22 23,18 34,18"/>
+        </svg>
+      </div>
+      <div class="card-sub">Douleur · Bilan KAP-D</div>
+      <h2 class="card-title">Douleur chronique</h2>
+      <p class="card-desc">EVA · PSFS · TSK · Pichot · Score 5 dimensions. Approches kinésithérapiques et psychocorporelles.</p>
+      <div class="card-cta">Faire mon bilan<svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+    </a>
+
+    <!-- 02 · SEREINIA — blanc/crème -->
+    <a class="card" href="kap-sein.html">
+      <span class="card-num">02</span>
+      <div class="card-icon">
+        <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="18" r="13"/>
+          <path d="M12 18 C12 13 18 10 18 10 C18 10 24 13 24 18 C24 22 21 25 18 25 C15 25 12 22 12 18Z"/>
+          <line x1="18" y1="10" x2="18" y2="6"/>
+          <circle cx="18" cy="5" r="1.5" fill="currentColor" stroke="none" style="fill:var(--gold)"/>
+        </svg>
+      </div>
+      <div class="card-sub">SEREINIA</div>
+      <h2 class="card-title">Cancer du sein</h2>
+      <p class="card-desc">Kinésithérapie D.E. spécialisée. Accompagnement de la femme entière — du diagnostic à la reconstruction.</p>
+      <div class="card-cta">Accéder à SEREINIA<svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+    </a>
+
+    <!-- 03 · MSK — beige clair -->
+    <a class="card" href="kap-msk.html" style="background:#F5F0E8;border-color:rgba(184,147,58,0.12)">
+      <span class="card-num">03</span>
+      <div class="card-icon">
+        <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.1">
+          <line x1="18" y1="4" x2="18" y2="32"/>
+          <path d="M18 10 C14 10 10 13 10 17 C10 21 14 21 18 21"/>
+          <path d="M18 10 C22 10 26 13 26 17 C26 21 22 21 18 21"/>
+          <circle cx="18" cy="4" r="2.5"/>
+          <circle cx="18" cy="32" r="2.5"/>
+        </svg>
+      </div>
+      <div class="card-sub">MSK · 4 bilans spécialisés</div>
+      <h2 class="card-title">Musculo-squelettique</h2>
+      <p class="card-desc">Coiffe · Lombalgie · LCA · Cheville. Conservateur ou post-op. QuickDASH · STarT Back · IKDC · CAIT.</p>
+      <div class="card-cta">Faire mon bilan<svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+    </a>
+
+    <!-- 04 · Gynéco — beige plus clair -->
+    <a class="card" href="kap-gyneco.html" style="background:#F9F4ED;border-color:rgba(184,147,58,0.10)">
+      <span class="card-num">04</span>
+      <div class="card-icon">
+        <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.1">
+          <circle cx="18" cy="14" r="8"/>
+          <line x1="18" y1="22" x2="18" y2="30"/>
+          <line x1="13" y1="27" x2="23" y2="27"/>
+          <path d="M13 11 Q18 8 23 11"/>
+        </svg>
+      </div>
+      <div class="card-sub">Gynéco · 3 bilans</div>
+      <h2 class="card-title">Santé féminine</h2>
+      <p class="card-desc">Ménopause · Endométriose · Périnée. MRS · EHP-5 · ICIQ-SF · FSFI-6 · Score clinique validé.</p>
+      <div class="card-cta">Faire mon bilan<svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+    </a>
+
+    <!-- 05 · ENCORE — beige le plus clair -->
+    <a class="card card-encore-unified" href="kap-encore.html" style="background:#FBF8F3;border-color:rgba(184,147,58,0.08)">
+      <span class="card-num">05</span>
+      <div class="card-icon">
+        <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="18" cy="12" r="5"/>
+          <path d="M8 28 C8 22 12 18 18 18 C24 18 28 22 28 28"/>
+          <line x1="14" y1="28" x2="14" y2="24"/>
+          <line x1="22" y1="28" x2="22" y2="24"/>
+        </svg>
+      </div>
+      <div class="card-sub" style="display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:var(--gold);display:inline-block"></span>Programme 65 ans &amp; +</div>
+      <h2 class="card-title" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(22px,2vw,28px)">ENCORE</h2>
+      <p class="card-desc">Bilan chutes, équilibre, autonomie. Programme de remise en forme personnalisé — bilan et suivi KAP IA.</p>
+      <div class="card-cta" style="margin-top:auto">Commencer mon programme<svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ÉQUIPE SOIGNANTE -->
+<section class="eq-section" id="equipe">
+  <div class="eq-inner">
+
+    <div style="text-align:center;margin-bottom:56px">
+      <p style="font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Votre équipe</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:300;color:var(--ink);line-height:1.18;margin-bottom:16px">Derrière chaque guérison,<br><em style="color:var(--gold)">il y a des humains.</em></h2>
+      <p style="font-size:14px;color:var(--ink-xs);max-width:560px;margin:0 auto;line-height:1.75">KAP IA est là entre les rendez-vous — pour expliquer, orienter, préparer.<br>Pas à la place de votre équipe soignante. Avec elle.</p>
+    </div>
+
+    <div class="eq-grid" style="display:grid;grid-template-columns:repeat(6,1fr);max-width:980px;margin:0 auto 56px;border:1px solid var(--line)">
+
+      <div class="eq-pro">
+        <span class="eq-num">01</span>
+        <div class="eq-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1">
+            <circle cx="16" cy="9" r="4"/>
+            <path d="M8 28C8 22 11 18 16 18C21 18 24 22 24 28"/>
+            <line x1="13" y1="15" x2="10" y2="20"/>
+            <line x1="19" y1="15" x2="22" y2="20"/>
+          </svg>
+        </div>
+        <div class="eq-title">Médecin</div>
+        <p class="eq-desc">Diagnostiquer, prescrire, coordonner votre parcours de soins.</p>
+      </div>
+
+      <div class="eq-pro">
+        <span class="eq-num">02</span>
+        <div class="eq-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M10 6L22 6L26 10L26 26L6 26L6 10Z"/>
+            <line x1="16" y1="12" x2="16" y2="20"/>
+            <line x1="12" y1="16" x2="20" y2="16"/>
+          </svg>
+        </div>
+        <div class="eq-title">Chirurgien</div>
+        <p class="eq-desc">Réparer la structure avec précision là où les autres traitements ont leurs limites.</p>
+      </div>
+
+      <div class="eq-pro">
+        <span class="eq-num">03</span>
+        <div class="eq-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M8 14C8 14 6 12 6 10C6 8 8 6 10 6C11.5 6 13 7.5 13 9C13 7.5 14.5 6 16 6C18 6 20 8 20 10L20 14L22 14C24 14 26 16 26 18L26 24L8 24Z"/>
+          </svg>
+        </div>
+        <div class="eq-title">Infirmière</div>
+        <p class="eq-desc">Surveiller, soigner, être là chaque jour. Le regard quotidien qui rassure.</p>
+      </div>
+
+      <div class="eq-pro">
+        <span class="eq-num">04</span>
+        <div class="eq-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M8 20C8 14 12 10 16 10C20 10 24 14 24 20"/>
+            <path d="M6 24C6 22 8 20 11 20L21 20C24 20 26 22 26 24"/>
+            <circle cx="16" cy="7" r="2.5"/>
+          </svg>
+        </div>
+        <div class="eq-title">Kinésithérapeute</div>
+        <p class="eq-desc">Les mains, l'œil, le mouvement. Le toucher qui réapprend au corps à fonctionner.</p>
+      </div>
+
+      <div class="eq-pro">
+        <span class="eq-num">05</span>
+        <div class="eq-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1">
+            <ellipse cx="16" cy="22" rx="10" ry="4"/>
+            <path d="M8 22L8 18C8 14 10 12 13 11C13 8 14.5 6 16 6C17.5 6 19 8 19 11C22 12 24 14 24 18L24 22"/>
+          </svg>
+        </div>
+        <div class="eq-title">Podologue</div>
+        <p class="eq-desc">L'appui, la posture, la marche. Tout équilibre commence par le contact avec le sol.</p>
+      </div>
+
+      <div class="eq-pro" style="border-right:none">
+        <span class="eq-num">06</span>
+        <div class="eq-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1">
+            <circle cx="16" cy="12" r="6"/>
+            <line x1="16" y1="18" x2="16" y2="26"/>
+            <path d="M12 26L20 26"/>
+            <path d="M10 12C10 8 13 6 16 6"/>
+            <path d="M22 14C22 17 19 18 16 18"/>
+          </svg>
+        </div>
+        <div class="eq-title">Psychologue</div>
+        <p class="eq-desc">L'invisible, la blessure intérieure. Guérir le corps sans soigner l'esprit ne suffit pas.</p>
+      </div>
+
+    </div>
+
+    <!-- Message central -->
+    <div style="max-width:640px;margin:0 auto;text-align:center;padding:44px 52px;border:1px solid var(--gold-line);background:var(--cream-w);position:relative">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),var(--gold-l),transparent)"></div>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2vw,23px);font-style:italic;font-weight:400;line-height:1.62;color:var(--ink);margin-bottom:24px">
+        KAP IA a les connaissances et le temps.<br>
+        Votre équipe a les mains, l'œil et <span style="color:var(--gold);font-style:normal">le lien humain.</span><br>
+        <span style="font-style:normal;font-weight:500">Ensemble, vous guérissez.</span>
+      </p>
+      <div style="width:40px;height:1px;background:var(--gold-line);margin:0 auto 18px"></div>
+      <p style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--ink-xs)">KAP · Kiné · Activité · Prévention · Gagny · Chessy</p>
+    </div>
+
+  </div>
+</section>
+<!-- ══ CTA KAP IA ══ -->
+<section class="kap-ia-cta">
+  <p class="kap-ia-cta-label">Orientation</p>
+  <h2 class="kap-ia-cta-title">
+    Vous ne trouvez pas<br>
+    <em>votre situation ?</em>
+  </h2>
+  <p class="kap-ia-cta-sub">
+    KAP IA est là pour vous orienter vers la bonne spécialité —
+    posez votre question, décrivez ce que vous vivez.
+    Pas besoin des bons mots médicaux.
+  </p>
+  <button class="kap-ia-cta-btn" onclick="openTrace()">
+    <div class="kap-ia-dot"></div>
+    Je suis là — parlez-moi
+  </button>
+  <p class="kap-ia-cta-note">Gratuit · Disponible maintenant · Cabinet KAP — Gagny · Chessy</p>
+</section>
+
+<section class="philo" id="philosophie">
+  <div class="philo-inner">
+    <span class="philo-mark">"</span>
+    <blockquote>
+      Soigner, c'est accompagner une personne <em>entière</em> —<br>
+      pas seulement un symptôme.
+    </blockquote>
+    <hr class="philo-sep">
+    <p class="philo-author">Philosophie KAP · PEZZALI AMAR DELATORRE, kinésithérapeute D.E.</p>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="ft-logo">KAP</div>
+  <div class="ft-copy">© 2026 Cabinet KAP — Gagny · Chessy · Seine-Saint-Denis · Seine-et-Marne</div>
+  <div class="ft-links">
+    <a href="#">Mentions légales</a>
+    <a href="#">Confidentialité</a>
+    <a href="#">Contact</a>
+    <a href="kap-protocoles.html">Protocoles</a>
+  </div>
+
+<!-- LIEN FEEDBACK BETA -->
+<div style="text-align:center;padding:20px;background:rgba(184,149,82,0.05);border-top:1px solid rgba(184,149,82,0.1);">
+  <p style="font-size:12px;color:#7A6E5F;margin-bottom:8px;">Vous testez la version bêta de KAP</p>
+  <a href="kap-beta-feedback.html"
+    style="display:inline-flex;align-items:center;gap:8px;padding:10px 24px;
+           border-radius:24px;border:1.5px solid rgba(184,149,82,0.3);
+           color:#B89552;font-family:'Jost',sans-serif;font-size:12px;
+           text-decoration:none;transition:all .2s;">
+    ✦ Donner mon avis sur KAP
+  </a>
+</div>
+
+<div style="text-align:center;padding:16px 24px 32px;border-top:1px solid rgba(184,149,82,0.08)">
+  <a href="kap-references.html"
+     style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:1.5px;
+            text-transform:uppercase;color:rgba(184,149,82,0.55);text-decoration:none;
+            transition:color .2s;display:inline-flex;align-items:center;gap:7px;">
+    <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 8h12M10 4l4 4-4 4"/></svg>
+    Références scientifiques — base EBM de KAP
+  </a>
+</div>
+
+</footer>
+
+<!-- ── OVERLAY CHAT KAP IA ── -->
+<div class="overlay" id="overlay" onclick="bgClose(event)">
+  <div class="panel" id="panel">
+
+    <div class="p-head">
+      <div class="p-av">🤝</div>
+      <div class="p-info">
+        <div class="p-name">KAP IA</div>
+        <div class="p-status" id="p-status">Par Marc Pezzali, MK-DE · Gagny · Chessy</div>
+      </div>
+      <button class="p-close" onclick="closeChat()">✕</button>
+    </div>
+
+    <div class="sit-bar">
+      <div class="sit-bar-label">Spécialité</div>
+      <div class="sit-bar-btns">
+        <button class="s-btn" data-sit="douleur"   onclick="setSit(this)">🦴 Musculo-squelettique</button>
+        <button class="s-btn" data-sit="chronique" onclick="setSit(this)">⚡ Douleur chronique</button>
+
+      </div>
+    </div>
+
+    <div class="msgs" id="msgs">
+    <div class="chat-watermark">
+      <span>La santé est un art.</span>
+      <span>La science est son outil.</span>
+    </div></div>
+    <div id="anc"></div>
+
+    <div class="izone">
+      <div class="disc" id="disc">KAP IA est un outil d'information, pas un substitut à votre médecin. Urgences : 15. · <a href="kap-beta-feedback.html?module=general" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:2px;white-space:nowrap">Donner mon avis →</a></div>
+      <div class="ibox">
+        <textarea id="g-inp" placeholder="Écrivez ici..." rows="1" oninput="onI(this)" onkeydown="onK(event)"></textarea>
+        <button class="snd" id="g-snd" onclick="send()">
+          <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
+      </div>
+      <div class="chat-close-bar">
+      <button class="chat-close-btn" onclick="closeChatToFeedback('general')">
+        <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        Terminer et évaluer cette session
+      </button>
+      <span class="chat-close-label">En évaluant notre travail ensemble, vous nous permettez<br>de nous améliorer et de garantir un meilleur suivi aux patients.</span>
+    </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let kapTraceShown=false;
+let messageCount=0;
+let sit='general', hist=[], mc=0;
+
+const OPENS={
+  douleur:   `Bonjour. Je suis là.\n\nVous avez une douleur qui dure depuis un moment, ou qui revient régulièrement. C'est souvent là que le corps a besoin d'un vrai accompagnement.\n\nDécrivez-moi où vous avez mal et depuis combien de temps.`,
+  chronique: `Bonjour. Je vous entends.\n\nVivre avec une douleur chronique, c'est épuisant — pas seulement physiquement. Et souvent on a l'impression d'avoir tout essayé.\n\nQu'est-ce que vous traversez en ce moment ?`,
+  postop:    `Bonjour. Je suis là avec vous.\n\nLa période post-opératoire est souvent mal accompagnée — on rentre chez soi avec peu d'explications sur ce qui va se passer.\n\nQuelle opération avez-vous eue, et où en êtes-vous dans votre récupération ?`,
+  neuro:     `Bonjour. Je suis là.\n\nLes pathologies neurologiques demandent un accompagnement patient et progressif, adapté à ce que votre corps peut faire aujourd'hui.\n\nDites-moi ce que vous vivez en ce moment.`,
+  general:   `Bonjour. Je suis là avec vous.\n\nDites-moi ce qui vous amène. Pas besoin de trouver les bons mots médicaux — décrivez simplement ce que vous vivez.`
+};
+
+const LABELS={
+  douleur:   'Kinésithérapeute MSK · Disponible maintenant',
+  chronique: 'Spécialiste douleur chronique · Disponible maintenant',
+  postop:    'Rééducation post-op · Disponible maintenant',
+  neuro:     'Kinésithérapeute neurologique · Disponible maintenant',
+  general:   'Kinésithérapeute spécialisé · Disponible maintenant'
+};
+
+const SYS=()=>{
+  if(sit==='postop') return `Tu es KAP IA, assistant du cabinet KAP (Kiné, Activité, Prévention), PEZZALI AMAR DELATORRE, kinésithérapeute D.E., Gagny et Chessy.
+
+SPÉCIALITÉ : Rééducation post-opératoire.
+
+PHILOSOPHIE : L'opération répare. La rééducation réapprend au corps à s'en servir. Le patient a peur de forcer — ton rôle est de distinguer la bonne douleur de la mauvaise, et transformer la peur en progression confiante.
+
+SCIENCE EN LANGAGE HUMAIN :
+- Mobilisation précoce (24h post-op) réduit de 30% les complications et 40% le risque thromboembolique (Kehlet et Wilmore, 2008).
+- Atrophie musculaire : 2-3% de masse perdue par jour d'immobilisation (Bergouignan, 2011). En clair : bouger précocement protège le muscle.
+- Massage cicatriciel dès J21 : réduit de 60% le risque d'adhérence. En clair : la cicatrice rigide colle les tissus — le massage la libère.
+
+BONNE DOULEUR (normale) : tiraillement cicatrice, courbatures 24-48h, légère chaleur après effort.
+MAUVAISE DOULEUR (médecin) : fièvre + douleur locale, rougeur chaude cicatrice, gonflement brutal mollet.
+
+GARDES-FOUS : fièvre + douleur = médecin. Gonflement mollet brutal = urgences (phlébite). Perte force brutale = urgences.
+
+
+════════════════════════════════════
+RÈGLE LÉGALE ABSOLUE — DIAGNOSTIC MÉDICAL
+════════════════════════════════════
+EN FRANCE, POSER UN DIAGNOSTIC EST UN ACTE MÉDICAL RÉSERVÉ EXCLUSIVEMENT AU MÉDECIN
+(Article L.4161-1 du Code de la Santé Publique — exercice illégal de la médecine).
+
+Un kinésithérapeute ne pose PAS de diagnostic. KAP IA ne pose JAMAIS de diagnostic.
+
+INTERDICTIONS ABSOLUES — ces formulations sont PROHIBÉES sans exception :
+✗ "Vous avez une [pathologie]"
+✗ "C'est une [pathologie]"
+✗ "Il s'agit d'une [pathologie]"
+✗ "Vous souffrez d'une [pathologie]"
+✗ "Votre [douleur/symptôme] est une [pathologie]"
+✗ "C'est clairement un/une [pathologie]"
+
+FORMULATIONS OBLIGATOIRES à la place :
+✓ "Les symptômes que vous décrivez peuvent évoquer..."
+✓ "Cela ressemble à ce qu'on observe dans..."
+✓ "D'après votre description, une piste possible serait..."
+✓ "Seul un médecin peut confirmer ce dont il s'agit. En attendant..."
+✓ "Ces signes méritent une consultation médicale pour être identifiés précisément."
+
+RÈGLE PRATIQUE : à chaque fois que tu es tenté d'écrire "vous avez X",
+remplace systématiquement par "cela évoque X — votre médecin pourra confirmer."
+
+Cette règle s'applique même si le patient décrit des symptômes très évocateurs.
+Même si tu es certain à 100%. JAMAIS de diagnostic. Toujours une orientation.
+
+RÈGLE : jamais un exercice sans expliquer pourquoi. Ouvrir naturellement l'espace quand c'est utile — pas une formule systématique. Science traduite en langage courant obligatoire.
+
+*KAP IA est un outil d'information. En cas de doute, consultez votre professionnel de santé. Urgences : 15.*
+
+Situation : post-opératoire`;
+
+  if(sit==='neuro') return `Tu es KAP IA, assistant du cabinet KAP (Kiné, Activité, Prévention), PEZZALI AMAR DELATORRE, kinésithérapeute D.E., Gagny et Chessy.
+
+SPÉCIALITÉ : Rééducation neurologique.
+
+PHILOSOPHIE : Votre cerveau sait encore bouger. Il a juste besoin qu'on lui rappelle comment. La neuroplasticité est réelle — la science le prouve.
+
+SCIENCE EN LANGAGE HUMAIN :
+- Neuroplasticité (Hebb, 1949) : chaque répétition renforce le circuit neuronal. Métaphore : "Un sentier dans une forêt — plus on le parcourt, plus il devient praticable."
+- Parkinson LSVT BIG : exercices à grande amplitude, amélioration de 35% de la vitesse de marche (Ebersbach, 2010). En clair : faire GRAND recalibre le cerveau parkinsonien.
+- Marche 3x30 min/semaine : réduit de 30% le risque de chutes (Sherrington, méta-analyse 17 essais).
+- SEP : l'exercice doux RÉDUIT la fatigue neurologique — contre-intuitif mais prouvé (Motl, 2009).
+
+GARDES-FOUS : perte de force brutale unilatérale = SAMU 15. Troubles parole brutaux = SAMU 15. Maux de tête en coup de tonnerre = SAMU 15.
+
+RÈGLE : jamais un exercice sans expliquer ce qui se passe dans le cerveau. Laisser l'espace quand quelque chose est complexe — un geste humain, pas un protocole. Science traduite obligatoire.
+
+*KAP IA est un outil d'information. En cas de doute, consultez votre professionnel de santé. Urgences : 15.*
+
+Situation : neurologie`;
+
+  return `Tu es KAP IA, assistant du cabinet KAP (Kiné, Activité, Prévention), PEZZALI AMAR DELATORRE, kinésithérapeute D.E., Gagny et Chessy.
+
+SPÉCIALITÉ : ` + sit + `
+
+PHILOSOPHIE FONDAMENTALE :
+Le patient a le droit de comprendre. Pas juste recevoir un conseil — comprendre pourquoi, ce que ça fait dans son corps, et voir lui-même la progression.
+
+Ce cabinet soigne le corps et ce qui l'entoure. Un moment physiquement difficile peut devenir un moment humain — c'est une intention de soin, pas un hasard.
+Les professionnels de santé eux-mêmes font confiance à ce cabinet. Ce n'est pas un détail.
+La bienveillance n'est pas un bonus. C'est la condition du soin.
+
+CE QUE LE CABINET FAIT RÉELLEMENT :
+Il ne se contente pas de traiter la structure. Il prend le temps d'écouter ce que le patient n'arrive pas à mettre en mots. Il adapte — pas de protocole standard appliqué à tous. Il explique ce qui se passe dans le corps pour que le patient comprenne et soit acteur de sa récupération. Il accueille aussi bien la douleur physique que ce qu'elle fait à la vie.
+
+LA BOUCLE DE MARC :
+1. Évaluer : recueillir le ressenti avec les vrais mots du patient
+2. Expliquer le pourquoi : jamais un exercice sans l'explication de ce qui se passe dans le corps
+3. Agir : un exercice concret, faisable ce soir, seul, à la maison
+4. Science en langage humain : terme clinique + explication simple + preuve chiffrée + métaphore
+5. Laisser l'espace — quand quelque chose est complexe, ouvrir naturellement. Pas une formule à chaque fois.
+
+RÈGLE ABSOLUE : jamais un conseil sans expliquer pourquoi. Toujours la science traduite. Laisser l'espace quand ça sert — pas systématiquement.
+
+GARDES-FOUS : douleur nocturne + amaigrissement = médecin urgent. Perte de force brutale = urgences 15. Fièvre + douleur articulaire = médecin.
+
+*KAP IA est un outil d'information. En cas de doute, consultez votre professionnel de santé. Urgences : 15.*`;
+};
+
+function openKapChat(s){
+  sit=s;
+  hist=[];mc=0;
+  document.getElementById('msgs').innerHTML='';
+  document.getElementById('disc').classList.remove('on');
+  document.querySelectorAll('.s-btn').forEach(b=>b.classList.toggle('on',b.dataset.sit===s));
+  document.getElementById('p-status').textContent=LABELS[s]||LABELS.general;
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  startWithSit(s);
+}
+
+function openChat(){
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  if(hist.length===0)startWithSit(sit);
+}
+function startWithSit(s){
+  const txt=OPENS[s]||OPENS.general;
+  hist=[{role:'assistant',content:txt}];
+  addKap(txt);
+}
+
+function setSit(btn){
+  const s=btn.dataset.sit;
+  sit=s;
+  hist=[];mc=0;
+  document.getElementById('msgs').innerHTML='';
+  document.getElementById('disc').classList.remove('on');
+  document.querySelectorAll('.s-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('p-status').textContent=LABELS[s]||LABELS.general;
+  startWithSit(s);
+}
+
+function closeChat(){
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function bgClose(e){if(e.target===document.getElementById('overlay'))closeChat();}
+
+function addKap(txt){
+  const{clean,res}=parse(txt);
+  const row=document.createElement('div');row.className='mrow';
+  let rh='';
+  if(res.length){
+    rh='<div class="resources">'+res.map(r=>{
+      const h=r.url?`href="https://${r.url}" target="_blank" rel="noopener"`:'';
+      return`<a class="rpill" ${h}>${r.icon} ${r.label}</a>`;
+    }).join('')+'</div>';
+  }
+  var refData=parseRefs(clean);var cleanF=refData.clean;var refs=refData.refs;
+  var refHtml='';
+  if(refs.length){
+    refHtml='<div class="ref-pills">'+refs.map(function(r){
+      var tag=r.url?'<a class="ref-pill" href="'+r.url+'" target="_blank" rel="noopener">':'<span class="ref-pill">';
+      var end=r.url?'</a>':'</span>';
+      return tag+'<span class="ref-pill-icon">◦</span>'+r.label+end;
+    }).join('')+'</div>';
+  }
+  row.innerHTML=`<div class="mkap"><div class="kav">🤝</div><div class="bk"><div class="sndr">KAP IA</div>${fmt(cleanF)}${rh}${refHtml}<button class="proto-save-btn" onclick="saveProtocol(this)">📋 Sauvegarder le protocole</button></div></div>`;
+  document.getElementById('msgs').appendChild(row);scr();
+  messageCount++;
+  if(messageCount===3&&!kapTraceShown){kapTraceShown=true;setTimeout(()=>triggerKapTrace(),1200);}
+}
+
+function addUser(txt){
+  const row=document.createElement('div');row.className='mrow';
+  row.innerHTML=`<div class="musr"><div class="bu">${esc(txt)}</div></div>`;
+  document.getElementById('msgs').appendChild(row);scr();
+}
+
+function addTyp(){
+  const el=document.createElement('div');el.id='typ';el.className='mrow';
+  el.innerHTML=`<div class="typ"><div class="kav">🤝</div><div class="tdots"><span></span><span></span><span></span></div></div>`;
+  document.getElementById('msgs').appendChild(el);scr();
+}
+function rmTyp(){const t=document.getElementById('typ');if(t)t.remove();}
+
+function onI(el){
+  el.style.height='auto';
+  el.style.height=Math.min(el.scrollHeight,90)+'px';
+  document.getElementById('snd').classList.toggle('on',el.value.trim().length>0);
+}
+function onK(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}}
+
+async function send(){
+  const inp=document.getElementById('g-inp');
+  const txt=inp.value.trim();if(!txt)return;
+  inp.value='';
+  document.getElementById('g-snd').classList.remove('on');
+  addUser(txt);mc++;
+  hist.push({role:'user',content:txt});
+  addTyp();
+  try{
+    const r=await fetch('https://gentle-poetry-2315.kinepezzali.workers.dev',{
+      method:'POST',
+      headers:{'Content-Type':'application/json',},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1024,system:SYS(),messages:hist})
+    });
+    const d=await r.json();
+    rmTyp();
+    const rep=d.content?.[0]?.text||'Je rencontre une difficulte technique.';
+    hist.push({role:'assistant',content:rep});
+    addKap(rep);
+  }catch(e){
+    rmTyp();
+    addKap('Erreur : '+e.message);
+  }
+}
+
+function parse(txt){
+  const re=/\[RES:\s*([^|]+)\s*\|\s*([^|]+)\s*\|\s*([^\]]*)\]/g;
+  const res=[];
+  const clean=txt.replace(re,(_,icon,label,url)=>{res.push({icon:icon.trim(),label:label.trim(),url:url.trim()});return'';}).trim();
+  return{clean,res};
+}
+function fmt(t){return t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');}
+function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function scr(){document.getElementById('anc')?.scrollIntoView({behavior:'smooth'});}
+
+// ══ KAP-TRACE ══
+
+function triggerKapTrace() {
+  const row = document.createElement('div');
+  row.className = 'mrow';
+  row.innerHTML = `
+    <div class="mkap">
+      <div class="kav">🤝</div>
+      <div class="bk">
+        <div class="sndr">KAP IA</div>
+        <p>Avant de continuer — j'aimerais qu'on fasse un petit point ensemble. 5 questions, 3 minutes. Ça m'aide à vous répondre vraiment.</p>
+        <button onclick="openTrace()" style="margin-top:12px;padding:10px 20px;border-radius:20px;background:#A85470;border:none;color:white;font-family:'Jost',sans-serif;font-size:12px;cursor:pointer;width:100%;transition:all .2s;">✦ Faire mon bilan KAP-TRACE</button>
+      </div>
+    </div>
+  `;
+  document.getElementById('msgs').appendChild(row);
+  scr();
+}
+
+let traceCurrentStep = 1;
+let traceTotalSteps = 6;
+const traceData = {eva:5,activity:null,activityText:'',efforts:[],effortText:'',goal:'',progress:null,progressText:''};
+const EVA_DESCS = {0:"Aucune douleur — vous vous sentez bien",1:"Douleur très légère — à peine perceptible",2:"Douleur légère — présente mais discrète",3:"Douleur modérée légère — gênante par moments",4:"Douleur modérée — impacte certaines activités",5:"Douleur modérée — présente mais gérable",6:"Douleur importante — limite vos activités",7:"Douleur forte — difficile à ignorer",8:"Douleur très forte — concentrer devient difficile",9:"Douleur sévère — quasi-impossible de fonctionner",10:"Douleur maximale — insupportable"};
+const STEP_LABELS_RAPIDE = ["Votre situation","La Douleur","Ce qui vous manque","Ce que vous faites déjà","Votre objectif","Ce qui progresse"];
+const STEP_LABELS_APPROFONDI = ["Votre situation","La Douleur","Ce qui vous manque","Ce que vous faites déjà","Votre objectif","Ce qui progresse","Question 7","Question 8","Question 9","Question 10"];
+let STEP_LABELS = [...STEP_LABELS_RAPIDE];
+let bilanMode = 'rapide';
+
+function openTrace(){
+  document.getElementById('trace-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  showBilanChoice();
+}
+function showBilanChoice(){
+  document.getElementById('bilan-choice').style.display='flex';
+  document.querySelector('.tp-progress').style.display='none';
+  document.getElementById('tp-body').style.display='none';
+  document.getElementById('tp-footer').style.display='none';
+  if(document.getElementById('trace-result'))document.getElementById('trace-result').style.display='none';
+}
+function startBilan(mode){
+  bilanMode=mode;
+  traceTotalSteps=mode==='approfondi'?10:6;
+  STEP_LABELS=mode==='approfondi'?[...STEP_LABELS_APPROFONDI]:[...STEP_LABELS_RAPIDE];
+  document.getElementById('bilan-choice').style.display='none';
+  document.querySelector('.tp-progress').style.display='';
+  document.getElementById('tp-body').style.display='';
+  document.getElementById('tp-footer').style.display='';
+  for(let i=7;i<=10;i++){const d=document.getElementById('dot-'+i);if(d)d.closest('.tp-step').style.display=mode==='approfondi'?'':'none';}
+  resetTrace();
+}
+function closeTrace(){document.getElementById('trace-overlay').classList.remove('open');document.body.style.overflow='';}
+function overlayClose(e){if(e.target===document.getElementById('trace-overlay'))closeTrace();}
+
+function resetTrace(){
+  traceCurrentStep=1;
+  Object.assign(traceData,{eva:5,activity:null,activityText:'',efforts:[],effortText:'',goal:'',progress:null,progressText:''});
+  document.getElementById('tp-body').style.display='';
+  document.getElementById('tp-footer').style.display='';
+  document.getElementById('trace-result').style.display='none';
+  document.getElementById('tp-progress').style.display='';
+  document.querySelectorAll('.tp-step-content').forEach(s=>s.classList.remove('active'));
+  document.getElementById('step-1').classList.add('active');
+  for(let i=1;i<=5;i++){const dot=document.getElementById('dot-'+i);dot.classList.remove('active','done');dot.textContent=i;if(i<5)document.getElementById('line-'+i).classList.remove('done');}
+  document.getElementById('dot-1').classList.add('active');
+  document.getElementById('eva-slider').value=5;
+  updateEva(5);
+  document.querySelectorAll('.tp-chip').forEach(c=>c.classList.remove('selected'));
+  document.querySelectorAll('.tp-textarea').forEach(t=>t.value='');
+  document.querySelectorAll('.tp-progress-opt').forEach(o=>o.classList.remove('selected'));
+  updateTraceNav();
+}
+
+function updateEva(val){
+  traceData.eva=parseInt(val);
+  document.getElementById('eva-display').textContent=val;
+  document.getElementById('eva-desc').textContent=EVA_DESCS[val];
+  const slider=document.getElementById('eva-slider');
+  slider.style.setProperty('--val',(val/10*100)+'%');
+}
+
+function selectChip(el,group){
+  document.querySelectorAll(`#${group}-chips .tp-chip`).forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  if(group==='activity'){traceData.activity=el.dataset.val;checkStep2();}
+}
+
+function toggleChip(el,group){
+  el.classList.toggle('selected');
+  traceData.efforts=Array.from(document.querySelectorAll('#effort-chips .tp-chip.selected')).map(c=>c.dataset.val);
+}
+
+function selectProgress(el,val){
+  document.querySelectorAll('.tp-progress-opt').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  traceData.progress=val;
+}
+
+function checkStep2(){traceData.activityText=document.getElementById('activity-text').value;}
+function checkStep4(){const val=document.getElementById('goal-text').value;traceData.goal=val;document.getElementById('goal-count').textContent=val.length+' / 200';}
+
+function updateTraceNav(){
+  const back=document.getElementById('btn-back');
+  const next=document.getElementById('btn-next');
+  back.style.visibility=traceCurrentStep>1?'visible':'hidden';
+  next.textContent=traceCurrentStep===traceTotalSteps?'Voir mon bilan →':'Suivant →';
+  document.getElementById('tp-progress-label').textContent=`Étape ${traceCurrentStep} sur ${traceTotalSteps} · ${STEP_LABELS[traceCurrentStep-1]}`;
+}
+
+function nextStep(){
+  if(traceCurrentStep===2){traceData.activityText=document.getElementById('activity-text').value;}
+  if(traceCurrentStep===3){traceData.effortText=document.getElementById('effort-text').value;}
+  if(traceCurrentStep===4){traceData.goal=document.getElementById('goal-text').value;}
+  if(traceCurrentStep===5){traceData.progressText=document.getElementById('progress-text').value;}
+  if(traceCurrentStep===traceTotalSteps){showTraceResult();return;}
+  const oldDot=document.getElementById('dot-'+traceCurrentStep);
+  oldDot.classList.remove('active');oldDot.classList.add('done');oldDot.textContent='✓';
+  if(traceCurrentStep<5)document.getElementById('line-'+traceCurrentStep).classList.add('done');
+  document.getElementById('step-'+traceCurrentStep).classList.remove('active');
+  traceCurrentStep++;
+  document.getElementById('step-'+traceCurrentStep).classList.add('active');
+  document.getElementById('dot-'+traceCurrentStep).classList.add('active');
+  document.getElementById('tp-body').scrollTop=0;
+  updateTraceNav();
+}
+
+function prevStep(){
+  if(traceCurrentStep<=1)return;
+  document.getElementById('step-'+traceCurrentStep).classList.remove('active');
+  const dot=document.getElementById('dot-'+traceCurrentStep);dot.classList.remove('active');
+  traceCurrentStep--;
+  const prevDot=document.getElementById('dot-'+traceCurrentStep);
+  prevDot.classList.remove('done','active');prevDot.classList.add('active');prevDot.textContent=traceCurrentStep;
+  if(traceCurrentStep<5)document.getElementById('line-'+traceCurrentStep).classList.remove('done');
+  document.getElementById('step-'+traceCurrentStep).classList.add('active');
+  document.getElementById('tp-body').scrollTop=0;
+  updateTraceNav();
+}
+
+function showTraceResult(){
+  document.getElementById('tp-body').style.display='none';
+  document.getElementById('tp-footer').style.display='none';
+  document.querySelector('.tp-progress').style.display='none';
+  const result=document.getElementById('trace-result');result.style.display='flex';
+  const evaColor=traceData.eva<=3?'#2E7D32':traceData.eva<=6?'#A85470':'#7A3350';
+  const activityLabel=traceData.activity?document.querySelector(`[data-val="${traceData.activity}"]`)?.textContent?.trim()||traceData.activity:traceData.activityText||'Non précisée';
+  const effortsLabel=traceData.efforts.length>0?traceData.efforts.map(e=>document.querySelector(`[data-val="${e}"]`)?.textContent?.trim()||e).join(', '):traceData.effortText||'Pas encore commencé';
+  const progressLabel=traceData.progress==='mieux'?'📈 En amélioration':traceData.progress==='difficile'?'📉 Plus difficile':'➡️ Stable';
+  document.getElementById('tr-cards').innerHTML=`
+    <div class="tr-card"><div class="tr-card-label">📊 Douleur aujourd'hui</div><div class="tr-card-value" style="font-size:32px;color:${evaColor}">${traceData.eva}/10</div><div class="tr-card-sub">${EVA_DESCS[traceData.eva]}</div></div>
+    <div class="tr-card"><div class="tr-card-label">🎯 Ce qui vous manque</div><div class="tr-card-value">${activityLabel}</div><div class="tr-card-sub">Votre priorité fonctionnelle</div></div>
+    <div class="tr-card"><div class="tr-card-label">💪 Ce que vous faites</div><div class="tr-card-value" style="font-size:13px">${effortsLabel}</div><div class="tr-card-sub">Vos efforts existants</div></div>
+    <div class="tr-card"><div class="tr-card-label">🌱 Ce qui progresse</div><div class="tr-card-value" style="font-size:14px">${progressLabel}</div><div class="tr-card-sub">${traceData.progressText||'Votre trajectoire'}</div></div>
+  `;
+  generateKapTraceResponse();
+}
+
+function generateKapTraceResponse(){
+  const el=document.getElementById('tr-ia-text');
+  el.innerHTML='<em style="color:#A08080">KAP IA analyse votre bilan...</em>';
+  setTimeout(()=>{
+    const eva=traceData.eva;
+    const activity=traceData.activity||traceData.activityText||'vos activités';
+    const goal=traceData.goal||'reprendre vos activités habituelles';
+    const progress=traceData.progress;
+    let response='';
+    if(eva<=3){response+=`Votre douleur à ${eva}/10 est bien maîtrisée — c'est une bonne base de travail. `;}
+    else if(eva<=6){response+=`Une douleur à ${eva}/10, c'est réel et ça mérite qu'on en tienne compte. Vous avez raison de vouloir avancer malgré ça. `;}
+    else{response+=`À ${eva}/10, votre douleur est significative. Avant tout exercice, l'objectif est de la ramener sous 5/10 — c'est là que la récupération peut vraiment commencer. `;}
+    response+=`<br><br>Vous me dites que <strong>${activity}</strong> est ce qui vous manque le plus — et votre objectif dans 4 semaines, c'est de <strong>${goal}</strong>. C'est un cap clair, concret, atteignable. `;
+    if(progress==='mieux'){response+=`<br><br>Et vous percevez déjà une amélioration — c'est le signe que votre corps répond. Même infime, ce progrès est réel et documenté. Continuez.`;}
+    else if(progress==='difficile'){response+=`<br><br>Vous traversez une période difficile en ce moment. C'est souvent là que l'envie de tout arrêter est la plus forte — et c'est exactement là qu'il faut continuer, différemment. On va ajuster.`;}
+    else{response+=`<br><br>La progression n'est pas encore perceptible — c'est normal à ce stade. La récupération n'est pas linéaire, et les premiers progrès sont souvent invisibles avant de devenir évidents.`;}
+    response+=`<br><br><strong>Pour ce soir :</strong> 5 minutes de respiration diaphragmatique — inspirez 4 secondes, expirez 6 secondes. Ça régule le système nerveux, réduit la perception de la douleur, et prépare votre corps à bouger demain.`;
+    el.innerHTML=response;
+  },1200);
+}
+
+// Init slider KAP-TRACE
+updateEva(5);
+</script>
+
+<!-- ══ OVERLAY KAP-TRACE ══ -->
+<div id="trace-overlay" onclick="overlayClose(event)">
+<div id="trace-panel">
+  <div class="tp-header">
+    <div class="tp-brand">
+      <div class="tp-icon">✦</div>
+      <div>
+        <div class="tp-title">Bilan KAP-TRACE</div>
+        <div class="tp-sub">Trajectory · Resilience · Assessment · Context · Empowerment</div>
+      </div>
+    </div>
+    <button class="tp-close" onclick="closeTrace()">✕</button>
+  </div>
+  <!-- ÉCRAN DE CHOIX -->
+  <div id="bilan-choice" style="display:none">
+    <div class="bc-header-tag">Bilan KAP-TRACE · Orientation</div>
+    <div class="bc-header-title">Comment souhaitez-vous<br><em>commencer ?</em></div>
+    <div class="bc-header-sub">Les deux mènent à une réponse personnalisée. Choisissez selon le temps dont vous disposez.</div>
+    <div class="bc-cards">
+      <div class="bc-card rapide" onclick="startBilan('rapide')">
+        <div class="bc-icon-wrap">
+          <svg width="18" height="18" viewBox="0 0 24 24"><polyline points="13 2 13 9 20 9"/><path d="M3 15V5a2 2 0 0 1 2-2h8l5 5v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2"/><path d="M3 15h8"/><path d="M7 19l-4-4 4-4"/></svg>
+        </div>
+        <div class="bc-name">Bilan rapide</div>
+        <div class="bc-pills">
+          <span class="bc-pill-time">3 min</span>
+          <span class="bc-pill-steps">6 étapes</span>
+        </div>
+        <div class="bc-desc">L'essentiel pour une réponse ciblée ce soir.</div>
+        <div class="bc-cta">Commencer <svg width="14" height="14" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+      </div>
+      <div class="bc-card approfondi" onclick="startBilan('approfondi')">
+        <div class="bc-badge">Recommandé</div>
+        <div class="bc-icon-wrap">
+          <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div class="bc-name">Bilan approfondi</div>
+        <div class="bc-pills">
+          <span class="bc-pill-time">8 min</span>
+          <span class="bc-pill-steps">10 étapes</span>
+        </div>
+        <div class="bc-desc">Pour une réponse encore plus personnalisée à votre situation.</div>
+        <div class="bc-cta">Commencer <svg width="14" height="14" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+      </div>
+    </div>
+    <div class="bc-footer">
+      <div class="bc-footer-icon"><svg width="15" height="15" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="bc-footer-text">Vos réponses sont confidentielles et servent uniquement à personnaliser votre accompagnement.</div>
+    </div>
+  </div>
+
+  <div class="tp-progress">
+    <div class="tp-steps" id="tp-steps">
+      <div class="tp-step"><div class="tp-step-dot active" id="dot-1">1</div><div class="tp-step-line" id="line-1"></div></div>
+      <div class="tp-step"><div class="tp-step-dot" id="dot-2">2</div><div class="tp-step-line" id="line-2"></div></div>
+      <div class="tp-step"><div class="tp-step-dot" id="dot-3">3</div><div class="tp-step-line" id="line-3"></div></div>
+      <div class="tp-step"><div class="tp-step-dot" id="dot-4">4</div><div class="tp-step-line" id="line-4"></div></div>
+      <div class="tp-step"><div class="tp-step-dot" id="dot-5">5</div><div class="tp-step-line" id="line-5"></div></div>
+      <div class="tp-step"><div class="tp-step-dot" id="dot-6">6</div><div class="tp-step-line" id="line-6"></div></div>
+      <div class="tp-step" style="display:none"><div class="tp-step-dot" id="dot-7">7</div><div class="tp-step-line" id="line-7"></div></div>
+      <div class="tp-step" style="display:none"><div class="tp-step-dot" id="dot-8">8</div><div class="tp-step-line" id="line-8"></div></div>
+      <div class="tp-step" style="display:none"><div class="tp-step-dot" id="dot-9">9</div><div class="tp-step-line" id="line-9"></div></div>
+      <div class="tp-step" style="display:none"><div class="tp-step-dot" id="dot-10">10</div><div class="tp-step-line"></div></div>
+    </div>
+    <div class="tp-progress-label" id="tp-progress-label">Étape 1 sur 5 · La Douleur</div>
+  </div>
+  <div class="tp-body" id="tp-body">
+    <div class="tp-step-content active" id="step-1">
+      <div class="tp-step-num">Étape 1 · La Douleur</div>
+      <div class="tp-step-q">Sur 10, comment vous<br><em>sentez-vous aujourd'hui ?</em></div>
+      <div class="eva-wrap">
+        <div class="eva-value" id="eva-display">5</div>
+        <input type="range" class="eva-slider" id="eva-slider" min="0" max="10" value="5" step="1" oninput="updateEva(this.value)">
+        <div class="eva-labels"><span>0 — Aucune douleur</span><span>10 — Maximale</span></div>
+        <div class="eva-desc" id="eva-desc">Douleur modérée — présente mais gérable</div>
+      </div>
+    </div>
+    <div class="tp-step-content" id="step-2">
+      <div class="tp-step-num">Étape 2 · L'Activité Perdue</div>
+      <div class="tp-step-q">Quelle activité du quotidien<br><em>vous manque le plus ?</em></div>
+      <div class="tp-chips" id="activity-chips">
+        <div class="tp-chip" onclick="selectChip(this,'activity')" data-val="marcher"><span class="tp-chip-icon">🚶</span> Marcher</div>
+        <div class="tp-chip" onclick="selectChip(this,'activity')" data-val="dormir"><span class="tp-chip-icon">😴</span> Dormir</div>
+        <div class="tp-chip" onclick="selectChip(this,'activity')" data-val="travailler"><span class="tp-chip-icon">💼</span> Travailler</div>
+        <div class="tp-chip" onclick="selectChip(this,'activity')" data-val="porter"><span class="tp-chip-icon">🛍</span> Porter</div>
+        <div class="tp-chip" onclick="selectChip(this,'activity')" data-val="escaliers"><span class="tp-chip-icon">🪜</span> Escaliers</div>
+        <div class="tp-chip" onclick="selectChip(this,'activity')" data-val="jardiner"><span class="tp-chip-icon">🌱</span> Jardiner</div>
+        <div class="tp-chip" onclick="selectChip(this,'activity')" data-val="conduire"><span class="tp-chip-icon">🚗</span> Conduire</div>
+        <div class="tp-chip" onclick="selectChip(this,'activity')" data-val="sport"><span class="tp-chip-icon">⚽</span> Sport</div>
+      </div>
+      <textarea class="tp-textarea" id="activity-text" placeholder="Ou décrivez autre chose..." oninput="checkStep2()"></textarea>
+    </div>
+    <div class="tp-step-content" id="step-3">
+      <div class="tp-step-num">Étape 3 · L'Effort Existant</div>
+      <div class="tp-step-q">Qu'est-ce que vous faites<br><em>déjà pour aller mieux ?</em></div>
+      <div class="tp-chips" id="effort-chips">
+        <div class="tp-chip" onclick="toggleChip(this,'effort')" data-val="exercices"><span class="tp-chip-icon">🏃</span> Exercices / Kiné</div>
+        <div class="tp-chip" onclick="toggleChip(this,'effort')" data-val="glace"><span class="tp-chip-icon">🧊</span> Glace / Chaleur</div>
+        <div class="tp-chip" onclick="toggleChip(this,'effort')" data-val="medicaments"><span class="tp-chip-icon">💊</span> Médicaments</div>
+        <div class="tp-chip" onclick="toggleChip(this,'effort')" data-val="repos"><span class="tp-chip-icon">🛋</span> Repos</div>
+        <div class="tp-chip" onclick="toggleChip(this,'effort')" data-val="marche"><span class="tp-chip-icon">🚶</span> Marche douce</div>
+        <div class="tp-chip" onclick="toggleChip(this,'effort')" data-val="rien"><span class="tp-chip-icon">🤷</span> Pas encore</div>
+      </div>
+      <textarea class="tp-textarea" id="effort-text" placeholder="Autre chose que vous faites..."></textarea>
+    </div>
+    <div class="tp-step-content" id="step-4">
+      <div class="tp-step-num">Étape 4 · Votre Objectif</div>
+      <div class="tp-step-q">Dans 4 semaines, qu'est-ce que<br><em>vous aimeriez refaire ?</em></div>
+      <p style="font-size:12.5px;color:#A08080;margin-bottom:16px;font-style:italic">Soyez précis — "aller chercher mon pain" vaut mieux que "aller mieux"</p>
+      <textarea class="tp-textarea" id="goal-text" placeholder="Dans 4 semaines, je voudrais..." oninput="checkStep4()" style="min-height:110px"></textarea>
+      <div style="text-align:right;font-size:11px;color:#A08080;margin-top:6px" id="goal-count">0 / 200</div>
+    </div>
+    <div class="tp-step-content" id="step-5">
+      <div class="tp-step-num">Étape 5 · Ce qui Progresse</div>
+      <div class="tp-step-q">Depuis que vous suivez votre rééducation —<br><em>qu'est-ce qui est différent ?</em></div>
+      <div class="tp-progress-opts" id="progress-opts">
+        <div class="tp-progress-opt" onclick="selectProgress(this,'mieux')" data-val="mieux"><span class="tp-progress-opt-icon">📈</span><div class="tp-progress-opt-label">C'est mieux</div></div>
+        <div class="tp-progress-opt" onclick="selectProgress(this,'pareil')" data-val="pareil"><span class="tp-progress-opt-icon">➡️</span><div class="tp-progress-opt-label">Pareil</div></div>
+        <div class="tp-progress-opt" onclick="selectProgress(this,'difficile')" data-val="difficile"><span class="tp-progress-opt-icon">📉</span><div class="tp-progress-opt-label">Plus difficile</div></div>
+      </div>
+      <textarea class="tp-textarea" id="progress-text" placeholder="Décrivez ce changement, même minime..."></textarea>
+    </div>
+  </div>
+    <div class="tp-step-content" id="step-6">
+      <div class="tp-step-num">Étape 6 · Ce qui progresse</div>
+      <div class="tp-step-q">Par rapport au début,<br><em>qu'est-ce qui est différent ?</em></div>
+      <div class="tp-progress-opts" id="progress-opts">
+        <div class="tp-progress-opt" onclick="selectProgress(this,'mieux')" data-val="mieux"><span class="tp-progress-opt-icon">📈</span><div class="tp-progress-opt-label">C'est mieux</div></div>
+        <div class="tp-progress-opt" onclick="selectProgress(this,'pareil')" data-val="pareil"><span class="tp-progress-opt-icon">➡️</span><div class="tp-progress-opt-label">Pareil</div></div>
+        <div class="tp-progress-opt" onclick="selectProgress(this,'difficile')" data-val="difficile"><span class="tp-progress-opt-icon">📉</span><div class="tp-progress-opt-label">C'est plus difficile</div></div>
+        <div class="tp-progress-opt" onclick="selectProgress(this,'debut')" data-val="debut"><span class="tp-progress-opt-icon">🆕</span><div class="tp-progress-opt-label">C'est mon premier bilan</div></div>
+      </div>
+      <textarea class="tp-textarea" id="progress-text" placeholder="Décrivez ce changement, même minime..."></textarea>
+    </div>
+    <div class="tp-step-content" id="step-7">
+      <div class="tp-step-num">Étape 7 · La durée</div>
+      <div class="tp-step-q">Depuis combien de temps<br><em>vivez-vous avec cette situation ?</em></div>
+      <div class="tp-progress-opts">
+        <div class="tp-progress-opt" onclick="selectProgressOpt(this,'duree','recente')" data-val="recente"><span class="tp-progress-opt-icon">📅</span><div class="tp-progress-opt-label">Moins de 3 mois</div></div>
+        <div class="tp-progress-opt" onclick="selectProgressOpt(this,'duree','quelques')" data-val="quelques"><span class="tp-progress-opt-icon">📅</span><div class="tp-progress-opt-label">3 à 6 mois</div></div>
+        <div class="tp-progress-opt" onclick="selectProgressOpt(this,'duree','longue')" data-val="longue"><span class="tp-progress-opt-icon">📅</span><div class="tp-progress-opt-label">6 mois à 1 an</div></div>
+        <div class="tp-progress-opt" onclick="selectProgressOpt(this,'duree','tres-longue')" data-val="tres-longue"><span class="tp-progress-opt-icon">📅</span><div class="tp-progress-opt-label">Plus d'un an</div></div>
+      </div>
+    </div>
+    <div class="tp-step-content" id="step-8">
+      <div class="tp-step-num">Étape 8 · Le sommeil</div>
+      <div class="tp-step-q">Comment dormez-vous<br><em>en ce moment ?</em></div>
+      <div class="tp-progress-opts">
+        <div class="tp-progress-opt" onclick="selectProgressOpt(this,'sommeil','bien')" data-val="bien"><span class="tp-progress-opt-icon">😴</span><div class="tp-progress-opt-label">Je dors bien</div></div>
+        <div class="tp-progress-opt" onclick="selectProgressOpt(this,'sommeil','perturbe')" data-val="perturbe"><span class="tp-progress-opt-icon">🌙</span><div class="tp-progress-opt-label">Sommeil perturbé</div></div>
+        <div class="tp-progress-opt" onclick="selectProgressOpt(this,'sommeil','reveil')" data-val="reveil"><span class="tp-progress-opt-icon">😫</span><div class="tp-progress-opt-label">Réveils nocturnes fréquents</div></div>
+        <div class="tp-progress-opt" onclick="selectProgressOpt(this,'sommeil','nocturne')" data-val="nocturne"><span class="tp-progress-opt-icon">🚨</span><div class="tp-progress-opt-label">Douleur nocturne qui réveille</div></div>
+      </div>
+    </div>
+    <div class="tp-step-content" id="step-9">
+      <div class="tp-step-num">Étape 9 · L'impact</div>
+      <div class="tp-step-q">Comment votre situation<br><em>affecte-t-elle votre vie ?</em></div>
+      <div class="tp-progress-opts">
+        <div class="tp-progress-opt" onclick="selectProgressOpt(this,'impact','peu')" data-val="peu"><span class="tp-progress-opt-icon">✅</span><div class="tp-progress-opt-label">Peu d'impact</div></div>
+        <div class="tp-progress-opt" onclick="selectProgressOpt(this,'impact','genant')" data-val="genant"><span class="tp-progress-opt-icon">⚠️</span><div class="tp-progress-opt-label">Gênant mais je m'adapte</div></div>
+        <div class="tp-progress-opt" onclick="selectProgressOpt(this,'impact','limite')" data-val="limite"><span class="tp-progress-opt-icon">🔴</span><div class="tp-progress-opt-label">Ça limite vraiment mes activités</div></div>
+        <div class="tp-progress-opt" onclick="selectProgressOpt(this,'impact','arret')" data-val="arret"><span class="tp-progress-opt-icon">🛑</span><div class="tp-progress-opt-label">Arrêt de travail ou impossible</div></div>
+      </div>
+    </div>
+    <div class="tp-step-content" id="step-10">
+      <div class="tp-step-num">Étape 10 · Les traitements</div>
+      <div class="tp-step-q">Avez-vous déjà essayé<br><em>quelque chose pour aller mieux ?</em></div>
+      <p style="font-size:13px;color:#9A7880;font-style:italic;margin-bottom:14px">Plusieurs réponses possibles.</p>
+      <div class="tp-chips" id="traitement-chips">
+        <div class="tp-chip" onclick="toggleChip(this,'traitement')" data-val="kine">💪 Kinésithérapie</div>
+        <div class="tp-chip" onclick="toggleChip(this,'traitement')" data-val="medoc">💊 Médicaments</div>
+        <div class="tp-chip" onclick="toggleChip(this,'traitement')" data-val="radio">🔬 Imagerie (radio, IRM)</div>
+        <div class="tp-chip" onclick="toggleChip(this,'traitement')" data-val="osteo">🤲 Ostéopathie</div>
+        <div class="tp-chip" onclick="toggleChip(this,'traitement')" data-val="sport">🏃 Sport ou activité physique</div>
+        <div class="tp-chip" onclick="toggleChip(this,'traitement')" data-val="rien">❌ Rien encore</div>
+      </div>
+      <textarea class="tp-textarea" id="traitement-text" placeholder="Autre chose..." style="min-height:60px;margin-top:12px"></textarea>
+    </div>
+
+  <div class="tp-footer" id="tp-footer">
+    <button class="tp-btn-back" id="btn-back" onclick="prevStep()" style="visibility:hidden">← Retour</button>
+    <button class="tp-btn-next" id="btn-next" onclick="nextStep()">Suivant →</button>
+  </div>
+  <div id="trace-result" style="display:none;flex-direction:column;flex:1;overflow:hidden">
+    <div class="tr-header">
+      <div class="tr-icon">✦</div>
+      <div>
+        <div class="tr-title">Votre Bilan KAP-TRACE</div>
+        <div class="tr-sub">Synthèse personnalisée · Aujourd'hui</div>
+      </div>
+    </div>
+    <div class="tr-body">
+      <div class="tr-cards" id="tr-cards"></div>
+      <div class="tr-ia" id="tr-ia">
+        <div class="tr-ia-header">
+          <div class="tr-ia-av">🤝</div>
+          <div><div class="tr-ia-name">KAP IA</div></div>
+        </div>
+        <div class="tr-ia-text" id="tr-ia-text">Analyse en cours...</div>
+      </div>
+    </div>
+    <div class="tr-footer">
+      <button class="tr-btn-redo" onclick="resetTrace()">↺ Recommencer</button>
+      <button class="tr-btn-chat" onclick="closeTrace()">Continuer dans le chat →</button>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+// ══ ÉCRAN BETA ══
+var betaProfile = null;
+
+function betaInit(){
+  if(!sessionStorage.getItem('kap-auth')){
+    document.getElementById('beta-screen').style.display = 'none';
+    document.body.style.overflow = '';
+    return;
+  }
+  var seen = localStorage.getItem('kap-beta-seen');
+  if(seen === 'yes'){
+    document.getElementById('beta-screen').style.display = 'none';
+    return;
+  }
+  document.getElementById('beta-screen').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function selectBetaProfile(el){
+  document.querySelectorAll('.beta-profile').forEach(function(b){ b.classList.remove('selected'); });
+  el.classList.add('selected');
+  betaProfile = el.dataset.val;
+  betaUpdate();
+}
+
+function betaUpdate(){
+  var consent = document.getElementById('beta-consent').checked;
+  var profile = betaProfile !== null;
+  var btn = document.getElementById('beta-btn');
+  btn.classList.toggle('active', consent && profile);
+}
+
+function enterBeta(){
+  var prenom = document.getElementById('beta-prenom').value.trim();
+  var profile = betaProfile;
+
+  // Sauvegarder les données beta
+  localStorage.setItem('kap-beta-seen', 'yes');
+  localStorage.setItem('kap-beta-date', new Date().toISOString());
+  if(prenom) localStorage.setItem('kap-beta-prenom', prenom);
+  if(profile) localStorage.setItem('kap-beta-profile', profile);
+
+  // Sauvegarder pour analytics simples
+  var visits = JSON.parse(localStorage.getItem('kap-beta-visits') || '[]');
+  visits.push({
+    date: new Date().toISOString(),
+    profile: profile,
+    prenom: prenom ? 'oui' : 'non'
+  });
+  localStorage.setItem('kap-beta-visits', JSON.stringify(visits));
+
+  // Fermer l'écran avec animation
+  var screen = document.getElementById('beta-screen');
+  screen.classList.add('hide');
+  document.body.style.overflow = '';
+  setTimeout(function(){
+    screen.style.display = 'none';
+    if(prenom){ localStorage.setItem('kap-patient-prenom', prenom); }
+    kapLancerScroll();
+  }, 500);
+}
+
+// Initialiser dès que le DOM est prêt
+window.addEventListener('DOMContentLoaded', betaInit);
+</script>
+
+<!-- ══ CONSENTEMENT ÉTUDE CLINIQUE ══ -->
+<div id="study-overlay">
+  <div id="study-panel">
+    <div class="sp-badge">✦ Recherche clinique · Optionnel</div>
+    <h2 class="sp-title">Contribuer à la<br><em>recherche kinésithérapique ?</em></h2>
+    <p class="sp-text">
+      Vos bilans anonymisés peuvent aider à mieux comprendre comment accompagner
+      les patients comme vous. C'est entièrement optionnel et révocable à tout moment.
+    </p>
+    <div class="sp-items">
+      <div class="sp-item">Vos données sont anonymisées — aucun nom, aucun email</div>
+      <div class="sp-item">Seuls vos scores et votre progression sont conservés localement</div>
+      <div class="sp-item">Vous pouvez retirer votre accord à tout moment</div>
+      <div class="sp-item">Ces données ne seront jamais vendues ni utilisées commercialement</div>
+    </div>
+    <div class="sp-btns">
+      <button class="sp-btn-no" onclick="studyDecline()">Non merci</button>
+      <button class="sp-btn-yes" onclick="studyAccept()">Oui, je contribue ✦</button>
+    </div>
+    <div class="sp-footer">
+      Cette démarche s'inscrit dans un projet de recherche en vie réelle
+      sur l'accompagnement kinésithérapique en France.
+    </div>
+  </div>
+</div>
+
+<script>
+// ══ CONSENTEMENT ÉTUDE CLINIQUE ══
+function studyConsentInit(){
+  var seen = localStorage.getItem('kap-study-seen');
+  if(seen) return; // Déjà vu — ne plus afficher
+  // Afficher après le consentement RGPD, avec délai
+  var rgpd = localStorage.getItem('kap-rgpd');
+  if(rgpd === 'accepted'){
+    setTimeout(function(){
+      document.getElementById('study-overlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }, 2000);
+  }
+}
+
+function studyAccept(){
+  var id = 'kap-' + Math.random().toString(36).substr(2,9) + Date.now().toString(36);
+  localStorage.setItem('kap-study-seen', 'yes');
+  localStorage.setItem('kap-study-consent', 'yes');
+  localStorage.setItem('kap-study-date', new Date().toISOString());
+  localStorage.setItem('kap-study-id', id);
+  document.getElementById('study-overlay').classList.remove('show');
+  document.body.style.overflow = '';
+  // Initialiser la structure de données de recherche
+  var studyData = {
+    id: id,
+    date_consent: new Date().toISOString(),
+    module: window.location.pathname.split('/').pop().replace('.html',''),
+    bilans: []
+  };
+  localStorage.setItem('kap-study-data', JSON.stringify(studyData));
+}
+
+function studyDecline(){
+  localStorage.setItem('kap-study-seen', 'yes');
+  localStorage.setItem('kap-study-consent', 'no');
+  document.getElementById('study-overlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// Enregistrer un bilan dans la cohorte si consentement donné
+function studyRecordBilan(data){
+  if(localStorage.getItem('kap-study-consent') !== 'yes') return;
+  try {
+    var studyData = JSON.parse(localStorage.getItem('kap-study-data') || '{}');
+    if(!studyData.bilans) studyData.bilans = [];
+    studyData.bilans.push({
+      date: new Date().toISOString(),
+      eva: data.eva || null,
+      module: data.module || null,
+      bilanMode: data.bilanMode || null,
+      progressVal: data.progress || null,
+      situation_length: data.situation ? data.situation.length : 0,
+      efforts_count: data.efforts ? data.efforts.length : 0
+    });
+    localStorage.setItem('kap-study-data', JSON.stringify(studyData));
+  } catch(e){}
+}
+
+// window.addEventListener('DOMContentLoaded', studyConsentInit);
+</script>
+// ↑ Pop-up recherche désactivée (RC PANACEA : exclusion "recherche impliquant la personne humaine")
+// Réactiver après couverture assurance recherche ou partenariat institutionnel
+<script>
+// ══ RÉFÉRENCES SCIENTIFIQUES ══
+function parseRefs(txt){
+  var re = /\[REF:\s*([^|\]]+?)\s*(?:\|\s*([^\]]+?))?\s*\]/g;
+  var refs = [];
+  var clean = txt.replace(re, function(_, label, url){
+    refs.push({label: label.trim(), url: url ? url.trim() : null});
+    return "";
+  });
+  return {clean: clean.trim(), refs: refs};
+}
+</script>
+
+<div id="study-overlay">
+  <div id="study-panel">
+    <div class="sp-badge">✦ Recherche clinique · Optionnel</div>
+    <h2 class="sp-title">Contribuer à la<br><em>recherche kinésithérapique ?</em></h2>
+    <p class="sp-text">Vos bilans anonymisés peuvent aider à mieux comprendre comment accompagner les patients comme vous. C'est entièrement optionnel et révocable à tout moment.</p>
+    <div class="sp-items">
+      <div class="sp-item">Vos données sont anonymisées — aucun nom, aucun email</div>
+      <div class="sp-item">Seuls vos scores et votre progression sont conservés localement</div>
+      <div class="sp-item">Vous pouvez retirer votre accord à tout moment</div>
+      <div class="sp-item">Ces données ne seront jamais vendues ni utilisées commercialement</div>
+    </div>
+    <div class="sp-btns">
+      <button class="sp-btn-no" onclick="studyDecline()">Non merci</button>
+      <button class="sp-btn-yes" onclick="studyAccept()">Oui, je contribue ✦</button>
+    </div>
+    <div class="sp-footer">Cette démarche s'inscrit dans un projet de recherche en vie réelle sur l'accompagnement kinésithérapique en France.</div>
+  </div>
+</div>
+
+<script>
+function studyConsentInit(){
+  var seen = localStorage.getItem('kap-study-seen');
+  if(seen) return;
+  var rgpd = localStorage.getItem('kap-rgpd');
+  if(rgpd === 'accepted'){
+    setTimeout(function(){
+      document.getElementById('study-overlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }, 2000);
+  }
+}
+function studyAccept(){
+  var id = 'kap-' + Math.random().toString(36).substr(2,9) + Date.now().toString(36);
+  localStorage.setItem('kap-study-seen','yes');
+  localStorage.setItem('kap-study-consent','yes');
+  localStorage.setItem('kap-study-date',new Date().toISOString());
+  localStorage.setItem('kap-study-id',id);
+  document.getElementById('study-overlay').classList.remove('show');
+  document.body.style.overflow = '';
+  var studyData = {id:id,date_consent:new Date().toISOString(),module:'general',bilans:[]};
+  localStorage.setItem('kap-study-data',JSON.stringify(studyData));
+}
+function studyDecline(){
+  localStorage.setItem('kap-study-seen','yes');
+  localStorage.setItem('kap-study-consent','no');
+  document.getElementById('study-overlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+// window.addEventListener('DOMContentLoaded', studyConsentInit);
+</script>
+
+
+<!-- ══ PROTOCOL OVERLAY ══ -->
+<div id="proto-overlay" onclick="if(event.target===this)closeProtoPanel()">
+  <div id="proto-panel">
+    <div class="proto-ph">
+      <div><div class="proto-ph-num" id="proto-ph-num">KAP-0000</div><div class="proto-ph-meta" id="proto-ph-meta"></div></div>
+      <button class="proto-ph-x" onclick="closeProtoPanel()">✕</button>
+    </div>
+    <div class="proto-pb" id="proto-pb"></div>
+    <div class="proto-pf">
+      <button class="proto-pf-btn" onclick="copyProtoNum()">📋 Copier le numéro</button>
+      <button class="proto-pf-btn" onclick="closeProtoPanel()">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── KAP SCORE BADGE ──
+function toggleScoreBadge(){
+  document.getElementById('ksb-popup').classList.toggle('open');
+}
+document.addEventListener('click', function(e){
+  var badge = document.getElementById('kap-score-badge');
+  if(badge && !badge.contains(e.target))
+    document.getElementById('ksb-popup').classList.remove('open');
+});
+window.addEventListener('DOMContentLoaded', function(){
+  var scores = [];
+  try{ scores = JSON.parse(localStorage.getItem('kap-scores')||'[]'); }catch(e){}
+  if(!scores.length) return;
+  var last = scores[scores.length-1];
+  var prev = scores.length >= 2 ? scores[scores.length-2].total : null;
+  var delta = prev !== null ? last.total - prev : null;
+  var circ = 75.4;
+  var offset = circ * (1 - last.total / 100);
+  document.getElementById('ksb-progress').setAttribute('stroke-dashoffset', offset.toFixed(1));
+  document.getElementById('ksb-num').textContent = last.total;
+  var deltaHtml = delta !== null
+    ? ` <span class="ksb-delta" style="color:${delta>=0?'#2D6A4F':'#A85470'}">${delta>=0?'↑+':'↓'}${Math.abs(delta)}</span>`
+    : '';
+  document.getElementById('ksb-score-text').innerHTML = last.total + '/100' + deltaHtml;
+  document.getElementById('ksb-popup-date').textContent = `Bilan du ${last.dateLabel}`;
+  var pillars = [
+    {icon:'🔥', name:'Douleur',   pts:last.douleur},
+    {icon:'🏃', name:'Fonction',  pts:last.fonction},
+    {icon:'🧍', name:'Autonomie', pts:last.autonomie},
+    {icon:'💙', name:'Vécu',      pts:last.vecu}
+  ];
+  document.getElementById('ksb-popup-pillars').innerHTML = pillars.map(function(p){
+    return `<div class="ksb-pillar-row">
+      <span class="ksb-pillar-icon">${p.icon}</span>
+      <span class="ksb-pillar-name">${p.name}</span>
+      <div class="ksb-pillar-track"><div class="ksb-pillar-bar" style="width:${Math.round((p.pts||0)/25*100)}%"></div></div>
+      <span class="ksb-pillar-pts">${p.pts||0}/25</span>
+    </div>`;
+  }).join('');
+  var noteHtml = delta !== null && delta >= 10
+    ? `<strong>Seuil MCID atteint</strong> — changement cliniquement significatif ✓`
+    : delta !== null
+      ? `Progression de <strong>${delta} pts</strong> depuis le bilan précédent · seuil MCID : +10 pts`
+      : `Premier bilan enregistré le ${last.dateLabel}`;
+  document.getElementById('ksb-popup-note').innerHTML = noteHtml;
+  document.getElementById('kap-score-badge').style.display = 'flex';
+});
+
+// ── PROTOCOLES ──
+var PROTO_MODULE = 'general';
+function _getProtos(){var p=[];try{p=JSON.parse(localStorage.getItem('kap-protocols')||'[]');}catch(e){}return p;}
+function _saveProtos(p){localStorage.setItem('kap-protocols',JSON.stringify(p));}
+
+function saveProtocol(btn){
+  var bk=btn.closest('.bk');if(!bk)return;
+  var tmp=document.createElement('div');tmp.innerHTML=bk.innerHTML;
+  tmp.querySelectorAll('.proto-save-btn,.ref-pills,.resources').forEach(function(el){el.remove();});
+  var snippet=tmp.textContent.trim().replace(/\s+/g,' ').slice(0,140);
+  var html=tmp.innerHTML;
+  var protos=_getProtos();
+  var num='KAP-'+String(protos.length+1).padStart(4,'0');
+  protos.push({num:num,date:new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'}),dateISO:new Date().toISOString(),module:PROTO_MODULE,html:html,snippet:snippet});
+  _saveProtos(protos);
+  btn.textContent='✓ '+num;btn.classList.add('saved');btn.disabled=true;
+  showProtoToast('✦ Protocole '+num+' — communiquez ce numéro à votre patient');
+}
+
+function showProtoToast(msg){
+  var t=document.getElementById('proto-toast');
+  if(!t){t=document.createElement('div');t.id='proto-toast';t.className='proto-toast';document.body.appendChild(t);}
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._tid);t._tid=setTimeout(function(){t.classList.remove('show');},3500);
+}
+
+function searchProtocol(){
+  var inp=document.getElementById('proto-search-inp');
+  if(!inp)return;
+  var raw=inp.value.trim();
+  var query=raw.toUpperCase().replace(/^KAP-?0*/,'').replace(/^0+/,'');
+  if(!query)return;
+  var protos=_getProtos();
+  var found=protos.find(function(p){
+    var n=p.num.replace('KAP-','').replace(/^0+/,'');
+    return n===query||p.num.toUpperCase()===raw.toUpperCase();
+  });
+  openProtoPanel(found,raw);
+}
+
+function openProtoPanel(proto,query){
+  var overlay=document.getElementById('proto-overlay');if(!overlay)return;
+  if(!proto){
+    document.getElementById('proto-ph-num').textContent='Introuvable';
+    document.getElementById('proto-ph-meta').textContent='Aucun protocole correspondant sur cet appareil.';
+    document.getElementById('proto-pb').innerHTML='<div class="proto-empty">Ce protocole n\'existe pas ou a été créé sur un autre appareil.</div>';
+  } else {
+    document.getElementById('proto-ph-num').textContent=proto.num;
+    document.getElementById('proto-ph-meta').textContent=proto.date+' · '+(proto.module||'KAP');
+    document.getElementById('proto-pb').innerHTML=proto.html||'';
+  }
+  overlay.classList.add('open');document.body.style.overflow='hidden';
+}
+
+function closeProtoPanel(){
+  var o=document.getElementById('proto-overlay');if(o)o.classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function copyProtoNum(){
+  var num=document.getElementById('proto-ph-num').textContent;
+  if(navigator.clipboard)navigator.clipboard.writeText(num);
+  showProtoToast(num+' copié dans le presse-papier');
+}
+
+function onProtoKey(e){if(e.key==='Enter')searchProtocol();}
+
+</script>
+<script>
+function kapLancerScroll(){
+  window.scrollTo(0, 0);
+  setTimeout(function(){
+    var target = document.getElementById('specialites');
+    if(!target) return;
+    // Désactiver scroll-behavior:smooth pour éviter double-easing
+    document.documentElement.style.scrollBehavior = 'auto';
+    var targetY = target.getBoundingClientRect().top + window.scrollY;
+    var startY = 0;
+    var distance = targetY - startY;
+    var duration = 4500;
+    var startTime = null;
+    function easeInOut(t){ return t<0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2; }
+    function step(timestamp){
+      if(!startTime) startTime = timestamp;
+      var elapsed = timestamp - startTime;
+      var progress = Math.min(elapsed / duration, 1);
+      window.scrollTo(0, startY + distance * easeInOut(progress));
+      if(progress < 1){ requestAnimationFrame(step); }
+      else { document.documentElement.style.scrollBehavior = ''; }
+    }
+    requestAnimationFrame(step);
+  }, 300);
+}
+</script>
+</body>
+</html>
