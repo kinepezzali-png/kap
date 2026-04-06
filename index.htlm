@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>KAP — Bilans Cliniques</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1a56db;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+    .subtitle {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      width: 100%;
+      max-width: 700px;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border: 2px solid transparent;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .card:hover { border-color: #1a56db; box-shadow: 0 4px 16px rgba(26,86,219,0.15); }
+    .icon { font-size: 2rem; }
+    .card-text .name { font-size: 1rem; font-weight: 700; color: #111827; }
+    .card-text .desc { font-size: 0.8rem; color: #6b7280; margin-top: 2px; }
+    .footer { margin-top: 40px; font-size: 0.75rem; color: #9ca3af; }
+  </style>
+</head>
+<body>
+  <div class="logo">KAP</div>
+  <div class="subtitle">Kiné · Activité · Prévention — Bilans Cliniques</div>
+  <div class="grid">
+    <a class="card" href="kap-douleur.html">
+      <span class="icon">🧠</span>
+      <div class="card-text">
+        <div class="name">Bilan Douleur</div>
+        <div class="desc">Évaluation multidimensionnelle</div>
+      </div>
+    </a>
+    <a class="card" href="kap-msk.html">
+      <span class="icon">🦴</span>
+      <div class="card-text">
+        <div class="name">Bilan MSK</div>
+        <div class="desc">Musculo-squelettique</div>
+      </div>
+    </a>
+    <a class="card" href="kap-sein.html">
+      <span class="icon">🎗️</span>
+      <div class="card-text">
+        <div class="name">Bilan Sein</div>
+        <div class="desc">Sénologie — SEREINIA</div>
+      </div>
+    </a>
+    <a class="card" href="kap-gyneco.html">
+      <span class="icon">🌸</span>
+      <div class="card-text">
+        <div class="name">Bilan Gynéco</div>
+        <div class="desc">Rééducation périnéale</div>
+      </div>
+    </a>
+    <a class="card" href="kap-general.html">
+      <span class="icon">📋</span>
+      <div class="card-text">
+        <div class="name">Bilan Général</div>
+        <div class="desc">Évaluation globale patient</div>
+      </div>
+    </a>
+  </div>
+  <div class="footer">KAP SAS © 2026 — Usage interne cabinet</div>
+</body>
+</html>
