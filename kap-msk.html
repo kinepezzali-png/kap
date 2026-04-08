@@ -3102,7 +3102,8 @@ function showMSKResult(){
 
   var date=new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
   result.innerHTML=`
-  <div class="kap-res-top">
+  <div class="kap-res-top" style="display:flex;align-items:center;gap:8px">
+      <button onclick="closeAndResetResult()" title="Retour" style="flex-shrink:0;width:30px;height:30px;border-radius:50%;background:transparent;border:1px solid rgba(100,80,50,0.2);color:#7A6A55;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s" onmouseover="this.style.borderColor='rgba(184,122,42,0.6)';this.style.color='#B87A2A'" onmouseout="this.style.borderColor='rgba(100,80,50,0.2)';this.style.color='#7A6A55'">←</button>
     <div class="kap-res-top-label">${col.name} · ${currentMode==='postop'?'Post-op':'Conservateur'} · ${date}</div>
     <button class="kap-res-close" onclick="closeAndResetMSK()">✕</button>
   </div>
@@ -3358,9 +3359,24 @@ function downloadMSKPDF(immat){
   Outil de préparation à la séance de kinésithérapie. Ne constitue pas un diagnostic médical. Urgences : 15 ou 112.</div>
   </body></html>`;
 
+
+  // Conversation KAP IA
+  var chatHtml = '';
+  if(typeof chatHistory !== 'undefined' && chatHistory.length > 1){
+    chatHtml += '<div class="section-title" style="margin-top:24px">Conversation avec KAP IA</div>';
+    chatHistory.forEach(function(m){
+      if(m.role==='assistant'){
+        chatHtml += '<div style="background:'+bc+'0D;border-radius:10px;padding:12px 16px;margin-bottom:8px;font-size:11.5px;line-height:1.7;color:#1A1510;border:1px solid '+bc+'20"><div style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:'+bc+';margin-bottom:5px">KAP IA</div>'+m.content.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>')+'</div>';
+      } else if(m.role==='user'){
+        chatHtml += '<div style="background:#F8F5F0;border-radius:10px;padding:10px 14px;margin-bottom:5px;font-size:11.5px;color:#5A4A3A;text-align:right;border:1px solid #E8E0D0">'+m.content.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</div>';
+      }
+    });
+  }
+
+  var html2=html.replace('</body></html>', chatHtml+'</body></html>');
   var win=window.open('','_blank');
-  if(win){win.document.write(html);win.document.close();setTimeout(()=>win.print(),500);}
-  else{var b=new Blob([html],{type:'text/html'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='KAP-MSK-'+immat+'.html';a.click();}
+  if(win){win.document.write(html2);win.document.close();setTimeout(()=>win.print(),500);}
+  else{var b=new Blob([html2],{type:'text/html'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='KAP-MSK-'+immat+'.html';a.click();}
 }
 
 const EVA_DESCS={0:"Aucune douleur — vous vous sentez bien",1:"Douleur très légère — à peine perceptible",2:"Douleur légère — présente mais discrète",3:"Douleur modérée légère — gênante par moments",4:"Douleur modérée — impacte certaines activités",5:"Douleur modérée — présente mais gérable",6:"Douleur importante — limite vos activités",7:"Douleur forte — difficile à ignorer",8:"Douleur très forte — difficile de se concentrer",9:"Douleur sévère — quasi-impossible de fonctionner",10:"Douleur maximale — insupportable"};
@@ -3943,7 +3959,13 @@ function renderKineReport(){
   var recoHtml='<ol style="margin:0;padding-left:16px">'+recos.map(r=>`<li style="font-size:11.5px;color:#1A1010;line-height:1.6;margin-bottom:5px">${r}</li>`).join('')+'</ol><div style="font-size:10px;color:#AAA;margin-top:8px">À adapter selon l\'examen clinique.</div>';
   var recoSec=sec('💡','Recommandations · Séance 1',recoHtml);
 
-  var footer='<div style="margin-top:14px;padding-top:10px;border-top:1px solid #EEE;font-size:10px;color:#AAA;text-align:center;line-height:1.6">KAP · Kinésithérapie · Activité · Prévention · Gagny (93) & Chessy (77)<br>Outil de préparation à la séance. Ne constitue pas un diagnostic.</div>';
+  var footer='<div style="margin-top:14px;padding-top:10px;border-top:1px solid #EEE;font-size:10px;color:#AAA;text-align:center;line-height:1.6">KAP · Kinésithérapie · Activité · Prévention · Gagny (93) & Chessy (77)<br>Outil de préparation à la séance. Ne constitue pas un diagnostic.</div><div style="margin-top:14px;padding:12px 8px;border-top:1px solid #EEE;text-align:center">
+  <div style="font-size:10.5px;color:#666;font-weight:500;margin-bottom:8px">Donnez votre avis — 1 minute pour améliorer KAP</div>
+  <div id="kap-qr-avis" style="display:inline-block;padding:6px;background:white;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.08)"></div>
+  <div style="font-size:9.5px;color:#BBB;margin-top:6px">Scannez avec votre téléphone</div>
+  <script src=\"https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js\"><\/script>
+  <script>setTimeout(function(){if(typeof QRCode!==\"undefined\"&&document.getElementById(\"kap-qr-avis\")&&!document.getElementById(\"kap-qr-avis\").children.length){new QRCode(document.getElementById(\"kap-qr-avis\"),{text:\"https://docs.google.com/forms/d/e/1FAIpQLSd0qJqbrQ1dJnGx-Wlnul4HtUxJADojvmgEBWxTz3Gc76BEOA/viewform?usp=header\",width:130,height:130,colorDark:\"#1A1208\",colorLight:\"#ffffff\",correctLevel:QRCode.CorrectLevel.H});}},300);<\/script>
+</div>';
   el.innerHTML=header+ctxSec+scoresSec+dimsSec+psfsSec+flagsSec+recoSec+footer;
 }
 

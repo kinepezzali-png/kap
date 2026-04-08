@@ -852,7 +852,13 @@ function buildKineReport(){
   var footer = `<div style="margin-top:16px;padding-top:12px;border-top:1px solid #EEE;font-size:10px;color:#9990AA;text-align:center;line-height:1.6">
     KAP · Kinésithérapie · Activité · Prévention · Cabinet KAP Gagny (93) &amp; Chessy (77)<br>
     Outil de préparation à la séance. Ne constitue pas un diagnostic médical. Données saisies par la patiente.
-  </div>`;
+  </div><div style="margin-top:14px;padding:12px 8px;border-top:1px solid #EEE;text-align:center">
+  <div style="font-size:10.5px;color:#666;font-weight:500;margin-bottom:8px">Donnez votre avis — 1 minute pour améliorer KAP</div>
+  <div id="kap-qr-avis" style="display:inline-block;padding:6px;background:white;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.08)"></div>
+  <div style="font-size:9.5px;color:#BBB;margin-top:6px">Scannez avec votre téléphone</div>
+  <script src=\"https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js\"><\/script>
+  <script>setTimeout(function(){if(typeof QRCode!==\"undefined\"&&document.getElementById(\"kap-qr-avis\")&&!document.getElementById(\"kap-qr-avis\").children.length){new QRCode(document.getElementById(\"kap-qr-avis\"),{text:\"https://docs.google.com/forms/d/e/1FAIpQLSd0qJqbrQ1dJnGx-Wlnul4HtUxJADojvmgEBWxTz3Gc76BEOA/viewform?usp=header\",width:130,height:130,colorDark:\"#1A1208\",colorLight:\"#ffffff\",correctLevel:QRCode.CorrectLevel.H});}},300);<\/script>
+</div>`;
 
   body.innerHTML = header + contextSection + scoresSection + psfsSection + flagsSection + recosSection + footer;
 }
@@ -1641,7 +1647,8 @@ function showGynResult(){
   }
 
   result.innerHTML=`
-  <div class="kap-res-top">
+  <div class="kap-res-top" style="display:flex;align-items:center;gap:8px">
+      <button onclick="closeAndResetResult()" title="Retour" style="flex-shrink:0;width:30px;height:30px;border-radius:50%;background:transparent;border:1px solid rgba(100,80,50,0.2);color:#7A6A55;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s" onmouseover="this.style.borderColor='rgba(184,122,42,0.6)';this.style.color='#B87A2A'" onmouseout="this.style.borderColor='rgba(100,80,50,0.2)';this.style.color='#7A6A55'">←</button>
     <div class="kap-res-top-label">${col.name} · ${date}</div>
     <button class="kap-res-close" onclick="closeTrace()">✕</button>
   </div>
@@ -1968,6 +1975,21 @@ function downloadGynPDF(immat){
   var bc=col.bc;
   var date=new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
   var html=buildGynPDFHtml(kap,lbl,col,bc,date,immat);
+
+  // Conversation KAP IA
+  var chatHtml = '';
+  if(typeof hist !== 'undefined' && hist.length > 1){
+    chatHtml += '<div style="margin-top:20px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:'+bc+'">Conversation avec KAP IA</div>';
+    hist.forEach(function(m){
+      if(m.role==='assistant'){
+        chatHtml += '<div style="background:'+bc+'0D;border-radius:10px;padding:12px 16px;margin:8px 0;font-size:11.5px;line-height:1.7;color:#2E1E3E;border:1px solid '+bc+'30"><div style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:'+bc+';margin-bottom:5px">KAP IA</div>'+m.content.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>')+'</div>';
+      } else if(m.role==='user'){
+        chatHtml += '<div style="background:#F5F0F8;border-radius:10px;padding:10px 14px;margin:5px 0;font-size:11.5px;color:#5A3A6A;text-align:right;border:1px solid #E0D0EC">'+m.content.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</div>';
+      }
+    });
+  }
+
+  html = html.replace('</body></html>', chatHtml+'</body></html>');
   // Impression via iframe caché (fonctionne sans popup)
   var iframe=document.createElement('iframe');
   iframe.style.cssText='position:fixed;top:-9999px;left:-9999px;width:210mm;height:297mm;border:none;';
