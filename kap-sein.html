@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KAP — Vous n'êtes pas seule</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Josefin+Sans:wght@100;200;300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -3084,8 +3085,12 @@ function showTraceResult(){
   // ─ Calculer le KAP Score
   var kap = computeKAPScore();
   var lbl = kapScoreLabel(kap.global);
-  var actChip = document.querySelector('#activity-chips [data-val="'+tData.activity+'"]');
-  var actLabel = actChip ? actChip.textContent.trim() : (tData.activityText || 'Non précisé');
+  // Multi-select : utiliser le label combiné
+  var actLabel = tData.activityLabel || (function(){
+    var chips = Array.from(document.querySelectorAll('#activity-chips .tp-chip.selected'));
+    if(chips.length) return chips.map(function(c){return c.textContent.trim();}).join(', ');
+    return tData.activityText || 'Non précisé';
+  })();
   var progressLabel = tData.progress === 'mieux' ? 'En amélioration' : tData.progress === 'difficile' ? 'Période difficile' : 'Stable';
 
   // ─ Couleurs des barres dimensionnelles
@@ -3299,7 +3304,11 @@ function saveBilanToProto(immat){
   var kap = computeKAPScore();
   var date = new Date().toISOString();
   var actChip = document.querySelector('#activity-chips [data-val="'+tData.activity+'"]');
-  var actLabel = actChip ? actChip.textContent.trim() : (tData.activityText || 'Non précisé');
+  var actLabel = tData.activityLabel || (function(){
+    var chips = Array.from(document.querySelectorAll('#activity-chips .tp-chip.selected'));
+    if(chips.length) return chips.map(function(c){return c.textContent.trim();}).join(', ');
+    return tData.activityText || 'Non précisé';
+  })();
   var payload = {
     immat: immat,
     date: date,
