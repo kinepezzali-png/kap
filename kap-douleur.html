@@ -3388,6 +3388,15 @@ updateEva(5);
       </div>
     </div>
 
+  <div id="step-bubble" style="margin:0 24px 12px;background:#FDFCFA;border-radius:14px;border:1px solid rgba(184,122,42,0.18);padding:12px 16px;display:flex;align-items:flex-start;gap:12px;box-shadow:0 2px 12px rgba(184,122,42,0.07);flex-shrink:0">
+    <span class="bubble-icon" id="bubble-icon" style="font-size:20px;flex-shrink:0;margin-top:2px">✦</span>
+    <div style="flex:1;min-width:0">
+      <div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#B87A2A;margin-bottom:3px">Pourquoi cette question</div>
+      <div id="bubble-title" style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:600;color:#2E1E1E;margin-bottom:2px">Avant les chiffres, les mots</div>
+      <div id="bubble-text" style="font-size:11.5px;color:#7A6A5A;line-height:1.6">Décrire sa douleur en ses propres mots révèle des patterns que les outils ne capturent pas.</div>
+      <div id="bubble-source" style="display:none;font-size:10px;color:#B0A090;margin-top:4px"></div>
+    </div>
+  </div>
   <div class="tp-footer" id="tp-footer">
     <button class="tp-btn-back" id="btn-back" onclick="prevStep()" style="visibility:hidden">← Retour</button>
     <button class="tp-btn-next" id="btn-next" onclick="nextStep()">Suivant →</button>
@@ -3472,15 +3481,6 @@ updateEva(5);
 
 
 
-</div>
-<div id="step-bubble">
-  <span class="bubble-icon" id="bubble-icon">✦</span>
-  <div style="flex:1;min-width:0">
-    <div class="bubble-tag">Pourquoi cette question</div>
-    <div class="bubble-title" id="bubble-title">Avant les chiffres, les mots</div>
-    <div class="bubble-text" id="bubble-text">Décrire sa douleur en ses propres mots révèle des patterns que les outils ne capturent pas. La narration libre aide le kiné à comprendre votre vécu réel.</div>
-    <div class="bubble-source" id="bubble-source" style="display:none"></div>
-  </div>
 </div>
 </div>
 
@@ -3856,7 +3856,7 @@ function renderKineReport(){
 
   var footer='<div style="margin-top:14px;padding-top:10px;border-top:1px solid #EEE;font-size:10px;color:#AAA;text-align:center;line-height:1.6">KAP · Kinésithérapie · Activité · Prévention · Gagny (93) & Chessy (77)<br>Outil de préparation à la séance. Ne constitue pas un diagnostic.</div><div style="margin-top:14px;padding:12px 8px;border-top:1px solid #EEE;text-align:center">
   <div style="font-size:10.5px;color:#666;font-weight:500;margin-bottom:8px">Donnez votre avis — 1 minute pour améliorer KAP</div>
-  <div id="kap-qr-avis" style="display:inline-block;padding:6px;background:white;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.08)"></div>
+  <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&color=2E1818&bgcolor=ffffff&qzone=1&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSd0qJqbrQ1dJnGx-Wlnul4HtUxJADojvmgEBWxTz3Gc76BEOA%2Fviewform%3Fusp%3Dheader" alt="QR code avis KAP" style="width:120px;height:120px;border-radius:6px;display:block;margin:0 auto">
   <div style="font-size:9.5px;color:#BBB;margin-top:6px">Scannez avec votre téléphone</div>
   <script src=\"https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js\"><\/script>
   <script>setTimeout(function(){if(typeof QRCode!==\"undefined\"&&document.getElementById(\"kap-qr-avis\")&&!document.getElementById(\"kap-qr-avis\").children.length){new QRCode(document.getElementById(\"kap-qr-avis\"),{text:\"https://docs.google.com/forms/d/e/1FAIpQLSd0qJqbrQ1dJnGx-Wlnul4HtUxJADojvmgEBWxTz3Gc76BEOA/viewform?usp=header\",width:130,height:130,colorDark:\"#1A1208\",colorLight:\"#ffffff\",correctLevel:QRCode.CorrectLevel.H});}},300);<\/script>
