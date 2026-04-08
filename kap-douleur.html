@@ -2371,7 +2371,21 @@ function downloadBilanDouleurPDF(){
     '<div class="footer">' +
       'KAP · Kiné · Activité · Prévention — SAS MAMCG · Cabinet Gagny (93) · Cabinet Chessy (77)<br>' +
       'Cet outil est réservé à un usage de préparation à la séance de kinésithérapie. Il ne constitue pas un diagnostic médical. Urgences : 15 ou 112.' +
-    '</div></body></html>';
+    '</div>
+<!-- ══ OVERLAY QR AVIS ══ -->
+<div id="kap-qr-overlay" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(26,21,16,0.88);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:20px">
+  <div style="background:#FDFCFA;border-radius:24px;padding:36px 32px;max-width:340px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:#1A1510;margin-bottom:6px">Votre avis compte</div>
+    <div style="font-size:12px;color:#7A6A55;margin-bottom:24px;line-height:1.6">2 minutes pour nous aider à améliorer KAP.<br>Scannez avec votre téléphone.</div>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&color=1A1510&bgcolor=ffffff&qzone=1&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSd0qJqbrQ1dJnGx-Wlnul4HtUxJADojvmgEBWxTz3Gc76BEOA%2Fviewform%3Fusp%3Dheader" alt="QR code avis KAP" style="width:180px;height:180px;border-radius:12px;display:block;margin:0 auto 20px">
+    <div style="font-size:10px;color:#B0A090;margin-bottom:20px;letter-spacing:0.5px">Gagny · Chessy — Cabinet KAP</div>
+    <button onclick="document.getElementById('kap-qr-overlay').style.display='none';document.getElementById('kap-qr-overlay').style.alignItems=''" 
+      style="width:100%;padding:13px;background:linear-gradient(135deg,#B87A2A,#D49A3C);color:white;border:none;border-radius:12px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;cursor:pointer;letter-spacing:0.3px">
+      Terminer ✦
+    </button>
+  </div>
+</div>
+</body></html>';
 
 
   // Conversation KAP IA
@@ -2413,6 +2427,12 @@ function closeAndResetResult(){
   if(tpFooter) tpFooter.style.display='';
   if(tpProgress) tpProgress.style.display='';
   resetTrace();
+
+  var overlay = document.getElementById('trace-overlay');
+  if(overlay) overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  var qr = document.getElementById('kap-qr-overlay');
+  if(qr){ qr.style.display='flex'; qr.style.alignItems='center'; }
 }
 
 function showTraceResult(){
