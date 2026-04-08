@@ -589,7 +589,7 @@ textarea::placeholder{color:var(--text-s)}
 }
 .tp-btn-next:hover{background:#7A3350;transform:translateY(-1px)}
 .tp-btn-next:disabled{opacity:.35;pointer-events:none;transform:none}
-#trace-result{display:noneposition:relative;}
+#trace-result{display:none;position:relative;}
 .tr-header{padding:20px 24px 16px;border-bottom:1px solid rgba(168,84,112,0.11);display:flex;align-items:center;gap:12px}
 .tr-icon{width:40px;height:40px;background:linear-gradient(135deg,#7A3350,#A85470);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px}
 .tr-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;color:#2E1E1E}
@@ -2657,7 +2657,6 @@ function openChatAfterBilan(kap){
           <div class="tp-chip" onclick="toggleChip(this,'traitement')" data-val="radio">☢️ Radiothérapie</div>
           <div class="tp-chip" onclick="toggleChip(this,'traitement')" data-val="hormono">💊 Hormonothérapie</div>
           <div class="tp-chip" onclick="toggleChip(this,'traitement')" data-val="recons">🔧 Reconstruction en cours</div>
-    grid.innerHTML = '<div class="temo-empty">Aucun t\u00e9moignage pour l\u2019instant.<br>Soyez la premi\u00e8re \u00e0 partager un mot.</div>';
         </div>
         <textarea class="tp-textarea" id="traitement-text" placeholder="Autre chose..." style="min-height:60px;margin-top:12px"></textarea>
       </div>
@@ -2866,9 +2865,15 @@ function updateEva(v){
 
 function toggleChip(el, type){
   if(type === 'activity'){
-    document.querySelectorAll('#activity-chips .tp-chip').forEach(function(c){c.classList.remove('selected');});
-    el.classList.add('selected');
-    tData.activity = el.dataset.val;
+    // Multi-select : plusieurs choix possibles
+    el.classList.toggle('selected');
+    var selected = Array.from(document.querySelectorAll('#activity-chips .tp-chip.selected')).map(function(c){return c.dataset.val;});
+    tData.activity = selected.length ? selected[0] : null; // premier pour compat score
+    tData.activities = selected; // tous les choix
+    tData.activityLabel = selected.map(function(v){
+      var labels={'bras':'Lever le bras','sommeil':'Dormir sans douleur','fatigue':'Retrouver de l\'énergie','bras-lourd':'Bras lourd/gonflé','cordes':'Corde sous l\'aisselle','confiance':'Me sentir en confiance','activite':'Reprendre mes activités'};
+      return labels[v]||v;
+    }).join(', ');
   } else if(type === 'barrier'){
     el.classList.toggle('selected');
     // barriers tracked at result time via DOM
