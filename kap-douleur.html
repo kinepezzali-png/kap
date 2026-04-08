@@ -2427,12 +2427,14 @@ function closeAndResetResult(){
   if(tpFooter) tpFooter.style.display='';
   if(tpProgress) tpProgress.style.display='';
   resetTrace();
-
+  // Fermer le bilan et afficher le QR
   var overlay = document.getElementById('trace-overlay');
   if(overlay) overlay.classList.remove('open');
   document.body.style.overflow = '';
-  var qr = document.getElementById('kap-qr-overlay');
-  if(qr){ qr.style.display='flex'; qr.style.alignItems='center'; }
+  setTimeout(function(){
+    var qr = document.getElementById('kap-qr-overlay');
+    if(qr){ qr.style.display='flex'; }
+  }, 200);
 }
 
 function showTraceResult(){
