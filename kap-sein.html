@@ -2766,9 +2766,11 @@ function openChatAfterBilan(kap){
 </div>
 
 <!-- RÉSULTAT BILAN -->
-<div id="trace-result" style="display:none;position:fixed;inset:0;z-index:99998;background:rgba(46,30,30,0.6);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:20px">
-  <div style="background:#FAF0F2;border-radius:22px;width:100%;max-width:560px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(100,40,60,0.2)">
-    <!-- Header minimal -->
+<div id="trace-result" style="display:none;position:fixed;inset:0;z-index:99998;background:#F5EEF0;flex-direction:column;overflow:hidden">
+  <div style="background:#FAF0F2;width:100%;max-width:600px;margin:0 auto;display:flex;flex-direction:column;flex:1;overflow:hidden;box-shadow:none">
+
+    <div style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch">
+    <!-- Header -->
     <div style="padding:14px 20px 12px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;border-bottom:1px solid rgba(168,84,112,0.08)">
       <button onclick="closeResult()" style="width:28px;height:28px;border-radius:50%;background:#F5E2E2;border:none;cursor:pointer;font-size:14px;color:#A85470;display:flex;align-items:center;justify-content:center">←</button>
       <div style="font-size:9.5px;letter-spacing:2.5px;text-transform:uppercase;color:#C9849A">KAP-Trace · SEREINIA</div>
@@ -2777,24 +2779,53 @@ function openChatAfterBilan(kap){
         <button onclick="closeResult()" style="width:28px;height:28px;border-radius:8px;background:#F5E2E2;border:none;cursor:pointer;font-size:13px;color:#A85470;display:flex;align-items:center;justify-content:center">✕</button>
       </div>
     </div>
-    <!-- Hero KAP Score — visible immédiatement -->
-    <div style="padding:20px 20px 0;flex-shrink:0" id="tr-hero"><!-- rempli par showTraceResult --></div>
-    <!-- Détails scrollables -->
-    <div style="flex:1;overflow-y:auto;padding:0 20px 12px" id="tr-cards"></div>
+
+    <!-- Score hero -->
+    <div style="padding:20px 20px 0" id="tr-hero"></div>
+
+    <!-- Détails -->
+    <div style="padding:0 20px 12px" id="tr-cards"></div>
+
     <!-- Réponse SEREINIA -->
-    <div style="background:#FDF0F2;border-top:1px solid rgba(168,84,112,0.08);padding:16px 20px;font-size:13px;line-height:1.8;color:#2E1E1E;flex-shrink:0;max-height:220px;overflow-y:auto" id="tr-ia-block">
+    <div style="background:#FDF0F2;border-top:1px solid rgba(168,84,112,0.08);padding:16px 20px;font-size:13px;line-height:1.8;color:#2E1E1E;margin:0 0 4px" id="tr-ia-block">
       <div style="font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:#A85470;margin-bottom:6px">SEREINIA · Par Marc Pezzali, MK-DE</div>
       <div id="tr-ia-text">Analyse en cours...</div>
     </div>
-    <!-- Barre téléchargement -->
-    
-    <div id="kine-view-panel">
+
+    <!-- Numéro de bilan -->
+    <div class="immat-reveal" style="display:none;padding:10px 20px;background:white">
+      <div style="background:#A85470;border-radius:12px;padding:10px 16px;display:flex;align-items:center;gap:12px">
+        <div>
+          <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:2px">Votre numéro de bilan</div>
+          <div id="immat-display" style="font-family:monospace;font-size:22px;font-weight:bold;color:white;letter-spacing:3px">—</div>
+        </div>
+        <div style="font-size:11px;color:rgba(255,255,255,.8);line-height:1.5;flex:1">Communiquez ce numéro à votre kiné.</div>
+      </div>
+    </div>
+
+    <!-- QR code -->
+    <div style="padding:16px 20px;text-align:center;border-top:1px solid rgba(168,84,112,0.08)">
+      <div style="font-size:10.5px;color:#A08080;font-weight:500;margin-bottom:10px">Donnez votre avis — 1 minute pour améliorer KAP</div>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&color=2E1818&bgcolor=ffffff&qzone=1&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSd0qJqbrQ1dJnGx-Wlnul4HtUxJADojvmgEBWxTz3Gc76BEOA%2Fviewform%3Fusp%3Dheader" alt="QR avis KAP" style="width:140px;height:140px;border-radius:8px;display:block;margin:0 auto">
+      <div style="font-size:9.5px;color:#C0A0A0;margin-top:6px">Scannez avec votre téléphone</div>
+    </div>
+
+    <!-- Bouton unique sauvegarde -->
+    <div style="margin:0 20px 12px">
+      <button onclick="saveBilanHTML()" style="width:100%;padding:13px;background:white;border:1.5px solid rgba(168,84,112,0.3);border-radius:14px;color:#A85470;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s" onmouseover="this.style.background='#FDF0F4'" onmouseout="this.style.background='white'">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>
+        Sauvegarder mon bilan complet
+      </button>
+    </div>
+
+    <!-- Panel Kiné -->
+    <div id="kine-view-panel" style="margin:8px 20px 0">
       <div class="kine-hdr">
         <button class="kine-back" onclick="closeKineReport()">←</button>
         <span style="font-size:12px;font-weight:500;color:#2E1818;flex:1">Rapport clinique · Kiné</span>
         <span style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:#A85470;opacity:.7">Code 2603</span>
       </div>
-      <div id="kine-code-sc" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:32px 20px;flex:1">
+      <div id="kine-code-sc" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:32px 20px">
         <div style="font-size:30px">🔐</div>
         <div style="font-family:Cormorant Garamond,serif;font-size:17px;font-weight:500;color:#2E1818;text-align:center">Accès réservé au kiné</div>
         <div style="font-size:11.5px;color:#8A7070;text-align:center;line-height:1.6">Entrez votre code pour<br>le rapport clinique complet</div>
@@ -2805,38 +2836,16 @@ function openChatAfterBilan(kap){
         <div id="kine-code-err" style="display:none;color:#C04040;font-size:11px">Code incorrect</div>
         <button onclick="submitKineCode()" style="background:#A85470;color:white;border:none;border-radius:20px;padding:10px 24px;font-family:Jost,sans-serif;font-size:13px;cursor:pointer">Accéder</button>
       </div>
-      <div id="kine-rpt" style="display:none;overflow-y:auto;flex:1;padding:16px 18px"></div>
+      <div id="kine-rpt" style="display:none;overflow-y:auto;max-height:400px;padding:16px 18px"></div>
     </div>
 
-    <div style="padding:10px 20px 6px;text-align:center;flex-shrink:0">
-      <div style="font-size:10.5px;color:#A08080;font-weight:500;margin-bottom:8px">Donnez votre avis — 1 minute pour améliorer KAP</div>
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&color=2E1818&bgcolor=ffffff&qzone=1&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSd0qJqbrQ1dJnGx-Wlnul4HtUxJADojvmgEBWxTz3Gc76BEOA%2Fviewform%3Fusp%3Dheader" alt="QR code avis KAP" style="width:120px;height:120px;border-radius:6px;display:block">
-      <div style="font-size:9.5px;color:#C0A0A0;margin-top:5px">Scannez avec votre téléphone</div>
     </div>
-    <div class="tr-dl-bar">
-      <button class="tr-dl-btn" onclick="downloadBilanPDF()">
-        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><polyline points="9 14 12 17 15 14"/></svg>
-        Télécharger mon bilan PDF
-      </button>
-        <button class="btn-kine-pro tr-dl-btn" onclick="printKineDossier()"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Kiné</button>
-    </div>
-    <!-- Immatriculation -->
-    <div class="immat-reveal" style="display:none;padding:10px 20px 0;background:white">
-      <div style="background:#A85470;border-radius:12px;padding:10px 16px;display:flex;align-items:center;gap:12px">
-        <div>
-          <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:2px">Votre numéro de bilan</div>
-          <div id="immat-display" style="font-family:monospace;font-size:22px;font-weight:bold;color:white;letter-spacing:3px">—</div>
-        </div>
-        <div style="font-size:11px;color:rgba(255,255,255,.8);line-height:1.5;flex:1">Communiquez ce numéro à votre kiné lors de votre prochaine séance.</div>
-      </div>
-    </div>
-    
-    </div>
-    <!-- Barre actions -->
-    <div style="padding:10px 20px 14px;display:flex;gap:8px;flex-shrink:0;background:white">
-      <button onclick="resetTrace()" style="padding:9px 18px;border-radius:20px;border:1px solid rgba(168,84,112,0.2);background:transparent;color:#A08080;font-family:'Jost',sans-serif;font-size:12px;cursor:pointer">↺ Recommencer</button>
+    <!-- Boutons actions — DANS le conteneur -->
+    <div style="display:flex;gap:8px;padding:12px 16px 24px;background:#FAF0F2;flex-shrink:0;border-top:1px solid rgba(168,84,112,0.1)">
+      <button onclick="resetTrace()" style="padding:9px 18px;border-radius:20px;border:1px solid rgba(168,84,112,0.2);background:transparent;color:#A08080;font-family:'Jost',sans-serif;font-size:12px;cursor:pointer;white-space:nowrap">↺ Recommencer</button>
       <button onclick="var _kap=computeKAPScore();closeResult();openChatAfterBilan(_kap);" style="flex:1;padding:10px;border-radius:20px;background:#A85470;border:none;color:white;font-family:'Jost',sans-serif;font-size:13px;cursor:pointer">Continuer avec SEREINIA →</button>
     </div>
+
   </div>
 </div>
 
@@ -2890,9 +2899,10 @@ function toggleChip(el, type){
 }
 
 function selectProgress(el, val){
-  document.querySelectorAll('#progress-opts .tp-progress-opt').forEach(function(o){o.classList.remove('on');});
-  el.classList.add('on');
+  document.querySelectorAll('#progress-opts .tp-progress-opt').forEach(function(o){o.classList.remove('on','selected');});
+  el.classList.add('on','selected');
   tData.progress = val;
+  tUpdateNav();
 }
 
 function checkStep4(){
@@ -3071,6 +3081,7 @@ function showTraceResult(){
   var result = document.getElementById('trace-result');
   if(!result) return;
   result.style.display = 'flex';
+  result.style.flexDirection = 'column';
   document.body.style.overflow = 'hidden';
   // Générer QR code avis
   setTimeout(function(){
@@ -3640,6 +3651,160 @@ function printKineDossier(){
     a.download = 'SEREINIA-Dossier-'+immat+'-'+new Date().toISOString().split('T')[0]+'.html';
     a.click();
   }
+}
+
+function saveBilanHTML(){
+  var kap = computeKAPScore();
+  var lbl = kapScoreLabel(kap.global);
+  var immat = (function(){var s=localStorage.getItem('kap-last-immat');return s||'—';})();
+  var date = new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  var iaText = document.getElementById('tr-ia-text') ? document.getElementById('tr-ia-text').innerHTML : '';
+  var sc = (kap.global||0)>=70?'#2E8B57':(kap.global||0)>=40?'#A85470':'#C04040';
+  var bc = '#A85470';
+
+  // Dimensions HTML
+  var dimNames = {D:'KAP-D · Douleur et confort',F:'KAP-F · Fonctionnalité du bras',S:'KAP-S · Qualité du sommeil',Fa:'KAP-Fa · Fatigue',K:'KAP-I · Image & bien-être'};
+  var dimsHTML = '';
+  Object.keys(kap.dims||{}).forEach(function(k){
+    var v = kap.dims[k];
+    if(v===null) return;
+    var c = v>=70?'#2E8B57':v>=45?bc:'#C04040';
+    dimsHTML += '<div style="margin-bottom:10px">'+
+      '<div style="display:flex;justify-content:space-between;margin-bottom:3px">'+
+        '<span style="font-size:12px;color:#5A3040">'+(dimNames[k]||k)+'</span>'+
+        '<span style="font-size:13px;font-weight:600;color:'+c+'">'+v+'</span>'+
+      '</div>'+
+      '<div style="background:rgba(168,84,112,0.1);border-radius:4px;height:6px;overflow:hidden">'+
+        '<div style="width:'+v+'%;height:100%;background:'+c+';border-radius:4px"></div>'+
+      '</div></div>';
+  });
+
+  // Données complètes du bilan
+  function rowData(l,v){ return v!=null&&v!==''?'<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(168,84,112,0.07)"><span style="font-size:11px;color:#9A7880;min-width:140px">'+l+'</span><span style="font-size:12px;color:#2E1818;font-weight:500;text-align:right;flex:1">'+v+'</span></div>':''; }
+  var dureeLabels={recente:'< 3 mois',quelques:'3–6 mois',longue:'6 mois–1 an','tres-longue':'> 1 an'};
+  var nuitLabels={bien:'Non perturbé ✅',perturbe:'Perturbé 🌙',reveil:'Réveils nocturnes 😫',nocturne:'Douleur nocturne 🔴'};
+  var impactLabels={peu:'Peu d\'impact',genant:'G\u00eanant mais adapt\u00e9',limite:'Limite vraiment',arret:'Ne peut presque plus rien'};
+  var progressLabels={mieux:'En amélioration 📈',stable:'Stable ➡',difficile:'Période difficile 📉'};
+  var kinesioLabels={0:'Peu présente',1:'Modérée',2:'Élevée',3:'Très élevée'};
+  var bisLabels={0:'Très bonne',1:'Bonne',2:'Variable',3:'Difficile'};
+
+  // Activités sélectionnées (multi-select)
+  var activitesLabel = tData.activityLabel || (tData.activity ? tData.activity : '');
+  var qdashScore = null;
+  if(tData.qdash){var qv=Object.values(tData.qdash).filter(function(v){return v!=null;});if(qv.length)qdashScore=Math.round(((qv.reduce(function(a,b){return a+b;},0)/qv.length-1)/4)*100);}
+  var pichotScore = null;
+  if(tData.pichot){var pv=Object.values(tData.pichot).filter(function(v){return v!=null;});if(pv.length)pichotScore=pv.reduce(function(a,b){return a+b;},0);}
+
+  var donneesHTML =
+    rowData('Douleur EVA', tData.eva!=null ? tData.eva+'/10' : null)+
+    rowData('Ce qui est difficile', activitesLabel)+
+    rowData('Objectif 4 semaines', tData.goal)+
+    rowData('Trajectoire perçue', progressLabels[tData.progress]||null)+
+    rowData('Durée des symptômes', dureeLabels[tData.duree]||null)+
+    rowData('Sommeil', nuitLabels[tData.nuit]||null)+
+    rowData('Impact quotidien', impactLabels[tData.impact]||null)+
+    rowData('Soutien', tData.soutienText||null)+
+    rowData('QuickDASH (bras)', qdashScore!==null ? qdashScore+'/100' : null)+
+    rowData('Fatigue Pichot', pichotScore!==null ? pichotScore+'/12' : null)+
+    rowData('Kinésiophobie', tData.kinesio!=null ? kinesioLabels[tData.kinesio] : null)+
+    rowData('Image corporelle', tData.bis!=null ? bisLabels[tData.bis] : null)+
+    rowData('Brides axillaires', tData.brides ? '⚠ Présentes' : null);
+
+  var html = '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">'+
+    '<meta name="viewport" content="width=device-width,initial-scale=1">'+
+    '<title>Bilan SEREINIA '+immat+'</title>'+
+    '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">'+
+    '<style>'+
+    '*{margin:0;padding:0;box-sizing:border-box}'+
+    'body{background:#F5EEF0;font-family:Jost,sans-serif;font-weight:300;min-height:100vh;padding:0}'+
+    '.page{max-width:600px;margin:0 auto;background:#FAF0F2;min-height:100vh;padding:0 0 40px}'+
+    '.header{text-align:center;padding:32px 24px 24px;border-bottom:1px solid rgba(168,84,112,0.12)}'+
+    '.logo{font-family:"Cormorant Garamond",serif;font-size:2.2rem;font-weight:300;letter-spacing:0.35em;color:#7A3350}'+
+    '.subtitle{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#C9849A;margin-top:4px}'+
+    '.date{font-size:10px;color:#A08080;margin-top:6px}'+
+    '.section{margin:16px;background:white;border-radius:16px;padding:20px;border:1px solid rgba(168,84,112,0.08)}'+
+    '.section-label{font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:#C9849A;margin-bottom:14px}'+
+    '.score-row{display:flex;align-items:flex-start;gap:16px}'+
+    '.score-num{font-family:"Cormorant Garamond",serif;font-size:72px;line-height:1;color:'+sc+';min-width:100px;text-align:center}'+
+    '.score-info{flex:1}'+
+    '.score-label{font-size:15px;font-weight:600;color:'+sc+'}'+
+    '.score-desc{font-size:11px;color:#A08080;margin-top:3px;line-height:1.5}'+
+    '.legend{display:flex;gap:4px;flex-wrap:wrap;margin-top:10px}'+
+    '.legend span{padding:2px 8px;border-radius:10px;font-size:9px}'+
+    '.ia-section{margin:16px;background:#FDF0F2;border-radius:16px;padding:20px;border:1px solid rgba(168,84,112,0.1)}'+
+    '.ia-label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#A85470;margin-bottom:12px}'+
+    '.ia-text{font-size:13px;line-height:1.85;color:#2E1E1E}'+
+    '.ia-text strong{font-weight:600}'+
+    '.ia-text em{font-style:italic}'+
+    '.immat{margin:16px;background:#A85470;border-radius:16px;padding:18px;color:white;text-align:center}'+
+    '.immat-label{font-size:8px;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px}'+
+    '.immat-num{font-family:monospace;font-size:26px;font-weight:bold;letter-spacing:4px}'+
+    '.immat-hint{font-size:10px;opacity:.75;margin-top:5px}'+
+    '.qr{margin:16px;text-align:center;padding:20px;background:white;border-radius:16px;border:1px solid rgba(168,84,112,0.08)}'+
+    '.qr-title{font-size:11px;color:#7A5060;font-weight:500;margin-bottom:12px}'+
+    '.footer{text-align:center;padding:0 16px 24px;font-size:9px;color:#A08080;line-height:1.7}'+
+    '</style></head><body>'+
+    '<div class="page">'+
+
+    '<div class="header">'+
+      '<div class="logo">SEREINIA</div>'+
+      '<div class="subtitle">Kinésithérapie · Santé</div>'+
+      '<div class="date">'+date+'</div>'+
+    '</div>'+
+
+    '<div class="section">'+
+      '<div class="section-label">KAP Score SEREINIA</div>'+
+      '<div class="score-row">'+
+        '<div class="score-num">'+(kap.global!==null?kap.global:'—')+'</div>'+
+        '<div class="score-info">'+
+          '<div class="score-label">'+lbl.label+'</div>'+
+          '<div class="score-desc">'+lbl.desc+'</div>'+
+          '<div style="background:rgba(168,84,112,0.1);border-radius:4px;height:8px;overflow:hidden;margin-top:10px">'+
+            '<div style="width:'+(kap.global||0)+'%;height:100%;background:linear-gradient(to right,'+sc+',rgba(168,84,112,0.5));border-radius:4px"></div>'+
+          '</div>'+
+          '<div class="legend">'+
+            '<span style="background:#FBF0F4;color:#7A3350">0–19 Difficile</span>'+
+            '<span style="background:#FBF0F4;color:#A85470">20–39 Complexe</span>'+
+            '<span style="background:#F0FAF4;color:#4A8860">40–59 En route</span>'+
+            '<span style="background:#E8F5EE;color:#2D6A4F">60–79 Progression</span>'+
+            '<span style="background:#DFF2E8;color:#2D6A4F">80+ ✦</span>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+    '</div>'+
+
+    (dimsHTML ? '<div class="section"><div class="section-label">Détail par dimension</div>'+dimsHTML+'</div>' : '')+
+
+    (donneesHTML ? '<div class="section"><div class="section-label">Données déclarées</div>'+donneesHTML+'</div>' : '')+
+
+    '<div class="ia-section">'+
+      '<div class="ia-label">SEREINIA · Par Marc Pezzali, MK-DE</div>'+
+      '<div class="ia-text">'+iaText+'</div>'+
+    '</div>'+
+
+    '<div class="immat">'+
+      '<div class="immat-label">Votre numéro de bilan</div>'+
+      '<div class="immat-num">'+immat+'</div>'+
+      '<div class="immat-hint">À communiquer à votre kiné lors de votre prochaine séance</div>'+
+    '</div>'+
+
+    '<div class="qr">'+
+      '<div class="qr-title">Donnez votre avis — 1 minute pour améliorer KAP</div>'+
+      '<img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&color=2E1818&bgcolor=ffffff&qzone=1&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSd0qJqbrQ1dJnGx-Wlnul4HtUxJADojvmgEBWxTz3Gc76BEOA%2Fviewform%3Fusp%3Dheader" style="width:160px;height:160px;border-radius:8px;display:block;margin:0 auto 8px">'+
+      '<div style="font-size:9px;color:#C0A0A0">Scannez avec votre téléphone</div>'+
+    '</div>'+
+
+    '<div class="footer">KAP · SEREINIA · Kinésithérapie Oncologique<br>Cabinet KAP · Gagny (93) &amp; Chessy (77)<br>Outil de préparation à la séance. Ne constitue pas un diagnostic médical.</div>'+
+
+    '</div></body></html>';
+
+  var b = new Blob([html],{type:'text/html;charset=utf-8'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(b);
+  a.download = 'SEREINIA-'+immat+'-'+new Date().toISOString().split('T')[0]+'.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 }
 
 function closeResult(){

@@ -522,19 +522,23 @@ textarea::placeholder{color:var(--ink-xs)}
 .tp-btn-next:disabled{opacity:.35;pointer-events:none;transform:none}
 #trace-result{display:noneposition:relative;}
 /* ── Result mode : panel s'élargit ── */
-#trace-panel.result-mode{max-width:960px;border-radius:20px;max-height:92vh}
+#trace-panel.result-mode{max-width:600px;border-radius:20px 20px 0 0;height:92vh;display:flex;flex-direction:column}
 /* ── Layout 2 colonnes ── */
 .kap-res-top{padding:13px 22px;border-bottom:1px solid rgba(184,122,42,0.12);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:var(--white)}
 .kap-res-top-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--amber)}
 .kap-res-close{width:30px;height:30px;border-radius:8px;background:rgba(184,122,42,0.08);border:none;cursor:pointer;font-size:14px;color:var(--amber-l);display:flex;align-items:center;justify-content:center;transition:background .18s}
 .kap-res-close:hover{background:rgba(184,122,42,0.18)}
-.kap-res-body{flex:1;overflow-y:auto;overflow-x:hidden;padding:20px 22px;display:flex;flex-direction:column;gap:16px}
+/* Résultat colonne unique */
+#trace-result{display:none;flex-direction:column;flex:1;overflow:hidden}
+.kap-res-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0;display:flex;flex-direction:column;gap:0}
 .kap-res-body::-webkit-scrollbar{width:3px}
 .kap-res-body::-webkit-scrollbar-thumb{background:var(--amber-p);border-radius:3px}
-.kap-res-left{background:#FDFCFA;border-radius:14px;border:1px solid rgba(184,122,42,0.12);padding:18px 20px}
-.kap-res-right{display:flex;flex-direction:column;gap:14px}
-.kap-res-msg-zone{background:var(--white);border-radius:14px;border:1px solid rgba(184,122,42,0.10);padding:20px 22px}
-.kap-res-footer{flex-shrink:0;padding:12px 22px;border-top:1px solid rgba(184,122,42,0.1);display:flex;gap:10px;flex-wrap:wrap;background:var(--white)}
+.kap-res-section{padding:18px 20px;border-bottom:1px solid rgba(184,122,42,0.08)}
+.kap-res-section-label{font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber);margin-bottom:12px}
+.kap-ia-block{background:#FDFCFA;padding:20px;border-bottom:1px solid rgba(184,122,42,0.08);font-size:13px;line-height:1.85;color:var(--ink-s)}
+.kap-ia-block strong{color:var(--ink);font-weight:500}
+.kap-ia-label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+.kap-res-footer{flex-shrink:0;padding:12px 16px;border-top:1px solid rgba(184,122,42,0.1);display:flex;gap:8px;flex-wrap:wrap;background:var(--white)}
 /* ── KAP Score global ── */
 .kap-score-wrap{background:var(--white);border:2px solid rgba(184,122,42,0.18);border-radius:16px;padding:18px;margin-bottom:16px}
 .kap-score-label-sm{font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
@@ -581,8 +585,9 @@ textarea::placeholder{color:var(--ink-xs)}
 @media(max-width:700px){
   #trace-panel.result-mode{max-width:100%;border-radius:20px 20px 0 0;position:fixed;bottom:0;left:0;right:0;max-height:96vh}
   #trace-overlay{padding:0;align-items:flex-end}
-  .kap-res-body{padding:14px 16px}
-  .kap-res-msg-zone{padding:16px 18px}
+  .kap-res-body{flex-direction:column;overflow-y:auto}
+  .kap-res-left{flex:none;border-right:none;border-bottom:1px solid rgba(184,122,42,0.1);padding:18px}
+  .kap-res-msg-zone{padding:18px 20px}
 }
 /* ── Legacy (conservé pour compatibilité) ── */
 .tr-btn-redo{display:none}.tr-btn-chat{display:none}.tr-header{display:none}.tr-body{display:none}.tr-footer{display:none}
@@ -2371,21 +2376,7 @@ function downloadBilanDouleurPDF(){
     '<div class="footer">' +
       'KAP · Kiné · Activité · Prévention — SAS MAMCG · Cabinet Gagny (93) · Cabinet Chessy (77)<br>' +
       'Cet outil est réservé à un usage de préparation à la séance de kinésithérapie. Il ne constitue pas un diagnostic médical. Urgences : 15 ou 112.' +
-    '</div>
-<!-- ══ OVERLAY QR AVIS ══ -->
-<div id="kap-qr-overlay" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(26,21,16,0.88);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:20px">
-  <div style="background:#FDFCFA;border-radius:24px;padding:36px 32px;max-width:340px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
-    <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:#1A1510;margin-bottom:6px">Votre avis compte</div>
-    <div style="font-size:12px;color:#7A6A55;margin-bottom:24px;line-height:1.6">2 minutes pour nous aider à améliorer KAP.<br>Scannez avec votre téléphone.</div>
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&color=1A1510&bgcolor=ffffff&qzone=1&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSd0qJqbrQ1dJnGx-Wlnul4HtUxJADojvmgEBWxTz3Gc76BEOA%2Fviewform%3Fusp%3Dheader" alt="QR code avis KAP" style="width:180px;height:180px;border-radius:12px;display:block;margin:0 auto 20px">
-    <div style="font-size:10px;color:#B0A090;margin-bottom:20px;letter-spacing:0.5px">Gagny · Chessy — Cabinet KAP</div>
-    <button onclick="document.getElementById('kap-qr-overlay').style.display='none';document.getElementById('kap-qr-overlay').style.alignItems=''" 
-      style="width:100%;padding:13px;background:linear-gradient(135deg,#B87A2A,#D49A3C);color:white;border:none;border-radius:12px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;cursor:pointer;letter-spacing:0.3px">
-      Terminer ✦
-    </button>
-  </div>
-</div>
-</body></html>';
+    '</div></body></html>';
 
 
   // Conversation KAP IA
@@ -2427,14 +2418,6 @@ function closeAndResetResult(){
   if(tpFooter) tpFooter.style.display='';
   if(tpProgress) tpProgress.style.display='';
   resetTrace();
-  // Fermer le bilan et afficher le QR
-  var overlay = document.getElementById('trace-overlay');
-  if(overlay) overlay.classList.remove('open');
-  document.body.style.overflow = '';
-  setTimeout(function(){
-    var qr = document.getElementById('kap-qr-overlay');
-    if(qr){ qr.style.display='flex'; }
-  }, 200);
 }
 
 function showTraceResult(){
@@ -2724,6 +2707,71 @@ function openChatWithTrace(s){
 
 // Sauvegarder SF-12 si bilan approfondi
 function _saveSF12OnFinish(){ if(bilanMode==="approfondi") saveSF12ToStudy(); }
+
+function saveBilanDouleurHTML(){
+  var kap = computeKAPScoreDouleur();
+  var lbl = kapDLabel(kap.global);
+  var msg = buildPatientMessage(kap);
+  var immat = document.getElementById('kap-immat-num') ? document.getElementById('kap-immat-num').textContent : '—';
+  var date = new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  var sc = (kap.global||0)>=70?'#2E8B57':(kap.global||0)>=40?'#B87A2A':'#C04040';
+  var bc = '#B87A2A';
+  var d = traceData;
+
+  // Dimensions
+  var dimNames = {D:'KAP-D · Confort & Douleur',F:'KAP-F · Fonctionnalité',K:'KAP-K · Mouvement & Confiance',Fa:'KAP-Fa · Vitalité & Énergie',A:'KAP-A · Auto-efficacité'};
+  var dimsHTML = '';
+  Object.keys(kap.dims||{}).forEach(function(k){
+    var v = kap.dims[k]; if(v===null) return;
+    var c = v>=70?'#2E8B57':v>=40?bc:'#C04040';
+    dimsHTML += '<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:12px;color:#5A4020">'+(dimNames[k]||k)+'</span><span style="font-size:13px;font-weight:600;color:'+c+'">'+v+'</span></div><div style="background:rgba(184,122,42,0.12);border-radius:4px;height:6px;overflow:hidden"><div style="width:'+v+'%;height:100%;background:'+c+';border-radius:4px"></div></div></div>';
+  });
+
+  // Données déclarées
+  function row(l,v){return v!=null&&v!==''?'<tr><td style="font-size:11px;color:#8A7060;padding:6px 0;border-bottom:1px solid rgba(184,122,42,0.08);width:45%">'+l+'</td><td style="font-size:12px;color:#1A1510;font-weight:500;padding:6px 0;border-bottom:1px solid rgba(184,122,42,0.08)">'+v+'</td></tr>':'';}
+  var sommeilL={bien:'Non perturbé ✅',perturbe:'Perturbé',reveil:'Réveils nocturnes',nocturne:'Douleur nocturne 🔴'};
+  var progressL={mieux:'En amélioration 📈',stable:'Stable ➡',difficile:'Période difficile 📉'};
+  var qualiteLabel=(d.qualite||[]).join(', ')||null;
+  var locLabel=(d.localisation||[]).join(', ')||null;
+  var psfsRows='';
+  if(d.psfs)(d.psfs).filter(function(p){return p.label;}).forEach(function(p){psfsRows+=row(p.label,p.score+'/10');});
+  var pichotScore=null;
+  if(d.pichot){var pv=Object.values(d.pichot).filter(function(v){return v!=null;});if(pv.length)pichotScore=pv.reduce(function(a,b){return a+b;},0);}
+  var donneesRows=
+    row('Situation décrite',d.situation)+
+    row('Douleur EVA',d.eva!=null?d.eva+'/10':null)+
+    row('Qualité de la douleur',qualiteLabel)+
+    row('Localisation',locLabel)+
+    row('Ce qui est difficile',d.activityText||d.activity)+
+    row('Objectif',d.goal)+
+    row('Trajectoire',progressL[d.progress]||null)+
+    row('Sommeil',sommeilL[d.sommeil]||null)+
+    row('Fatigue Pichot',pichotScore!=null?pichotScore+'/12':null)+
+    psfsRows;
+
+  var headlineHTML = document.getElementById('kap-res-headline') ? document.getElementById('kap-res-headline').innerHTML : msg.headline;
+  var textHTML = document.getElementById('kap-res-text') ? document.getElementById('kap-res-text').innerHTML : msg.body;
+
+  var html = '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bilan KAP Douleur '+immat+'</title>'+
+  '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">'+
+  '<style>*{margin:0;padding:0;box-sizing:border-box}body{background:#F5F0E8;font-family:Jost,sans-serif;font-weight:300;min-height:100vh}.page{max-width:600px;margin:0 auto;background:#FDFCFA;min-height:100vh;padding:0 0 40px}.header{text-align:center;padding:32px 24px 22px;border-bottom:1px solid rgba(184,122,42,0.12)}.logo{font-family:"Cormorant Garamond",serif;font-size:2rem;font-weight:300;letter-spacing:0.35em;color:#1A1510}.subtitle{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#B87A2A;margin-top:4px}.date{font-size:10px;color:#8A7A60;margin-top:6px}.section{margin:16px;background:white;border-radius:14px;padding:18px 20px;border:1px solid rgba(184,122,42,0.1)}.section-label{font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:#B87A2A;margin-bottom:12px}.score-row{display:flex;align-items:flex-start;gap:16px}.score-num{font-family:"Cormorant Garamond",serif;font-size:72px;line-height:1;color:'+sc+';min-width:100px;text-align:center}.score-info{flex:1}.score-label{font-size:15px;font-weight:600;color:'+sc+'}.score-desc{font-size:11px;color:#8A7060;margin-top:3px}.bar-track{background:rgba(184,122,42,0.1);border-radius:4px;height:8px;overflow:hidden;margin-top:10px}.bar-fill{height:100%;background:linear-gradient(to right,'+sc+',rgba(184,122,42,0.4));border-radius:4px}.ia-section{margin:16px;background:#1A1510;border-radius:14px;padding:20px}.ia-label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px}.ia-headline{font-family:"Cormorant Garamond",serif;font-size:20px;color:white;line-height:1.35;margin-bottom:12px}.ia-headline em{color:#D4A855;font-style:italic}.ia-text{font-size:13px;color:rgba(255,255,255,.75);line-height:1.85}.ia-text strong{color:#D4A855;font-weight:500}.immat{margin:16px;background:#B87A2A;border-radius:14px;padding:16px 20px;display:flex;align-items:center;gap:16px;color:white}.immat-num{font-family:monospace;font-size:22px;font-weight:bold;letter-spacing:3px}.immat-hint{font-size:10px;opacity:.75}.qr{margin:16px;text-align:center;padding:18px;background:white;border-radius:14px;border:1px solid rgba(184,122,42,0.1)}.footer{text-align:center;padding:0 16px 16px;font-size:9px;color:#A09080;line-height:1.7}strong{font-weight:600}em{font-style:italic}</style></head><body>'+
+  '<div class="page">'+
+  '<div class="header"><div class="logo">KAP Douleur</div><div class="subtitle">Kinésithérapie · Cabinet KAP</div><div class="date">'+date+'</div></div>'+
+  '<div class="section"><div class="section-label">KAP Score Douleur</div><div class="score-row"><div class="score-num">'+(kap.global!==null?kap.global:'—')+'</div><div class="score-info"><div class="score-label">'+lbl.label+'</div><div class="score-desc">'+lbl.desc+'</div><div class="bar-track"><div class="bar-fill" style="width:'+(kap.global||0)+'%"></div></div></div></div></div>'+
+  (dimsHTML?'<div class="section"><div class="section-label">Détail par dimension</div>'+dimsHTML+'</div>':'')+
+  (donneesRows?'<div class="section"><div class="section-label">Données déclarées</div><table style="width:100%;border-collapse:collapse">'+donneesRows+'</table></div>':'')+
+  '<div class="ia-section"><div class="ia-label">KAP IA · Par Marc Pezzali, MK-DE</div><div class="ia-headline">'+headlineHTML+'</div><div class="ia-text">'+textHTML+'</div></div>'+
+  '<div class="immat"><div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:4px">Numéro de bilan</div><div class="immat-num">'+immat+'</div></div><div class="immat-hint">À communiquer à votre kiné lors de votre prochaine séance</div></div>'+
+  '<div class="qr"><div style="font-size:10px;color:#8A7060;font-weight:500;margin-bottom:10px">Donnez votre avis — 1 minute pour améliorer KAP</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&color=1A1510&bgcolor=ffffff&qzone=1&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSd0qJqbrQ1dJnGx-Wlnul4HtUxJADojvmgEBWxTz3Gc76BEOA%2Fviewform%3Fusp%3Dheader" style="width:150px;height:150px;border-radius:8px;display:block;margin:0 auto 6px"><div style="font-size:9px;color:#B0A090">Scannez avec votre téléphone</div></div>'+
+  '<div class="footer">KAP · Kinésithérapie Douleur Chronique<br>Cabinet KAP · Gagny (93) &amp; Chessy (77)<br>Outil de préparation à la séance. Ne constitue pas un diagnostic médical.</div>'+
+  '</div></body></html>';
+
+  var b=new Blob([html],{type:'text/html;charset=utf-8'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(b);
+  a.download='KAP-Douleur-'+immat+'-'+new Date().toISOString().split('T')[0]+'.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+}
 
 function startChatAfterTrace(){
   closeTrace();
@@ -3429,75 +3477,77 @@ updateEva(5);
       <button class="kap-res-close" onclick="closeAndResetResult()">✕</button>
     </div>
 
-    <!-- Corps colonne unique fluide -->
+    <!-- Corps colonne unique scrollable -->
     <div class="kap-res-body">
 
-      <!-- Bloc 1 : Score global -->
-      <div class="kap-res-left">
-        <div id="kap-res-score"><!-- score global injecté par JS --></div>
+      <!-- Score global -->
+      <div class="kap-res-section">
+        <div id="kap-res-score"></div>
       </div>
 
-      <!-- Bloc 2 : Dimensions -->
-      <div class="kap-res-left">
-        <div id="kap-res-dims"><!-- 5 dimensions injectées par JS --></div>
+      <!-- Dimensions -->
+      <div class="kap-res-section">
+        <div id="kap-res-dims"></div>
       </div>
 
-      <!-- Bloc 3 : Message patient -->
-      <div class="kap-res-right">
-        <div class="kap-res-msg-zone">
-          <div id="kap-res-headline" class="kap-res-headline"></div>
-          <div id="kap-res-text" class="kap-res-text"></div>
-          <div id="kap-res-action" class="kap-action-card" style="display:none">
-            <div class="kap-action-tag">Ce soir · Action concrète</div>
-            <div class="kap-action-title" id="kap-action-title"></div>
-            <div class="kap-action-body" id="kap-action-body"></div>
-          </div>
-          <div id="kap-res-immat" class="kap-immat-wrap" style="display:none">
-            <div>
-              <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-xs);margin-bottom:3px">Numéro de bilan</div>
-              <div class="kap-immat-num" id="kap-immat-num">—</div>
-            </div>
-            <div class="kap-immat-hint">À communiquer à votre kiné lors de votre prochaine séance.</div>
-          </div>
+      <!-- Message IA -->
+      <div class="kap-ia-block">
+        <div class="kap-ia-label">KAP IA · Par Marc Pezzali, MK-DE</div>
+        <div id="kap-res-headline" class="kap-res-headline"></div>
+        <div id="kap-res-text" class="kap-res-text"></div>
+        <div id="kap-res-action" class="kap-action-card" style="display:none">
+          <div class="kap-action-tag">Ce soir · Action concrète</div>
+          <div class="kap-action-title" id="kap-action-title"></div>
+          <div class="kap-action-body" id="kap-action-body"></div>
         </div>
+      </div>
 
-        
+      <!-- Numéro bilan -->
+      <div id="kap-res-immat" class="kap-immat-wrap" style="display:none;margin:16px">
+        <div>
+          <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-xs);margin-bottom:3px">Numéro de bilan</div>
+          <div class="kap-immat-num" id="kap-immat-num">—</div>
         </div>
+        <div class="kap-immat-hint">À communiquer à votre kiné lors de votre prochaine séance.</div>
+      </div>
 
-        <!-- Footer actions -->
-        
-        <div id="kine-view-panel">
-          <div class="kine-hdr">
-            <button class="kine-back" onclick="closeKineReport()">←</button>
-            <span style="font-size:12px;font-weight:500;color:#1A1010;flex:1">Rapport clinique · Kiné</span>
-            <span style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:#B87A2A;opacity:.7">Code 2603</span>
-          </div>
-          <div id="kine-code-sc" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:32px 20px;flex:1">
-            <div style="font-size:30px">🔐</div>
-            <div style="font-family:Cormorant Garamond,serif;font-size:17px;font-weight:500;color:#1A1010;text-align:center">Accès réservé au kiné</div>
-            <div style="font-size:11.5px;color:#8A7060;text-align:center;line-height:1.6">Entrez votre code d'accès<br>pour le rapport clinique complet</div>
-            <input id="kine-code-in" type="password" placeholder="••••" maxlength="6"
-              style="border:1.5px solid #DDD;border-radius:10px;padding:10px 14px;font-size:20px;letter-spacing:8px;text-align:center;width:155px;font-family:Jost,sans-serif;background:#FFF;outline:none;color:#1A1010"
-              onkeydown="if(event.key==='Enter')submitKineCode()"
-              oninput="document.getElementById('kine-code-err').style.display='none'">
-            <div id="kine-code-err" style="display:none;color:#C04040;font-size:11px">Code incorrect</div>
-            <button onclick="submitKineCode()" style="background:#B87A2A;color:white;border:none;border-radius:20px;padding:10px 24px;font-family:Jost,sans-serif;font-size:13px;cursor:pointer">Accéder</button>
-          </div>
-          <div id="kine-rpt" style="display:none;overflow-y:auto;flex:1;padding:16px 18px"></div>
-        </div>
-
-        <div class="kap-res-footer">
-          <button class="kap-res-btn-redo" onclick="closeAndResetResult()">↺ Recommencer</button>
-          <button class="kap-res-btn-redo" onclick="downloadBilanDouleurPDF()" style="display:flex;align-items:center;gap:7px">
-            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><polyline points="9 14 12 17 15 14"/></svg>
-            Télécharger PDF
-          </button>
-          <button class="kap-res-btn-chat" onclick="startChatAfterTrace()">Parler avec KAP IA →</button>
-          <button class="btn-kine-pro" onclick="openKineReport()"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Kiné</button>
-        </div>
+      <!-- QR code -->
+      <div style="text-align:center;padding:18px 20px;border-top:1px solid rgba(184,122,42,0.08)">
+        <div style="font-size:10.5px;color:#8A7A60;font-weight:500;margin-bottom:10px">Donnez votre avis — 1 minute pour améliorer KAP</div>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&color=1A1510&bgcolor=ffffff&qzone=1&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSd0qJqbrQ1dJnGx-Wlnul4HtUxJADojvmgEBWxTz3Gc76BEOA%2Fviewform%3Fusp%3Dheader" alt="QR KAP" style="width:140px;height:140px;border-radius:8px;display:block;margin:0 auto">
+        <div style="font-size:9px;color:#B0A090;margin-top:6px">Scannez avec votre téléphone</div>
       </div>
 
     </div>
+
+    <!-- Footer sticky -->
+    <div class="kap-res-footer">
+      <button class="kap-res-btn-redo" onclick="closeAndResetResult()">↺ Recommencer</button>
+      <button class="kap-res-btn-chat" onclick="startChatAfterTrace()" style="flex:1">Parler avec KAP IA →</button>
+      <button onclick="saveBilanDouleurHTML()" style="padding:10px 14px;border-radius:20px;border:1.5px solid rgba(184,122,42,0.3);background:white;color:#B87A2A;font-family:'Jost',sans-serif;font-size:12px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>Enregistrer</button>
+    </div>
+
+    <!-- Panel Kiné -->
+    <div id="kine-view-panel">
+      <div class="kine-hdr">
+        <button class="kine-back" onclick="closeKineReport()">←</button>
+        <span style="font-size:12px;font-weight:500;color:#1A1010;flex:1">Rapport clinique · Kiné</span>
+        <span style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:#B87A2A;opacity:.7">Code 2603</span>
+      </div>
+      <div id="kine-code-sc" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:32px 20px;flex:1">
+        <div style="font-size:30px">🔐</div>
+        <div style="font-family:Cormorant Garamond,serif;font-size:17px;font-weight:500;color:#1A1010;text-align:center">Accès réservé au kiné</div>
+        <div style="font-size:11.5px;color:#8A7060;text-align:center;line-height:1.6">Entrez votre code d'accès<br>pour le rapport clinique complet</div>
+        <input id="kine-code-in" type="password" placeholder="••••" maxlength="6"
+          style="border:1.5px solid #DDD;border-radius:10px;padding:10px 14px;font-size:20px;letter-spacing:8px;text-align:center;width:155px;font-family:Jost,sans-serif;background:#FFF;outline:none;color:#1A1010"
+          onkeydown="if(event.key==='Enter')submitKineCode()"
+          oninput="document.getElementById('kine-code-err').style.display='none'">
+        <div id="kine-code-err" style="display:none;color:#C04040;font-size:11px">Code incorrect</div>
+        <button onclick="submitKineCode()" style="background:#B87A2A;color:white;border:none;border-radius:20px;padding:10px 24px;font-family:Jost,sans-serif;font-size:13px;cursor:pointer">Accéder</button>
+      </div>
+      <div id="kine-rpt" style="display:none;overflow-y:auto;flex:1;padding:16px 18px"></div>
+    </div>
+
   </div>
 
 
