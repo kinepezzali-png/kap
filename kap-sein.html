@@ -2807,6 +2807,11 @@ function openChatAfterBilan(kap){
       <div id="kine-rpt" style="display:none;overflow-y:auto;flex:1;padding:16px 18px"></div>
     </div>
 
+    <div style="padding:10px 20px 6px;text-align:center;flex-shrink:0">
+      <div style="font-size:10.5px;color:#A08080;font-weight:500;margin-bottom:8px">Donnez votre avis — 1 minute pour améliorer KAP</div>
+      <div id="kap-qr-result" style="display:inline-block;padding:6px;background:white;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.08)"></div>
+      <div style="font-size:9.5px;color:#C0A0A0;margin-top:5px">Scannez avec votre téléphone</div>
+    </div>
     <div class="tr-dl-bar">
       <button class="tr-dl-btn" onclick="downloadBilanPDF()">
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><polyline points="9 14 12 17 15 14"/></svg>
@@ -3066,6 +3071,13 @@ function showTraceResult(){
   if(!result) return;
   result.style.display = 'flex';
   document.body.style.overflow = 'hidden';
+  // Générer QR code avis
+  setTimeout(function(){
+    var qrEl = document.getElementById('kap-qr-result');
+    if(qrEl && !qrEl.children.length && typeof QRCode !== 'undefined'){
+      new QRCode(qrEl,{text:'https://docs.google.com/forms/d/e/1FAIpQLSd0qJqbrQ1dJnGx-Wlnul4HtUxJADojvmgEBWxTz3Gc76BEOA/viewform?usp=header',width:110,height:110,colorDark:'#2E1818',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.H});
+    }
+  }, 400);
   var dateEl = document.getElementById('tr-date');
   if(dateEl) dateEl.textContent = new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 
@@ -3111,14 +3123,7 @@ function showTraceResult(){
 
   cards.innerHTML =
 
-    // ── Grille de lecture ──
-    '<div style="display:flex;gap:3px;flex-wrap:wrap;margin-bottom:14px">' +
-      '<span style="background:#FBF0F4;border-radius:4px;padding:2px 6px;font-size:9px;color:#7A3350">0-19 Difficile</span>' +
-      '<span style="background:#FBF0F4;border-radius:4px;padding:2px 6px;font-size:9px;color:#A85470">20-39 Complexe</span>' +
-      '<span style="background:#F0FAF4;border-radius:4px;padding:2px 6px;font-size:9px;color:#4A8860">40-59 En route</span>' +
-      '<span style="background:#E8F5EE;border-radius:4px;padding:2px 6px;font-size:9px;color:#2D6A4F">60-79 Progression</span>' +
-      '<span style="background:#DFF2E8;border-radius:4px;padding:2px 6px;font-size:9px;color:#2D6A4F">80+ ✦</span>' +
-    '</div>' +
+    // ── Dimensions ──
 
     // ── Dimensions ──
     '<div style="background:white;border-radius:14px;padding:14px 18px;border:1px solid rgba(168,84,112,0.1);margin-bottom:12px">' +
@@ -3831,7 +3836,6 @@ function renderTemoignages(){
     });
   }
   if(!temos.length){
-    grid.innerHTML = '<div class="temo-empty">Aucun témoignage pour l’instant.<br>Soyez la première à partager un mot.</div>';
     return;
   }
   grid.innerHTML = temos.map(function(t){
