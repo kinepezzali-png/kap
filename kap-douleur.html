@@ -528,15 +528,13 @@ textarea::placeholder{color:var(--ink-xs)}
 .kap-res-top-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--amber)}
 .kap-res-close{width:30px;height:30px;border-radius:8px;background:rgba(184,122,42,0.08);border:none;cursor:pointer;font-size:14px;color:var(--amber-l);display:flex;align-items:center;justify-content:center;transition:background .18s}
 .kap-res-close:hover{background:rgba(184,122,42,0.18)}
-.kap-res-body{display:flex;flex:1;overflow:hidden;min-height:0}
-.kap-res-left{flex:0 0 360px;overflow-y:auto;padding:22px;border-right:1px solid rgba(184,122,42,0.1);background:#FDFCFA}
-.kap-res-left::-webkit-scrollbar{width:3px}
-.kap-res-left::-webkit-scrollbar-thumb{background:var(--amber-p);border-radius:3px}
-.kap-res-right{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--white)}
-.kap-res-msg-zone{flex:1;overflow-y:auto;padding:26px 30px}
-.kap-res-msg-zone::-webkit-scrollbar{width:3px}
-.kap-res-msg-zone::-webkit-scrollbar-thumb{background:var(--amber-p);border-radius:3px}
-.kap-res-footer{flex-shrink:0;padding:13px 22px;border-top:1px solid rgba(184,122,42,0.1);display:flex;gap:10px;background:var(--white)}
+.kap-res-body{flex:1;overflow-y:auto;overflow-x:hidden;padding:20px 22px;display:flex;flex-direction:column;gap:16px}
+.kap-res-body::-webkit-scrollbar{width:3px}
+.kap-res-body::-webkit-scrollbar-thumb{background:var(--amber-p);border-radius:3px}
+.kap-res-left{background:#FDFCFA;border-radius:14px;border:1px solid rgba(184,122,42,0.12);padding:18px 20px}
+.kap-res-right{display:flex;flex-direction:column;gap:14px}
+.kap-res-msg-zone{background:var(--white);border-radius:14px;border:1px solid rgba(184,122,42,0.10);padding:20px 22px}
+.kap-res-footer{flex-shrink:0;padding:12px 22px;border-top:1px solid rgba(184,122,42,0.1);display:flex;gap:10px;flex-wrap:wrap;background:var(--white)}
 /* ── KAP Score global ── */
 .kap-score-wrap{background:var(--white);border:2px solid rgba(184,122,42,0.18);border-radius:16px;padding:18px;margin-bottom:16px}
 .kap-score-label-sm{font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
@@ -583,9 +581,8 @@ textarea::placeholder{color:var(--ink-xs)}
 @media(max-width:700px){
   #trace-panel.result-mode{max-width:100%;border-radius:20px 20px 0 0;position:fixed;bottom:0;left:0;right:0;max-height:96vh}
   #trace-overlay{padding:0;align-items:flex-end}
-  .kap-res-body{flex-direction:column;overflow-y:auto}
-  .kap-res-left{flex:none;border-right:none;border-bottom:1px solid rgba(184,122,42,0.1);padding:18px}
-  .kap-res-msg-zone{padding:18px 20px}
+  .kap-res-body{padding:14px 16px}
+  .kap-res-msg-zone{padding:16px 18px}
 }
 /* ── Legacy (conservé pour compatibilité) ── */
 .tr-btn-redo{display:none}.tr-btn-chat{display:none}.tr-header{display:none}.tr-body{display:none}.tr-footer{display:none}
@@ -3410,16 +3407,20 @@ updateEva(5);
       <button class="kap-res-close" onclick="closeAndResetResult()">✕</button>
     </div>
 
-    <!-- Corps 2 colonnes -->
+    <!-- Corps colonne unique fluide -->
     <div class="kap-res-body">
 
-      <!-- Gauche : score + dimensions -->
+      <!-- Bloc 1 : Score global -->
       <div class="kap-res-left">
         <div id="kap-res-score"><!-- score global injecté par JS --></div>
+      </div>
+
+      <!-- Bloc 2 : Dimensions -->
+      <div class="kap-res-left">
         <div id="kap-res-dims"><!-- 5 dimensions injectées par JS --></div>
       </div>
 
-      <!-- Droite : interprétation + action + numéro -->
+      <!-- Bloc 3 : Message patient -->
       <div class="kap-res-right">
         <div class="kap-res-msg-zone">
           <div id="kap-res-headline" class="kap-res-headline"></div>
